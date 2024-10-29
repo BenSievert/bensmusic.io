@@ -35,7 +35,7 @@ export default {
 				},
 				highlight: {
 					softYellow: '#FFE1A1', // More vibrant Soft Butter Yellow
-					mintGreen: '#A3E1B2', // Brighter Light Mint Green
+					mintGreen: '#d9ffe2', // Brighter Light Mint Green
 					peach: '#FFC4B4' // More vivid Soft Peach
 				}
 			},
@@ -47,7 +47,7 @@ export default {
 			boxShadow: {
 				pastel: '0 2px 10px rgba(160, 196, 255, 0.5)', // Slightly stronger pastel shadow
 				softPink: '0 2px 8px rgba(255, 203, 242, 0.5)',
-				softBlue: '0 2px 8px rgba(189, 224, 254, 0.5)'
+				softBlue: '0 4px 10px rgba(189, 224, 254, 0.5)'
 			}
 		}
 	},
