@@ -1,4 +1,5 @@
 <script>
+
 	const links = [
 		{ name: 'Home', href: '/', color: `bg-highlight-softYellow` },
 		{ name: 'About Me', href: '/about', color: `bg-highlight-mintGreen` },
@@ -6,9 +7,9 @@
 		{ name: 'Student Resources', href: '/resources', color: `bg-highlight-peach` },
 		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` }
 	];
+
 </script>
 
-<div class="py-2">
 	<div class="mb-1 flex gap-2">
 		{#each links as link}
 			<a
@@ -19,5 +20,5 @@
 			</a>
 		{/each}
 	</div>
-	<hr class="h-[2px] bg-primary-light" />
-</div>
+	<hr class="h-[2px] bg-primary-light mb-3" />
+

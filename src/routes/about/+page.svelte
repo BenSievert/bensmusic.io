@@ -1,4 +1,3 @@
-<div class="min-h-screen bg-background-light p-6">
 	<!-- Welcome Header -->
 	<h1 class="mb-4 font-display text-3xl text-primary-dark md:text-5xl">
 		Welcome to Ben's Music Lessons
@@ -13,4 +12,4 @@
 	<!--    </button>-->
 
 	<!-- Decorative pastel-themed boxes for an engaging design -->
-</div>
+
