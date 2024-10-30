@@ -16,7 +16,7 @@ export default {
 				secondary: {
 					light: '#ffb4e1', // Lightened Soft Pink
 					DEFAULT: '#F1A7DB', // Lighter Lavender Pink
-					dark: '#dc83a5' // Lighter Dusty Lavender
+					dark: '#d9698f' // Lighter Dusty Lavender
 				},
 				accent: {
 					light: '#FF99E6', // Lightened Light Lilac
@@ -24,7 +24,7 @@ export default {
 					dark: '#D1668B' // Stronger Dusty Rose
 				},
 				background: {
-					light: '#f4effd', // Brighter Very Light Lilac
+					light: '#fbdffd', // Brighter Very Light Lilac
 					DEFAULT: '#F0D3D2', // Warm Off-White with more contrast
 					dark: '#E2C6B2' // Richer Beige
 				},

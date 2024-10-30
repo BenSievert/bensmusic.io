@@ -3,7 +3,7 @@
     import Navigation from '../components/Navigation.svelte';
 	let { children } = $props();
 </script>
-<div class="min-h-screen bg-background-light py-4 px-6">
+<div class="min-h-screen">
     <Navigation />
     {@render children()}
 </div>
