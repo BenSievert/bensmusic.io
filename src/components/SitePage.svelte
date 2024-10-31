@@ -10,6 +10,6 @@
 
 	<h2 class="mb-4 max-w-lg text-lg text-secondary-dark md:text-xl">{subtitle}</h2>
 </div>
-<div class="bg-background-light font-body text-gray-900">
+<div class="font-body text-gray-900">
 	{@render children()}
 </div>

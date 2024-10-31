@@ -24,7 +24,7 @@ export default {
 					dark: '#D1668B' // Stronger Dusty Rose
 				},
 				background: {
-					light: '#ffe8f9', // Brighter Very Light Lilac
+					light: '#fdebf9', // Brighter Very Light Lilac
 					DEFAULT: '#F0D3D2', // Warm Off-White with more contrast
 					dark: '#E2C6B2' // Richer Beige
 				},

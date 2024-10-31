@@ -2,7 +2,7 @@
 	const { children, theme = 'primary' } = $props();
 	const colors = {
 		primary: `bg-background-light text-gray-900`,
-		secondary: `bg-white text-gray-900`
+		secondary: `text-gray-950`
 	};
 </script>
 
