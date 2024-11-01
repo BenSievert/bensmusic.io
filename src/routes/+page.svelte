@@ -11,8 +11,7 @@
 				class="text-rose-800 underline">Hip Cat Music School</a
 			> in Bloomington-Normal. I've been playing the guitar for 17 years in a wide variety of genres
 			and styles. I've studied the guitar and other instruments one on one with several different instructors
-			and believe that a complete music education is agnostic of any one genre or style. I've also performed
-			in multiple bands on several different instruments.
+			and believe that a complete music education is about more than any one genre or style.
 		</p>
 	</Section>
 	<Section theme="secondary">
