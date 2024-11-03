@@ -6,6 +6,6 @@
 	};
 </script>
 
-<div class="px-8 py-10 {colors[theme]}">
+<div class="px-8 py-6 {colors[theme]}">
 	{@render children()}
 </div>

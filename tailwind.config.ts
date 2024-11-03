@@ -9,9 +9,9 @@ export default {
 		extend: {
 			colors: {
 				primary: {
-					light: '#B3D9FF', // Light Sky Blue
-					DEFAULT: '#7FAFFF', // Soft Baby Blue
-					dark: '#4C7BDF' // Slate Blue
+					light: '#d7e6fc', // Light Sky Blue
+					DEFAULT: '#a4c5ff', // Soft Baby Blue
+					dark: '#416fd7' // Slate Blue
 				},
 				secondary: {
 					light: '#ffb4e1', // Lightened Soft Pink
@@ -21,7 +21,7 @@ export default {
 				accent: {
 					light: '#FF99E6', // Lightened Light Lilac
 					DEFAULT: '#FF8BA0', // Lighter Blush Pink
-					dark: '#D1668B' // Stronger Dusty Rose
+					dark: '#d25d83' // Stronger Dusty Rose
 				},
 				background: {
 					light: '#fdebf9', // Brighter Very Light Lilac
