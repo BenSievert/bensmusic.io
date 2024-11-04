@@ -13,12 +13,12 @@
 </script>
 
 <nav class="flex items-center justify-end px-4 pt-4">
-	<div
-		class=" cursor-pointer rounded-lg bg-primary px-1 text-lg text-gray-900 md:hidden"
+	<button
+		class="cursor-pointer rounded-lg bg-primary text-lg text-gray-900 md:hidden px-1"
 		on:click={toggleMenu}
 	>
 		&#9776;
-	</div>
+	</button>
 	<div class="hidden space-x-4 md:flex">
 		{#each links as link}
 			<a
