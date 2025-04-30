@@ -28,7 +28,7 @@
 			What is the perfect 5th of <span class="font-bold">{notes[note]}</span>?
 		</div>
 		{#each notes as note}
-			<button on:click={() => guess(note)} class={`${wrongGuesses.includes(note) ? `bg-primary-light` : ``} w-16 bg-primary hover:bg-primary-light p-2 rounded-md mr-4 mb-1`}>{note}</button>
+			<button on:click={() => guess(note)} class={`${wrongGuesses.includes(note) ? `bg-gray-300` : ``} w-16 bg-primary hover:bg-primary-light p-2 rounded-md mr-4 mb-1`}>{note}</button>
 		{/each}
 
 	</Section>
