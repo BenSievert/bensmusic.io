@@ -8,7 +8,8 @@
 	const links = [
 		{ name: 'Home', href: '/', color: `bg-highlight-softYellow` },
 		{ name: 'Policy and Payment', href: '/policy', color: `bg-highlight-peach` },
-		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` }
+		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` },
+		{ name: `Training`, href: `/training`, color: `bg-highlight-peach`}
 	];
 </script>
 
