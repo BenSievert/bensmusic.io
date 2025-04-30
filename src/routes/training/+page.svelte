@@ -37,7 +37,7 @@
 							selectedIntervals = selectedIntervals.filter(i => i !== intervalIndex)
 						else
 							selectedIntervals = [...selectedIntervals, intervalIndex]
-					}} checked={selectedIntervals.includes(intervalIndex)} type="checkbox" class="h-4 w-4 text-accent-dark rounded focus:text-accent-dark" />
+					}} checked={selectedIntervals.includes(intervalIndex)} type="checkbox" class="h-4 w-4 text-accent-dark rounded focus:text-accent-dark focus:ring-0" />
 					<span class="text-gray-800 text-sm">{interval}</span>
 				</label>
 			{/each}
