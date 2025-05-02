@@ -24,7 +24,8 @@
 			My job is to help my students make the music that they want to make.
 			<br />
 			<br />
-			I am here to help. Lessons are tailored for the individual student's needs so they can advance at the best rate.
+			I am here to help. Lessons are tailored for the individual student's needs so they can advance
+			at the best rate.
 
 			<br />
 			<br />
@@ -35,8 +36,8 @@
 		</p>
 	</Section>
 	<Section>
-		I'm a good teacher because I've struggled myself. I have no natural talent. My skill comes from hours of dedication. I believe this makes me better
-		suited to teaching because I am able to break down concepts to people who don't immediately "get"
-		it.
+		I'm a good teacher because I've struggled myself. I have no natural talent. My skill comes from
+		hours of dedication. I believe this makes me better suited to teaching because I am able to
+		break down concepts to people who don't immediately "get" it.
 	</Section>
 </SitePage>

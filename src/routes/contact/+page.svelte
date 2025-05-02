@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
 	import Link from '../../components/Link.svelte';

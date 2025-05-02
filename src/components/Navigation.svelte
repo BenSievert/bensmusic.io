@@ -9,13 +9,13 @@
 		{ name: 'Home', href: '/', color: `bg-highlight-softYellow` },
 		{ name: 'Policy and Payment', href: '/policy', color: `bg-highlight-peach` },
 		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` },
-		{ name: `Training`, href: `/training`, color: `bg-highlight-peach`}
+		{ name: `Training`, href: `/training`, color: `bg-highlight-peach` }
 	];
 </script>
 
 <nav class="flex items-center justify-end px-4 pt-4">
 	<button
-		class="cursor-pointer rounded-lg bg-primary text-lg text-gray-900 md:hidden px-1"
+		class="cursor-pointer rounded-lg bg-primary px-1 text-lg text-gray-900 md:hidden"
 		on:click={toggleMenu}
 	>
 		&#9776;
