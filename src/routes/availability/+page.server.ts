@@ -39,7 +39,7 @@ const openSchedule = {};
 export async function load() {
 	const serviceAccountAuth = new JWT({
 		email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-		key: GOOGLE_PRIVATE_KEY,
+		key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
 		scopes: ['https://www.googleapis.com/auth/spreadsheets']
 	});
 	const colsToDaysAndStudios: Record<number, { day: string; studio: string }> = {};
