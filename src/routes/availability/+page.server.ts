@@ -34,9 +34,10 @@ const times = [
 	`10:00 PM`
 ];
 
-const openSchedule = {};
 
 export async function load() {
+	const openSchedule = {};
+
 	const serviceAccountAuth = new JWT({
 		email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
 		key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -82,6 +83,8 @@ export async function load() {
 			}
 		}
 	}
+
+	console.log(openSchedule)
 
 	return {
 		openSchedule
