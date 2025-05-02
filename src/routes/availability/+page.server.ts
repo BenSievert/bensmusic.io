@@ -84,8 +84,6 @@ export async function load() {
 		}
 	}
 
-	console.log(openSchedule)
-
 	return {
 		openSchedule
 	};
