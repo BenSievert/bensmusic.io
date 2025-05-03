@@ -35,7 +35,6 @@ const times = [
 	`10:00 PM`
 ];
 
-
 export async function GET() {
 	const openSchedule = {};
 
@@ -51,7 +50,6 @@ export async function GET() {
 	await scheduleSheet.loadCells(`B1:CR31`);
 	const colLen = 96;
 	const rowLen = 31;
-
 
 	let currentStudio = ``;
 	for (let column = 1; column < colLen; column++) {
@@ -70,7 +68,6 @@ export async function GET() {
 			}
 		}
 	}
-
 
 	return json(openSchedule, {
 		status: 200,
