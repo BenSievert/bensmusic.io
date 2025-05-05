@@ -150,7 +150,7 @@
 			{#each days as day}
 				<button
 					onclick={() => (selectedDay = days.indexOf(day))}
-					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-1 w-26 rounded-md p-2`}
+					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-2 w-26 rounded-md p-2`}
 					>{day}</button
 				>
 			{/each}
