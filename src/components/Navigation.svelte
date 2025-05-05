@@ -15,7 +15,7 @@
 
 <nav class="flex items-center justify-end px-4 pt-4">
 	<button
-		class="cursor-pointer rounded-lg bg-primary px-1 text-lg text-gray-900 md:hidden"
+		class="bg-primary cursor-pointer rounded-lg px-1 text-lg text-gray-900 md:hidden"
 		on:click={toggleMenu}
 	>
 		&#9776;
@@ -24,14 +24,14 @@
 		{#each links as link}
 			<a
 				href={link.href}
-				class="p-2 text-accent-dark hover:bg-highlight-mintGreen hover:text-rose-700 md:rounded-md"
+				class="text-accent-dark hover:bg-highlight-mintGreen p-2 hover:text-rose-700 md:rounded-md"
 			>
 				{link.name}
 			</a>
 		{/each}
 	</div>
 	<div
-		class="menu absolute right-0 top-14 w-48 flex-col rounded-md bg-primary-light md:hidden {isOpen
+		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md md:hidden {isOpen
 			? 'flex'
 			: 'hidden'}"
 	>
@@ -39,7 +39,7 @@
 			<a
 				on:click={toggleMenu}
 				href={link.href}
-				class="p-2 text-accent-dark hover:bg-highlight-mintGreen hover:text-rose-700"
+				class="text-accent-dark hover:bg-highlight-mintGreen p-2 hover:text-rose-700"
 			>
 				{link.name}
 			</a>

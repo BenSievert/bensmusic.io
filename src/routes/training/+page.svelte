@@ -62,7 +62,7 @@
 		{#each notes as note}
 			<button
 				on:click={() => guess(note)}
-				class={`${wrongGuesses.includes(note) ? `bg-gray-300` : `bg-primary`} mb-1 mr-4 w-16 rounded-md p-2 hover:bg-primary-light`}
+				class={`${wrongGuesses.includes(note) ? `bg-gray-300` : `bg-primary`} hover:bg-primary-light mr-4 mb-1 w-16 rounded-md p-2`}
 				>{note}</button
 			>
 		{/each}

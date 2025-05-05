@@ -66,6 +66,7 @@
 	] as const;
 
 	let openSchedule = $state({});
+	let errorMessage = $state(``);
 
 	onMount(async () => {
 		openSchedule = await (await fetch('/availability')).json();
@@ -108,7 +109,8 @@
 			openTimes.filter(
 				({ time, cell }) =>
 					selectedTimes.includes(time) &&
-					selectedNeeds.every((need) => needs[need].includes(studio)) && !savedCells.includes(cell)
+					selectedNeeds.every((need) => needs[need].includes(studio)) &&
+					!savedCells.includes(cell)
 			)
 		])
 	);
@@ -117,27 +119,25 @@
 
 	const handleSubmit = async () => {
 		formSubmitting = true;
-		console.log(selectedDate, pin, initials, selectedCell.cell);
-		const response = await(await fetch('/availability', {
-			method: 'POST',
-			body: JSON.stringify({ date: selectedDate, pin, initials, cell: selectedCell.cell }),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})).json();
+		const response = await (
+			await fetch('/availability', {
+				method: 'POST',
+				body: JSON.stringify({ date: selectedDate, pin, initials, cell: selectedCell.cell }),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+		).json();
 		formSubmitting = false;
 		if (response.message == `Success`) {
-			savedCells.push(selectedCell.cell)
+			savedCells.push(selectedCell.cell);
+		} else {
+			if (response.status == 403) {
+				savedCells.push(selectedCell.cell);
+				alert(response.message);
+				showModal = false;
+			} else errorMessage = `Error: ${response.message}`;
 		}
-		else {
-			if (response.status == 403)
-				savedCells.push(selectedCell.cell)
-			alert(response.message)
-		}
-		showModal = false;
-
-		console.log(response)
-
 	};
 </script>
 
@@ -146,16 +146,16 @@
 		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
 		<Section>
-			<h2 class="mb-2 text-xl font-bold text-primary-dark">Day</h2>
+			<h2 class="text-primary-dark mb-2 text-xl font-bold">Day</h2>
 			{#each days as day}
 				<button
 					onclick={() => (selectedDay = days.indexOf(day))}
-					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark text-white ring-1 ring-offset-2 ring-primary-dark` : `bg-primary`} w-26 mb-1 mr-4 rounded-md p-2 hover:bg-primary-light`}
+					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-1 w-26 rounded-md p-2`}
 					>{day}</button
 				>
 			{/each}
 			<div class="mb-4"></div>
-			<h2 class="mb-2 text-xl font-bold text-secondary-dark">Times</h2>
+			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
 			{#each times as time, i}
 				<Checkbox
 					label={time}
@@ -168,7 +168,7 @@
 				/>
 			{/each}
 			<div class="mb-4"></div>
-			<h2 class="mb-2 text-xl font-bold text-secondary-dark">Needs</h2>
+			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Needs</h2>
 			{#each Object.keys(needs) as need}
 				<Checkbox
 					label={need}
@@ -182,10 +182,10 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-2xl font-bold text-accent-dark">{days[selectedDay]}</div>
+			<div class="text-accent-dark text-2xl font-bold">{days[selectedDay]}</div>
 			{#each available as [studio, times]}
 				{#if times.length}
-					<div class="max-w-1/2 mb-4 text-xl text-primary-dark">{studio}</div>
+					<div class="text-primary-dark mb-4 max-w-1/2 text-xl">{studio}</div>
 					<div class="mb-2 flex flex-wrap">
 						{#each times as { time, cell }}
 							<button
@@ -194,7 +194,7 @@
 									selectedDate = possibleDates[0]?.value;
 									showModal = true;
 								}}
-								class="mb-2 mr-3 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+								class="mr-3 mb-2 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
 								>{time}<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
@@ -216,31 +216,39 @@
 			{/each}
 		</Section>
 	{/if}
-	<Modal bind:showModal disabled={invalidInput || formSubmitting} loading={formSubmitting} confirm={handleSubmit}>
-		<h2 class="text-2xl font-extrabold text-primary-dark">{selectedCell?.studio}</h2>
+	<Modal
+		bind:showModal
+		disabled={invalidInput || formSubmitting}
+		loading={formSubmitting}
+		confirm={handleSubmit}
+	>
+		<h2 class="text-primary-dark text-2xl font-extrabold">{selectedCell?.studio}</h2>
 		<div class="mb-3 text-rose-700">{days[selectedDay]}s at {selectedCell?.time}</div>
 		<form onsubmit={handleSubmit}>
 			<input
-				class="placeholder-primary-dark mb-3 w-28 rounded-2xl border border-primary px-4 py-2 text-gray-600 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent mr-1"
+				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-28 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 				placeholder="Initials"
+				oninput={() => (errorMessage = ``)}
 				bind:value={initials}
 			/>
 			<input
-				class="placeholder-primary-dark w-28 rounded-2xl border border-primary px-4 py-2 text-gray-600 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent w-28 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 				placeholder="PIN"
+				oninput={() => (errorMessage = ``)}
 				bind:value={pin}
 			/>
 			<label class="mt-1 block text-gray-600">
-				<div class="text-left text-lg text-primary-dark">Start Date</div>
+				<div class="text-primary-dark text-left text-lg">Start Date</div>
 				<select
 					bind:value={selectedDate}
-					class="w-full rounded-xl border border-primary py-2 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+					class="focus:outline-accent outline-primary w-full rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
 				>
 					{#each possibleDates as { value, label }}
 						<option {value}>{label}</option>
 					{/each}
 				</select>
 			</label>
+			<div class="mt-2 text-orange-800">{errorMessage}</div>
 		</form>
 	</Modal>
 </SitePage>

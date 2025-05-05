@@ -1,5 +1,5 @@
 <script>
-	import Spinner from "./Spinner.svelte";
+	import Spinner from './Spinner.svelte';
 	let { showModal = $bindable(), children, disabled, confirm, loading } = $props();
 
 	let dialog = $state(); // HTMLDialogElement
@@ -19,21 +19,21 @@
 		if (e.target === dialog) dialog.close();
 	}}
 >
-	<div>
+	<div class="">
 		{@render children?.()}
 		<div class="mt-4 flex justify-center">
 			<button
-				class="text-red-800 mr-4 rounded-md bg-red-300 px-3 py-1 text-gray-600 shadow-pastel hover:bg-red-200"
+				class="shadow-pastel mr-4 rounded-md bg-red-300 px-3 py-1 text-gray-600 text-red-800 hover:bg-red-200"
 				onclick={() => dialog.close()}>Cancel</button
 			>
 			<button
 				type="submit"
 				onclick={confirm}
 				disabled={disabled || loading}
-				class="text-green-800 rounded-md bg-green-300 px-5 py-2 text-lg disabled:text-gray-600 shadow-pastel hover:bg-green-200 disabled:bg-gray-200 disabled:shadow-none"
-				>{#if loading}<Spinner svgClass="size-4 fill-gray-600"/>
+				class="shadow-pastel rounded-md bg-green-300 px-5 py-2 text-lg text-green-800 hover:bg-green-200 disabled:bg-gray-200 disabled:text-gray-600 disabled:shadow-none"
+				>{#if loading}<Spinner svgClass="size-4 fill-gray-600" />
 				{:else}Confirm
-			{/if}</button
+				{/if}</button
 			>
 		</div>
 	</div>
@@ -41,13 +41,14 @@
 
 <style>
 	dialog {
-		max-width: 32em;
+		max-width: 36em;
 		border-radius: 0.4em;
 		border: none;
 		padding: 0;
+		margin: auto !important;
 	}
 	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(0, 0, 0, 0.5);
 	}
 	dialog > div {
 		padding: 1em;

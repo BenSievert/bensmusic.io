@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 
+/** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
@@ -47,5 +48,5 @@ export default {
 				softBlue: '0 4px 10px rgba(189, 224, 254, 0.5)'
 			}
 		}
-	},
+	}
 } satisfies Config;

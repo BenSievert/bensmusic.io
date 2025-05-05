@@ -6,7 +6,7 @@
 
 <SitePage title="Ben's Music Lessons" subtitle="Guitar Lessons in Bloomington-Normal">
 	<Section>
-		<h3 class="text-xl text-primary-dark">About Me</h3>
+		<h3 class="text-primary-dark text-xl">About Me</h3>
 		<p>
 			My name is Ben Sievert and I teach guitar lessons at <Link
 				href="https://www.hipcatmusicschool.com/home"
@@ -19,7 +19,7 @@
 		</p></Section
 	>
 	<Section theme="secondary">
-		<h3 class="text-xl text-accent-dark">Teaching Philosophy</h3>
+		<h3 class="text-accent-dark text-xl">Teaching Philosophy</h3>
 		<p>
 			My job is to help my students make the music that they want to make.
 			<br />

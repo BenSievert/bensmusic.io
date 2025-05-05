@@ -6,7 +6,7 @@
 
 <SitePage title="Policy and Payment" subtitle="Payment info and lesson policy">
 	<Section>
-		<h3 class="text-xl text-primary-dark">Payment</h3>
+		<h3 class="text-primary-dark text-xl">Payment</h3>
 
 		<p>
 			Payment for lessons is due at the beginning of each month and is $25 per half hour lesson.
@@ -20,7 +20,7 @@
 		</ul>
 	</Section>
 	<Section theme="secondary">
-		<h3 class="text-xl text-accent-dark">Cancellations</h3>
+		<h3 class="text-accent-dark text-xl">Cancellations</h3>
 		<p>My policies are in line with those from Hip Cat Music School</p>
 		<br />
 
