@@ -131,12 +131,15 @@
 		formSubmitting = false;
 		if (response.message == `Success`) {
 			savedCells.push(selectedCell.cell);
+			showModal = false
 		} else {
 			if (response.status == 403) {
 				savedCells.push(selectedCell.cell);
 				alert(response.message);
 				showModal = false;
-			} else errorMessage = `Error: ${response.message}`;
+			} else
+				errorMessage = `Error: ${response.message}`;
+
 		}
 	};
 </script>
