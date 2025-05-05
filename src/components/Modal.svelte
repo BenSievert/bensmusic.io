@@ -1,0 +1,80 @@
+<script>
+	import Spinner from "./Spinner.svelte";
+	let { showModal = $bindable(), children, disabled, confirm, loading } = $props();
+
+	let dialog = $state(); // HTMLDialogElement
+
+	$effect(() => {
+		if (showModal) dialog.showModal();
+		else dialog.close();
+	});
+</script>
+
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<dialog
+	class="bg-background-light text-center"
+	bind:this={dialog}
+	onclose={() => (showModal = false)}
+	onclick={(e) => {
+		if (e.target === dialog) dialog.close();
+	}}
+>
+	<div>
+		{@render children?.()}
+		<div class="mt-4 flex justify-center">
+			<button
+				class="text-red-800 mr-4 rounded-md bg-red-300 px-3 py-1 text-gray-600 shadow-pastel hover:bg-red-200"
+				onclick={() => dialog.close()}>Cancel</button
+			>
+			<button
+				type="submit"
+				onclick={confirm}
+				disabled={disabled || loading}
+				class="text-green-800 rounded-md bg-green-300 px-5 py-2 text-lg disabled:text-gray-600 shadow-pastel hover:bg-green-200 disabled:bg-gray-200 disabled:shadow-none"
+				>{#if loading}<Spinner svgClass="size-4 fill-gray-600"/>
+				{:else}Confirm
+			{/if}</button
+			>
+		</div>
+	</div>
+</dialog>
+
+<style>
+	dialog {
+		max-width: 32em;
+		border-radius: 0.4em;
+		border: none;
+		padding: 0;
+	}
+	dialog::backdrop {
+		background: rgba(0, 0, 0, 0.3);
+	}
+	dialog > div {
+		padding: 1em;
+	}
+	dialog[open] {
+		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+	@keyframes zoom {
+		from {
+			transform: scale(0.95);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
+	dialog[open]::backdrop {
+		animation: fade 0.2s ease-out;
+	}
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+	button {
+		display: block;
+	}
+</style>

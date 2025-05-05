@@ -2,9 +2,11 @@
 	import Section from '../../components/Section.svelte';
 	import SitePage from '../../components/SitePage.svelte';
 	import Checkbox from '../../components/Checkbox.svelte';
+	import Modal from '../../components/Modal.svelte';
+	import Spinner from '../../components/Spinner.svelte';
 	import { onMount } from 'svelte';
 
-	const days = [`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`];
+	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 	const needs = {
 		Piano: [
 			`Large Room (Studio 10)`,
@@ -70,49 +72,85 @@
 	});
 	let selectedTimes = $state<string[]>([]);
 	let selectedNeeds = $state<string[]>([`Piano`]);
-
-	let selectedDay = $state(`Monday`);
+	let showModal = $state(false);
+	let selectedCell = $state();
+	let pin = $state();
+	let initials = $state();
+	let formSubmitting = $state(false);
+	let savedCells = $state([]);
+	const next4Months = (day: number) => {
+		const dates = [];
+		const weeksIn4Months = 17;
+		const date = new Date();
+		if (date.getDay() == day)
+			dates.push({
+				value: `now`,
+				label: `${date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })} (Today)`
+			});
+		for (const _ of [...Array(weeksIn4Months)]) {
+			date.setDate(date.getDate() + ((day + 7 - date.getDay()) % 7 || 7));
+			dates.push({
+				value: `${date.getMonth()}/${date.getDate()}`,
+				label: date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })
+			});
+		}
+		dates[0].value = `now`;
+		return dates;
+	};
+	next4Months(0);
+	let selectedDay = $state(0);
+	let possibleDates = $derived(next4Months(selectedDay));
+	let selectedDate = $state();
 
 	let available = $derived(
-		Object.entries(openSchedule[selectedDay] ?? []).map(([studio, openTimes]) => [
+		Object.entries(openSchedule[days[selectedDay]] ?? []).map(([studio, openTimes]) => [
 			studio,
 			openTimes.filter(
-				(time) =>
+				({ time, cell }) =>
 					selectedTimes.includes(time) &&
-					selectedNeeds.every((need) => needs[need].includes(studio))
+					selectedNeeds.every((need) => needs[need].includes(studio)) && !savedCells.includes(cell)
 			)
 		])
 	);
+
+	let invalidInput = $derived(!pin || !initials);
+
+	const handleSubmit = async () => {
+		formSubmitting = true;
+		console.log(selectedDate, pin, initials, selectedCell.cell);
+		const response = await(await fetch('/availability', {
+			method: 'POST',
+			body: JSON.stringify({ date: selectedDate, pin, initials, cell: selectedCell.cell }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})).json();
+		formSubmitting = false;
+		if (response.message == `Success`) {
+			savedCells.push(selectedCell.cell)
+		}
+		else {
+			if (response.status == 403)
+				savedCells.push(selectedCell.cell)
+			alert(response.message)
+		}
+		showModal = false;
+
+		console.log(response)
+
+	};
 </script>
 
 <SitePage title="Hip Cat Schedule" subtitle="Find Open Studios">
 	{#if !Object.entries(openSchedule).length}
-		<div role="status" class="ml-4">
-			<svg
-				aria-hidden="true"
-				class="h-24 w-24 animate-spin fill-primary-dark text-gray-200"
-				viewBox="0 0 100 101"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-					fill="currentColor"
-				/>
-				<path
-					d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-					fill="currentFill"
-				/>
-			</svg>
-			<span class="sr-only">Loading...</span>
-		</div>
+		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
 		<Section>
 			<h2 class="mb-2 text-xl font-bold text-primary-dark">Day</h2>
 			{#each days as day}
 				<button
-					on:click={() => (selectedDay = day)}
-					class={`${selectedDay === day ? `bg-primary-dark text-white` : `bg-primary`} w-26 mb-1 mr-4 rounded-md p-2 hover:bg-primary-light`}
+					onclick={() => (selectedDay = days.indexOf(day))}
+					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark text-white ring-1 ring-offset-2 ring-primary-dark` : `bg-primary`} w-26 mb-1 mr-4 rounded-md p-2 hover:bg-primary-light`}
 					>{day}</button
 				>
 			{/each}
@@ -144,17 +182,65 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-2xl font-bold text-accent-dark">{selectedDay}</div>
+			<div class="text-2xl font-bold text-accent-dark">{days[selectedDay]}</div>
 			{#each available as [studio, times]}
 				{#if times.length}
 					<div class="max-w-1/2 mb-4 text-xl text-primary-dark">{studio}</div>
 					<div class="mb-2 flex flex-wrap">
-						{#each times as potentialTime}
-							<span class="mb-2 mr-3 rounded-md bg-blue-100 p-2 text-xs">{potentialTime}</span>
+						{#each times as { time, cell }}
+							<button
+								onclick={() => {
+									selectedCell = { time, cell, studio };
+									selectedDate = possibleDates[0]?.value;
+									showModal = true;
+								}}
+								class="mb-2 mr-3 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+								>{time}<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="mb-[2px] ml-2 size-4"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+									/>
+								</svg>
+							</button>
 						{/each}
 					</div>
 				{/if}
 			{/each}
 		</Section>
 	{/if}
+	<Modal bind:showModal disabled={invalidInput || formSubmitting} loading={formSubmitting} confirm={handleSubmit}>
+		<h2 class="text-2xl font-extrabold text-primary-dark">{selectedCell?.studio}</h2>
+		<div class="mb-3 text-rose-700">{days[selectedDay]}s at {selectedCell?.time}</div>
+		<form onsubmit={handleSubmit}>
+			<input
+				class="placeholder-primary-dark mb-3 w-28 rounded-2xl border border-primary px-4 py-2 text-gray-600 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent mr-1"
+				placeholder="Initials"
+				bind:value={initials}
+			/>
+			<input
+				class="placeholder-primary-dark w-28 rounded-2xl border border-primary px-4 py-2 text-gray-600 shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+				placeholder="PIN"
+				bind:value={pin}
+			/>
+			<label class="mt-1 block text-gray-600">
+				<div class="text-left text-lg text-primary-dark">Start Date</div>
+				<select
+					bind:value={selectedDate}
+					class="w-full rounded-xl border border-primary py-2 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+				>
+					{#each possibleDates as { value, label }}
+						<option {value}>{label}</option>
+					{/each}
+				</select>
+			</label>
+		</form>
+	</Modal>
 </SitePage>
