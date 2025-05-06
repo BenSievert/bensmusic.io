@@ -102,7 +102,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	let authorized = false;
 	for (let i = offset; i < contactSheet.cellStats.loaded - offset; i++) {
 		const cell = contactSheet.getCell(i, 3).value;
-		if (initials == cell) {
+		if (initials.toUpperCase() == cell) {
 			authorized = true;
 			break;
 		}
