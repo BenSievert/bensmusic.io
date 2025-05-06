@@ -2,6 +2,7 @@
 	import SitePage from '../components/SitePage.svelte';
 	import Section from '../components/Section.svelte';
 	import Link from '../components/Link.svelte';
+	let permanent = $state(true);
 </script>
 
 <SitePage title="Ben's Music Lessons" subtitle="Guitar Lessons in Bloomington-Normal">

@@ -89,7 +89,7 @@ export const GET: RequestHandler = async () => {
 };
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { pin, cell, initials, date } = await request.json();
+	const { pin, cell, initials, date, permanent } = await request.json();
 	let status = 401;
 	let response = { message: `Wrong PIN or Initials` };
 	if (pin != PIN && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
@@ -119,7 +119,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			{ status: 403 }
 		);
 
-	studioCell.value = `${initials} ${date == `now` ? `` : `start ${date}`}`;
+	studioCell.value = `${initials}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
 	await scheduleSheet.saveCells([studioCell]);
 	return json({ message: `Success` }, { status: 200 });
 };

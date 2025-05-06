@@ -7,6 +7,7 @@
 	import { onMount } from 'svelte';
 
 	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
+
 	const needs = {
 		Piano: [
 			`Large Room (Studio 10)`,
@@ -67,12 +68,13 @@
 
 	let openSchedule = $state({});
 	let errorMessage = $state(``);
+	let permanent = $state(true);
 
 	onMount(async () => {
 		openSchedule = await (await fetch('/availability')).json();
 	});
 	let selectedTimes = $state<string[]>([]);
-	let selectedNeeds = $state<string[]>([`Piano`]);
+	let selectedNeeds = $state<string[]>([]);
 	let showModal = $state(false);
 	let selectedCell = $state();
 	let pin = $state();
@@ -85,7 +87,7 @@
 		const date = new Date();
 		if (date.getDay() == day)
 			dates.push({
-				value: `now`,
+				value: `${date.getMonth()}/${date.getDate()}`,
 				label: `${date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })} (Today)`
 			});
 		for (const _ of [...Array(weeksIn4Months)]) {
@@ -95,7 +97,6 @@
 				label: date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })
 			});
 		}
-		dates[0].value = `now`;
 		return dates;
 	};
 	next4Months(0);
@@ -119,29 +120,25 @@
 
 	const handleSubmit = async () => {
 		formSubmitting = true;
-		const response = await (
-			await fetch('/availability', {
+		const response =
+			(await fetch('/availability', {
 				method: 'POST',
-				body: JSON.stringify({ date: selectedDate, pin, initials, cell: selectedCell.cell }),
+				body: JSON.stringify({date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate, pin, initials, cell: selectedCell.cell, permanent}),
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json
 				}
-			})
-		).json();
+			}))
+		const {message} = await response.json();
 		formSubmitting = false;
-		if (response.message == `Success`) {
+		if (response.status == 200) {
 			savedCells.push(selectedCell.cell);
-			showModal = false
-		} else {
-			if (response.status == 403) {
+			showModal = false;
+		} else if (response.status == 403){
 				savedCells.push(selectedCell.cell);
-				alert(response.message);
+				alert(message);
 				showModal = false;
-			} else
-				errorMessage = `Error: ${response.message}`;
-
-		}
-	};
+		} else errorMessage = `Error: ${message}`;
+	}
 </script>
 
 <SitePage title="Hip Cat Schedule" subtitle="Find Open Studios">
@@ -226,7 +223,7 @@
 		confirm={handleSubmit}
 	>
 		<h2 class="text-primary-dark text-2xl font-extrabold">{selectedCell?.studio}</h2>
-		<div class="mb-3 text-rose-700">{days[selectedDay]}s at {selectedCell?.time}</div>
+		<div class="mb-3 text-rose-700">{days[selectedDay]}{#if permanent}s{/if} at {selectedCell?.time}</div>
 		<form onsubmit={handleSubmit}>
 			<input
 				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-28 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
@@ -241,7 +238,7 @@
 				bind:value={pin}
 			/>
 			<label class="mt-1 block text-gray-600">
-				<div class="text-primary-dark text-left text-lg">Start Date</div>
+				<div class="text-primary-dark text-left text-lg">{#if permanent}Start{/if} Date</div>
 				<select
 					bind:value={selectedDate}
 					class="focus:outline-accent outline-primary w-full rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
@@ -251,7 +248,17 @@
 					{/each}
 				</select>
 			</label>
-			<div class="mt-2 text-orange-800">{errorMessage}</div>
+			<div class="flex mb-3 mt-4">
+				<label class="flex items-center mr-2">
+					<input value={true} bind:group={permanent} type="radio" class="mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+					<span class="text-sm text-rose-700">Permanent</span>
+				</label>
+				<label class="flex items-center">
+					<input value={false} bind:group={permanent} type="radio" class="mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+					<span class="text-sm text-rose-700">One-Time</span>
+				</label>
+			</div>
+			<div class="mt-2 text-orange-800 text-xs">{errorMessage}</div>
 		</form>
 	</Modal>
 </SitePage>
