@@ -150,7 +150,7 @@
 			{#each days as day}
 				<button
 					onclick={() => (selectedDay = days.indexOf(day))}
-					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-2 w-26 rounded-md p-2`}
+					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-2 w-26 rounded-md p-2 cursor-pointer`}
 					>{day}</button
 				>
 			{/each}
@@ -194,7 +194,7 @@
 									selectedDate = possibleDates[0]?.value;
 									showModal = true;
 								}}
-								class="mr-3 mb-2 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+								class="mr-3 mb-2 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100 cursor-pointer"
 								>{time}<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
