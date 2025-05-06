@@ -125,7 +125,7 @@
 				method: 'POST',
 				body: JSON.stringify({date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate, pin, initials, cell: selectedCell.cell, permanent}),
 				headers: {
-					'Content-Type': 'application/json
+					'Content-Type': 'application/json'
 				}
 			}))
 		const {message} = await response.json();
