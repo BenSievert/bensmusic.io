@@ -30,7 +30,7 @@
 				type="submit"
 				onclick={confirm}
 				disabled={disabled || loading}
-				class="shadow-pastel rounded-md bg-green-300 px-5 py-2 text-lg text-green-800 hover:bg-green-200 disabled:bg-gray-200 disabled:text-gray-600 disabled:shadow-none cursor-pointer"
+				class="shadow-pastel rounded-md bg-green-300 px-5 py-2 text-lg text-green-800 hover:bg-green-200 disabled:bg-gray-200 disabled:text-gray-600 disabled:shadow-none cursor-pointer disabled:cursor-default"
 				>{#if loading}<Spinner svgClass="size-4 fill-gray-600" />
 				{:else}Confirm
 				{/if}</button
