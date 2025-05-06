@@ -87,13 +87,13 @@
 		const date = new Date();
 		if (date.getDay() == day)
 			dates.push({
-				value: `${date.getMonth()}/${date.getDate()}`,
+				value: `${date.getMonth() + 1}/${date.getDate()}`,
 				label: `${date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })} (Today)`
 			});
 		for (const _ of [...Array(weeksIn4Months)]) {
 			date.setDate(date.getDate() + ((day + 7 - date.getDay()) % 7 || 7));
 			dates.push({
-				value: `${date.getMonth()}/${date.getDate()}`,
+				value: `${date.getMonth() + 1}/${date.getDate()}`,
 				label: date.toLocaleDateString(undefined, { month: `long`, day: `numeric` })
 			});
 		}
@@ -133,7 +133,7 @@
 		if (response.status == 200) {
 			savedCells.push(selectedCell.cell);
 			showModal = false;
-		} else if (response.status == 403){
+		} else if (response.status == 403) {
 				savedCells.push(selectedCell.cell);
 				alert(message);
 				showModal = false;
