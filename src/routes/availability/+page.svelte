@@ -4,7 +4,10 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Spinner from '../../components/Spinner.svelte';
+	import type { PageProps } from './$types';
 	import { onMount } from 'svelte';
+
+	let { data }: PageProps = $props();
 
 	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 
@@ -71,13 +74,12 @@
 	let permanent = $state(true);
 
 	onMount(async () => {
-		openSchedule = await (await fetch('/availability')).json();
+		openSchedule = await (await fetch(`/availability?auth=${data.auth}`)).json();
 	});
 	let selectedTimes = $state<string[]>([]);
 	let selectedNeeds = $state<string[]>([]);
 	let showModal = $state(false);
 	let selectedCell = $state();
-	let pin = $state();
 	let initials = $state();
 	let formSubmitting = $state(false);
 	let savedCells = $state([]);
@@ -116,14 +118,12 @@
 		])
 	);
 
-	let invalidInput = $derived(!pin || !initials);
-
 	const handleSubmit = async () => {
 		formSubmitting = true;
 		const response =
-			(await fetch('/availability', {
+			(await fetch(`/availability`, {
 				method: 'POST',
-				body: JSON.stringify({date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate, pin, initials, cell: selectedCell.cell, permanent}),
+				body: JSON.stringify({auth: data.auth, date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate, initials, cell: selectedCell.cell, permanent}),
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -218,7 +218,7 @@
 	{/if}
 	<Modal
 		bind:showModal
-		disabled={invalidInput || formSubmitting}
+		disabled={!initials || formSubmitting}
 		loading={formSubmitting}
 		confirm={handleSubmit}
 	>
@@ -226,16 +226,10 @@
 		<div class="mb-3 text-rose-700">{days[selectedDay]}{#if permanent}s{/if} at {selectedCell?.time}</div>
 		<form onsubmit={handleSubmit}>
 			<input
-				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-28 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+				class="w-full placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 				placeholder="Initials"
 				oninput={() => (errorMessage = ``)}
 				bind:value={initials}
-			/>
-			<input
-				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent w-28 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
-				placeholder="PIN"
-				oninput={() => (errorMessage = ``)}
-				bind:value={pin}
 			/>
 			<label class="mt-1 block text-gray-600">
 				<div class="text-primary-dark text-left text-lg">{#if permanent}Start{/if} Date</div>

@@ -5,7 +5,7 @@ import {
 	GOOGLE_PRIVATE_KEY,
 	GOOGLE_SERVICE_ACCOUNT_EMAIL,
 	SHEET_ID,
-	PIN
+	AUTH
 } from '$env/static/private';
 import type { RequestHandler } from './$types';
 
@@ -41,19 +41,26 @@ const times = [
 	`10:00 PM`
 ];
 
-const getSheet = async (override?: string) => {
+const getSheet = async () => {
 	const serviceAccountAuth = new JWT({
 		email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
 		key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
 		scopes: ['https://www.googleapis.com/auth/spreadsheets']
 	});
 
-	const doc = new GoogleSpreadsheet(override || SHEET_ID, serviceAccountAuth);
+	const doc = new GoogleSpreadsheet(SHEET_ID, serviceAccountAuth);
 	await doc.loadInfo();
 	return doc;
 };
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ url}) => {
+	if (url.searchParams.get(`auth`) != AUTH)
+		return json({}, {
+		status: 401,
+		headers: {
+			'Cache-Control': 'no-cache'
+		}
+	});
 	const openSchedule = {};
 	const doc = await getSheet();
 	const scheduleSheet = doc.sheetsByTitle[`schedule`];
@@ -88,14 +95,14 @@ export const GET: RequestHandler = async () => {
 	});
 };
 
-export const POST: RequestHandler = async ({ request }) => {
-	const { pin, cell, initials, date, permanent } = await request.json();
+export const POST: RequestHandler = async ({ request, url }) => {
+	const { cell, initials, date, permanent, auth } = await request.json();
 	let status = 401;
 	let response = { message: `Wrong PIN or Initials` };
-	if (pin != PIN && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
+	if (auth != AUTH && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
 		return json(response, { status });
 
-	const doc = await getSheet(`1pZwjEFTgxLcY7UgoCUjnUNngieBZVeY748xrZrlzCiI`);
+	const doc = await getSheet();
 	const contactSheet = doc.sheetsByTitle[`contact information`];
 	await contactSheet.loadCells(`D3:D50`);
 	const offset = 2;
