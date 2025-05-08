@@ -98,7 +98,7 @@ export const GET: RequestHandler = async ({ url}) => {
 export const POST: RequestHandler = async ({ request, url }) => {
 	const { cell, initials, date, permanent, auth } = await request.json();
 	let status = 401;
-	let response = { message: `Wrong PIN or Initials` };
+	let response = { message: `Wrong Auth or Initials` };
 	if (auth != AUTH && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
 		return json(response, { status });
 
