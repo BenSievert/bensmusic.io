@@ -235,7 +235,7 @@
 				<div class="text-primary-dark text-left text-lg">{#if permanent}Start{/if} Date</div>
 				<select
 					bind:value={selectedDate}
-					class="focus:outline-accent outline-primary w-full rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
+					class="cursor-pointer focus:outline-accent outline-primary w-full rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
 				>
 					{#each possibleDates as { value, label }}
 						<option {value}>{label}</option>
@@ -243,12 +243,12 @@
 				</select>
 			</label>
 			<div class="flex mb-3 mt-4">
-				<label class="flex items-center mr-2">
-					<input value={true} bind:group={permanent} type="radio" class="mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+				<label class="flex items-center mr-2 cursor-pointer">
+					<input value={true} bind:group={permanent} type="radio" class="cursor-pointer mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
 					<span class="text-sm text-rose-700">Permanent</span>
 				</label>
-				<label class="flex items-center">
-					<input value={false} bind:group={permanent} type="radio" class="mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+				<label class="flex items-center cursor-pointer">
+					<input value={false} bind:group={permanent} type="radio" class="cursor-pointer mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
 					<span class="text-sm text-rose-700">One-Time</span>
 				</label>
 			</div>

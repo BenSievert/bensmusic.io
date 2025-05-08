@@ -127,6 +127,11 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		);
 
 	studioCell.value = `${initials}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
-	await scheduleSheet.saveCells([studioCell]);
-	return json({ message: `Success` }, { status: 200 });
+	try {
+		await scheduleSheet.saveCells([studioCell]);
+		return json({ message: `Success` }, { status: 200 });
+	} catch (e) {
+		return json({ message: e }, { status: 500 });
+	}
+
 };
