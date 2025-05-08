@@ -141,7 +141,7 @@
 	}
 </script>
 
-<SitePage title="Hip Cat Schedule" subtitle="Find Open Studios">
+<SitePage title="Hip Cat Scheduler" subtitle="Find Open Studios">
 	{#if !Object.entries(openSchedule).length}
 		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
