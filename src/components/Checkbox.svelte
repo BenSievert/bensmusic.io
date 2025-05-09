@@ -4,12 +4,12 @@
 	export let handleInput = () => {};
 </script>
 
-<label class="inline-flex cursor-pointer items-center space-x-1 rounded-lg p-2">
+<label class="inline-flex cursor-pointer items-center space-x-1 p-2 mr-1">
 	<input
 		on:input={handleInput}
 		{checked}
 		type="checkbox"
-		class="accent-accent-dark focus:text-accent-dark h-4 w-4 rounded focus:ring-0 cursor-pointer"
+		class="accent-accent-dark focus:text-accent-dark h-4 w-4 rounded-full focus:ring-0 cursor-pointer"
 	/>
 	<span class="text-sm text-gray-800">{label}</span>
 </label>
