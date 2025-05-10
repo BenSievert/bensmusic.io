@@ -24,7 +24,7 @@
 		<div class="mt-4 flex justify-center">
 			<button
 				class="shadow-pastel mr-4 rounded-md bg-red-300 px-3 py-1 text-red-800 hover:bg-red-200 cursor-pointer"
-				onclick={() => dialog.close()}>Cancel</button
+				onclick={() => dialog.close()}>Close</button
 			>
 			<button
 				type="submit"
