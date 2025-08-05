@@ -4,6 +4,7 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
+	const strings = [`E`,`B`,`G`,`D`,`A`];
 	const intervals = [
 		`Unison`,
 		'Minor 2nd',
@@ -20,13 +21,42 @@
 	];
 	const p5 = 7;
 
+	const getIsPossible = (string, note) => {
+		const toBeFound = notes[note];
+		const stringIndex = notes.indexOf(strings[string])
+		for (const n of Array.from({ length: maxFret }, (_, i) => i)) {
+			if (getNextNote(stringIndex, n + 1) == toBeFound)
+				return true;
+
+		}
+		return false;
+
+	}
+	const getNextNote = (note: number, interval = 1) => notes[(((note + interval) % 12) + 12) % 12]
+
 	const getRandomNote = (override?: number) => Math.floor(Math.random() * (override ?? 11));
 	let note = $state(getRandomNote());
 	let interval = $state(p5);
+	let string = $state(0);
+	let ex2Note = $state(0)
 	let wrongGuesses = $state<string[]>([]);
 	let selectedIntervals = $state([p5]);
+	let selectedNotes = $state([0,2,3,5,7,8,10])
+	let maxFret = $state(3)
 
-	let answer = $derived(notes[(((note + interval) % 12) + 12) % 12]);
+	const generateEx2Answer = () => {
+		let newString;
+		let newEx2Note;
+		do {
+			newString = getRandomNote(strings.length);
+			newEx2Note = selectedNotes[getRandomNote(selectedNotes.length)]
+		} while (!getIsPossible(newString, newEx2Note) || newString == string && ex2Note == newEx2Note)
+		string = newString;
+		ex2Note = newEx2Note
+	}
+	generateEx2Answer();
+
+	let answer = $derived(getNextNote(note, interval));
 	const guess = (guess: string) => {
 		if (guess == answer) {
 			let newNote;
@@ -42,6 +72,7 @@
 
 <SitePage title="Training" subtitle="Games and Exercises">
 	<Section>
+		<div class="text-primary-dark text-2xl mb-2 font-bold">Interval Memorization</div>
 		<div>
 			{#each intervals as interval, intervalIndex}
 				<Checkbox
@@ -66,5 +97,37 @@
 				>{note}</button
 			>
 		{/each}
+	</Section>
+	<Section theme="secondary">
+		<div class="text-secondary-dark text-2xl mb-2 font-bold">Find the note</div>
+		<div class="text-primary-dark text-lg">Highest Fret
+		<input
+			type="number"
+			min="0"
+			max="12"
+			class="ml-2 pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+			bind:value={maxFret}
+		/>
+		</div>
+		<div class="text-primary-dark text-lg">Notes
+		{#each notes as note, noteIndex}
+			<Checkbox
+					label={note}
+					checked={selectedNotes.includes(noteIndex)}
+					handleInput={() => {
+						if (selectedNotes.includes(noteIndex))
+							selectedNotes = selectedNotes.filter((i) => i !== noteIndex);
+						else selectedNotes = [...selectedNotes, noteIndex];
+					}}
+			/>
+		{/each}
+		</div>
+		<div class="mb-2"></div>
+		<div class="mb-3 text-lg">
+			Find the <span class="font-bold">{notes[ex2Note]}</span> on the <span class="font-bold">{strings[string]}</span> string
+		</div>
+		<button
+				on:click={generateEx2Answer}
+				class="py-2 px-3 bg-primary hover:bg-primary-dark hover:text-white border-2 border-primary-dark rounded-lg">Next</button>
 	</Section>
 </SitePage>
