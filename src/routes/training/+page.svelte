@@ -99,7 +99,7 @@
 		{/each}
 	</Section>
 	<Section theme="secondary">
-		<div class="text-secondary-dark text-2xl mb-2 font-bold">Find the note</div>
+		<div class="text-secondary-dark text-2xl mb-2 font-bold">Find the Note</div>
 		<div class="text-primary-dark text-lg">Highest Fret
 		<input
 			type="number"
