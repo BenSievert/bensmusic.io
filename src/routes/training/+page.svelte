@@ -46,6 +46,7 @@
 	let minFret = $state(1)
 	let challenge = $state(false)
 	let seconds = $state(5)
+	let showError = $state(false);
 
 	let time = setInterval(() => {
 			if (challenge)
@@ -55,12 +56,20 @@
 	const generateEx2Answer = () => {
 		let newString;
 		let newEx2Note;
+		let tries = 0;
 		do {
 			newString = getRandomNote(strings.length);
 			newEx2Note = selectedNotes[getRandomNote(selectedNotes.length)]
-		} while (!getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note)
-		string = newString;
-		ex2Note = newEx2Note
+			tries++;
+		} while (tries < 2500 && !getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note)
+		if (tries == 2500) {
+			showError = true;
+		}
+		else {
+			showError = false;
+			string = newString;
+			ex2Note = newEx2Note
+		}
 	}
 	generateEx2Answer();
 
@@ -183,6 +192,11 @@
 		<div class="mb-3 text-3xl">
 			Find the <span class="font-bold">{notes[ex2Note]}</span> on the <span class="font-bold">{strings[string]}</span> string
 		</div>
+		{#if showError}
+		<div class="text-orange-800 text-sm">
+			Could not find a new note within parameters. Please change the settings and try again.
+		</div>
+		{/if}
 		{#if !challenge}
 			<button
 					on:click={generateEx2Answer}
