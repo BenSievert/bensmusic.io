@@ -61,8 +61,8 @@
 			newString = getRandomNote(strings.length);
 			newEx2Note = selectedNotes[getRandomNote(selectedNotes.length)]
 			tries++;
-		} while (tries < 2500 && !getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note)
-		if (tries == 2500) {
+		} while (tries < 5000 && (!getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note))
+		if (tries == 5000) {
 			showError = true;
 		}
 		else {
