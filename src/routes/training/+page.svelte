@@ -263,7 +263,7 @@
 					/>
 					<span class="text-sm text-rose-700">Sharps</span>
 				</label>
-				<label class="flex cursor-pointer items-center">
+				<label class="mr-2 flex cursor-pointer items-center">
 					<input
 						value="flats"
 						bind:group={noteDisplay}
@@ -272,7 +272,7 @@
 					/>
 					<span class="text-sm text-rose-700">Flats</span>
 				</label>
-				<label class="mr-2 flex cursor-pointer items-center">
+				<label class="flex cursor-pointer items-center">
 					<input
 						value="both"
 						bind:group={noteDisplay}
