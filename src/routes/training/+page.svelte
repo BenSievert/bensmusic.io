@@ -24,8 +24,8 @@
 	const getIsPossible = (string, note) => {
 		const toBeFound = notes[note];
 		const stringIndex = notes.indexOf(strings[string])
-		for (const n of Array.from({ length: maxFret }, (_, i) => i)) {
-			if (getNextNote(stringIndex, n + 1) == toBeFound)
+		for (const n of Array.from({ length: maxFret - minFret + 1 }, (_, i) => i)) {
+			if (getNextNote(stringIndex , n + minFret) == toBeFound)
 				return true;
 
 		}
@@ -43,6 +43,14 @@
 	let selectedIntervals = $state([p5]);
 	let selectedNotes = $state([0,2,3,5,7,8,10])
 	let maxFret = $state(3)
+	let minFret = $state(1)
+	let challenge = $state(false)
+	let seconds = $state(5)
+
+	let time = setInterval(() => {
+			if (challenge)
+				generateEx2Answer()
+		}, seconds * 1000);
 
 	const generateEx2Answer = () => {
 		let newString;
@@ -50,7 +58,7 @@
 		do {
 			newString = getRandomNote(strings.length);
 			newEx2Note = selectedNotes[getRandomNote(selectedNotes.length)]
-		} while (!getIsPossible(newString, newEx2Note) || newString == string && ex2Note == newEx2Note)
+		} while (!getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note)
 		string = newString;
 		ex2Note = newEx2Note
 	}
@@ -100,16 +108,32 @@
 	</Section>
 	<Section theme="secondary">
 		<div class="text-secondary-dark text-2xl mb-2 font-bold">Find the Note</div>
-		<div class="text-primary-dark text-lg">Highest Fret
+		<span class="text-primary-dark font-bold text-lg mr-2">Frets</span>
+		<div class="text-secondary-dark text-sm inline-block mb-2 mr-2">Lowest
+			<input
+					type="number"
+					min="1"
+					max="11"
+					class="pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+					on:change={() =>  {if (minFret > maxFret)
+						maxFret = minFret;
+					}}
+					bind:value={minFret}
+			/>
+		</div>
+		<div class="text-secondary-dark text-sm inline-block">Highest
 		<input
 			type="number"
-			min="0"
-			max="12"
-			class="ml-2 pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+			min="1"
+			max="11"
+			class="pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+			on:change={() =>  {if (maxFret < minFret)
+						minFret = maxFret;
+					}}
 			bind:value={maxFret}
 		/>
 		</div>
-		<div class="text-primary-dark text-lg">Notes
+		<div class="text-primary-dark text-lg font-bold mb-2">Notes
 		{#each notes as note, noteIndex}
 			<Checkbox
 					label={note}
@@ -122,12 +146,51 @@
 			/>
 		{/each}
 		</div>
-		<div class="mb-2"></div>
-		<div class="mb-3 text-lg">
+		<div class={`${challenge ? `mb-2` : `mb-4`} flex`} >
+		<span class="text-primary-dark font-bold text-lg mr-2">Challenge Mode</span>
+		<Checkbox
+				noPadding={true}
+				label=''
+				handleInput={() => {
+						clearInterval(time);
+						if (!challenge) {
+							time = setInterval(() => {
+								if (challenge)
+									generateEx2Answer()
+							}, seconds * 1000);
+						}
+						challenge = !challenge
+					}}
+		/>
+		</div>
+		{#if challenge}<div class="mb-4">
+			<span class="text-primary-dark font-bold text-lg mr-2">Seconds</span>
+			<input
+					type="number"
+					min="1"
+					class="w-16 pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+					bind:value={seconds}
+					on:input={e => {
+				clearInterval(time);
+				time = setInterval(() => {
+					if (challenge)
+						generateEx2Answer()
+				}, e.target.value * 1000);
+			}}
+			/>
+		</div>
+		{/if}
+		<div class="mb-3 text-3xl">
 			Find the <span class="font-bold">{notes[ex2Note]}</span> on the <span class="font-bold">{strings[string]}</span> string
 		</div>
-		<button
-				on:click={generateEx2Answer}
-				class="py-2 px-3 bg-primary hover:bg-primary-dark hover:text-white border-2 border-primary-dark rounded-lg">Next</button>
+		{#if !challenge}
+			<button
+					on:click={generateEx2Answer}
+					class="mt-2 py-2 px-3 bg-primary hover:bg-primary-dark hover:text-white border-2 border-primary-dark rounded-lg">Next</button>
+
+		{/if}
+
+
+
 	</Section>
 </SitePage>
