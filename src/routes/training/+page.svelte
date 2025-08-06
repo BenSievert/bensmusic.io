@@ -112,8 +112,8 @@
 		<div class="text-secondary-dark text-sm inline-block mb-2 mr-2">Lowest
 			<input
 					type="number"
-					min="1"
-					max="11"
+					min="0"
+					max="24"
 					class="pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 					on:change={() =>  {if (minFret > maxFret)
 						maxFret = minFret;
