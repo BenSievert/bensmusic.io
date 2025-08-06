@@ -4,7 +4,7 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
-	let stringsState = $state([`E`,`B`,`G`,`D`,`A`, `E`]);
+	let stringsState = $state([`E`,`A`,`D`,`G`,`B`, `E`]);
 	let strings = $derived([...new Set(stringsState.filter(string => string != `None`))])
 	const intervals = [
 		`Unison`,
