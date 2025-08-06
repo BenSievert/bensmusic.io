@@ -124,8 +124,8 @@
 		<div class="text-secondary-dark text-sm inline-block">Highest
 		<input
 			type="number"
-			min="1"
-			max="11"
+			min="0"
+			max="24"
 			class="pl-4 border-primary focus:border-accent focus:ring-accent rounded-sm border text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 			on:change={() =>  {if (maxFret < minFret)
 						minFret = maxFret;
@@ -175,7 +175,7 @@
 				time = setInterval(() => {
 					if (challenge)
 						generateEx2Answer()
-				}, e.target.value * 1000);
+				}, (e.target.value || 1) * 1000);
 			}}
 			/>
 		</div>
