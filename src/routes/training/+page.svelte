@@ -137,7 +137,7 @@
 		{#each Array.from({ length: 6}) as _, i}
 			<select
 					bind:value={stringsState[i]}
-					class="cursor-pointer w-14 mr-1 text-xs border border-accent-dark rounded-md py-0.5"
+					class="bg-white cursor-pointer w-18 mr-1 text-xs border border-accent-dark rounded-md py-0.5"
 			>
 				<option value="None">None</option>
 				{#each notes as note }
