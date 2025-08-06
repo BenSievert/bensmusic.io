@@ -32,12 +32,19 @@
 		return false;
 
 	}
+
+	const getPossible = (string: string) =>
+		Array.from({ length: maxFret - minFret + 1 }, (_, i) => i).map(i => getNextNote2(notes.indexOf(string), i + minFret)).filter(value => selectedNotes.includes(value))
+
+
+
 	const getNextNote = (note: number, interval = 1) => notes[(((note + interval) % 12) + 12) % 12]
+	const getNextNote2 = (note: number, interval = 1) => (((note + interval) % 12) + 12) % 12
 
 	const getRandomNote = (override?: number) => Math.floor(Math.random() * (override ?? 11));
 	let note = $state(getRandomNote());
 	let interval = $state(p5);
-	let string = $state(0);
+	let string = $state(`A`);
 	let ex2Note = $state(0)
 	let wrongGuesses = $state<string[]>([]);
 	let selectedIntervals = $state([p5]);
@@ -47,6 +54,10 @@
 	let challenge = $state(false)
 	let seconds = $state(5)
 	let showError = $state(false);
+	let allPossible = $derived(strings.map(string => {
+		return [string, getPossible(string)]
+
+	}).filter(([_, notes]) => notes.length))
 
 	let time = setInterval(() => {
 			if (challenge)
@@ -54,22 +65,25 @@
 		}, seconds * 1000);
 
 	const generateEx2Answer = () => {
-		let newString;
+		let newStringIndex;
+		let newString
 		let newEx2Note;
-		let tries = 0;
-		do {
-			newString = getRandomNote(strings.length);
-			newEx2Note = selectedNotes[getRandomNote(selectedNotes.length)]
-			tries++;
-		} while (tries < 5000 && (!getIsPossible(newString, newEx2Note) || newString == string && newEx2Note == ex2Note))
-		if (tries == 5000) {
+
+		if (allPossible.map(([_, n]) => n).flat().length < 2) {
 			showError = true;
+			return
 		}
-		else {
-			showError = false;
-			string = newString;
-			ex2Note = newEx2Note
-		}
+
+		do {
+			newStringIndex = getRandomNote(allPossible.length);
+			newString = allPossible[newStringIndex][0]
+			newEx2Note = allPossible[newStringIndex][1][getRandomNote(allPossible[newStringIndex][1].length)]
+		} while (newString == string && newEx2Note == ex2Note)
+
+		showError = false;
+		string = newString;
+		ex2Note = newEx2Note
+
 	}
 	generateEx2Answer();
 
@@ -190,11 +204,11 @@
 		</div>
 		{/if}
 		<div class="mb-3 text-3xl">
-			Find the <span class="font-bold">{notes[ex2Note]}</span> on the <span class="font-bold">{strings[string]}</span> string
+			Find the <span class="font-bold">{notes[ex2Note]}</span> on the <span class="font-bold">{string}</span> string
 		</div>
 		{#if showError}
 		<div class="text-orange-800 text-sm">
-			Could not find a new note within parameters. Please change the settings and try again.
+			Not enough notes within current parameters. Please change the settings and try again.
 		</div>
 		{/if}
 		{#if !challenge}
