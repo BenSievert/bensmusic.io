@@ -256,15 +256,6 @@
 			<div class="mt-4 mb-3 flex">
 				<label class="mr-2 flex cursor-pointer items-center">
 					<input
-						value="both"
-						bind:group={noteDisplay}
-						type="radio"
-						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
-					/>
-					<span class="text-sm text-rose-700">Both</span>
-				</label>
-				<label class="mr-2 flex cursor-pointer items-center">
-					<input
 						value="sharps"
 						bind:group={noteDisplay}
 						type="radio"
@@ -280,6 +271,15 @@
 						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
 					/>
 					<span class="text-sm text-rose-700">Flats</span>
+				</label>
+				<label class="mr-2 flex cursor-pointer items-center">
+					<input
+						value="both"
+						bind:group={noteDisplay}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+					/>
+					<span class="text-sm text-rose-700">Both</span>
 				</label>
 			</div>
 		</div>
