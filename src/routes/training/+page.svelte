@@ -4,7 +4,8 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
-	const strings = [`E`,`B`,`G`,`D`,`A`];
+	let stringsState = $state([`E`,`B`,`G`,`D`,`A`, `E`]);
+	let strings = $derived([...new Set(stringsState.filter(string => string != `None`))])
 	const intervals = [
 		`Unison`,
 		'Minor 2nd',
@@ -131,6 +132,20 @@
 	</Section>
 	<Section theme="secondary">
 		<div class="text-secondary-dark text-2xl mb-2 font-bold">Find the Note</div>
+		<div class="mb-3">
+		<span class="text-primary-dark font-bold text-lg mr-2">Tuning</span>
+		{#each Array.from({ length: 6}) as _, i}
+			<select
+					bind:value={stringsState[i]}
+					class="cursor-pointer w-14 mr-1 text-xs border border-accent-dark rounded-md py-1"
+			>
+				<option value="None">None</option>
+				{#each notes as note }
+					<option value={note}>{note}</option>
+				{/each}
+			</select>
+		{/each}
+		</div>
 		<span class="text-primary-dark font-bold text-lg mr-2">Frets</span>
 		<div class="text-secondary-dark text-sm inline-block mb-2 mr-2">Lowest
 			<input
