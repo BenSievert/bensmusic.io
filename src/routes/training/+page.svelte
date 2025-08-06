@@ -144,7 +144,7 @@
 			{#each Array.from({ length: 6 }) as _, i}
 				<select
 					bind:value={stringsState[i]}
-					class="cursor-pointer bg-white {noteDisplay == `both`
+					class="pl-1 cursor-pointer bg-white {noteDisplay == `both`
 						? `w-18`
 						: `w-12`} border-accent-dark mr-1 rounded-md border py-0.5 text-xs"
 				>
