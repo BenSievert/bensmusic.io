@@ -120,25 +120,30 @@
 
 	const handleSubmit = async () => {
 		formSubmitting = true;
-		const response =
-			(await fetch(`/availability`, {
-				method: 'POST',
-				body: JSON.stringify({auth: data.auth, date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate, initials, cell: selectedCell.cell, permanent}),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}))
-		const {message} = await response.json();
+		const response = await fetch(`/availability`, {
+			method: 'POST',
+			body: JSON.stringify({
+				auth: data.auth,
+				date: permanent && selectedDate == possibleDates[0].value ? `now` : selectedDate,
+				initials,
+				cell: selectedCell.cell,
+				permanent
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const { message } = await response.json();
 		formSubmitting = false;
 		if (response.status == 200) {
 			savedCells.push(selectedCell.cell);
 			showModal = false;
 		} else if (response.status == 403) {
-				savedCells.push(selectedCell.cell);
-				alert(message);
-				showModal = false;
+			savedCells.push(selectedCell.cell);
+			alert(message);
+			showModal = false;
 		} else errorMessage = `Error: ${message}`;
-	}
+	};
 </script>
 
 <SitePage title="Hip Cat Scheduler" subtitle="Find Open Studios">
@@ -150,7 +155,7 @@
 			{#each days as day}
 				<button
 					onclick={() => (selectedDay = days.indexOf(day))}
-					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-2 w-26 rounded-md p-2 cursor-pointer`}
+					class={`${selectedDay === days.indexOf(day) ? `bg-primary-dark ring-primary-dark text-white ring-1 ring-offset-2` : `bg-primary`} hover:bg-primary-light mr-4 mb-2 w-26 cursor-pointer rounded-md p-2`}
 					>{day}</button
 				>
 			{/each}
@@ -194,7 +199,7 @@
 									selectedDate = possibleDates[0]?.value;
 									showModal = true;
 								}}
-								class="mr-3 mb-2 flex items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100 cursor-pointer"
+								class="mr-3 mb-2 flex cursor-pointer items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
 								>{time}<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
@@ -223,36 +228,50 @@
 		confirm={handleSubmit}
 	>
 		<h2 class="text-primary-dark text-2xl font-extrabold">{selectedCell?.studio}</h2>
-		<div class="mb-3 text-rose-700">{days[selectedDay]}{#if permanent}s{/if} at {selectedCell?.time}</div>
+		<div class="mb-3 text-rose-700">
+			{days[selectedDay]}{#if permanent}s{/if} at {selectedCell?.time}
+		</div>
 		<form onsubmit={handleSubmit}>
 			<input
-				class="w-full placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+				class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-full rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 				placeholder="Initials"
 				oninput={() => (errorMessage = ``)}
 				bind:value={initials}
 			/>
 			<label class="mt-1 block text-gray-600">
-				<div class="text-primary-dark text-left text-lg">{#if permanent}Start{/if} Date</div>
+				<div class="text-primary-dark text-left text-lg">
+					{#if permanent}Start{/if} Date
+				</div>
 				<select
 					bind:value={selectedDate}
-					class="cursor-pointer focus:outline-accent outline-primary w-full rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
+					class="focus:outline-accent outline-primary w-full cursor-pointer rounded-xl border border-r-8 border-transparent bg-pink-50 px-3 py-2 outline"
 				>
 					{#each possibleDates as { value, label }}
 						<option {value}>{label}</option>
 					{/each}
 				</select>
 			</label>
-			<div class="flex mb-3 mt-4">
-				<label class="flex items-center mr-2 cursor-pointer">
-					<input value={true} bind:group={permanent} type="radio" class="cursor-pointer mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+			<div class="mt-4 mb-3 flex">
+				<label class="mr-2 flex cursor-pointer items-center">
+					<input
+						value={true}
+						bind:group={permanent}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+					/>
 					<span class="text-sm text-rose-700">Permanent</span>
 				</label>
-				<label class="flex items-center cursor-pointer">
-					<input value={false} bind:group={permanent} type="radio" class="cursor-pointer mb-[2px] mr-1 accent-accent-dark focus:ring-0 focus:ring-offset-0"/>
+				<label class="flex cursor-pointer items-center">
+					<input
+						value={false}
+						bind:group={permanent}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+					/>
 					<span class="text-sm text-rose-700">One-Time</span>
 				</label>
 			</div>
-			<div class="mt-2 text-orange-800 text-xs">{errorMessage}</div>
+			<div class="mt-2 text-xs text-orange-800">{errorMessage}</div>
 		</form>
 	</Modal>
 </SitePage>

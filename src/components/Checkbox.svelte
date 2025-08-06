@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let label = '';
 	export let checked = false;
-	export let noPadding = false
+	export let noPadding = false;
 	export let handleInput = () => {};
 </script>
 
@@ -10,7 +10,7 @@
 		on:input={handleInput}
 		{checked}
 		type="checkbox"
-		class="accent-accent-dark focus:text-accent-dark h-4 w-4 rounded-full focus:ring-0 cursor-pointer"
+		class="accent-accent-dark focus:text-accent-dark h-4 w-4 cursor-pointer rounded-full focus:ring-0"
 	/>
 	<span class="text-sm text-gray-800">{label}</span>
 </label>
