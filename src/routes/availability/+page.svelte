@@ -161,7 +161,7 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
-			<div class="grid grid-cols-3 sm:grid-cols-6 gap-1 w-max">
+			<div class="grid grid-cols-3 sm:grid-cols-6 kd gap-1 w-max">
 			{#each times as time, i}
 				<Checkbox
 					label={time}
@@ -190,7 +190,7 @@
 		</Section>
 		<Section theme="secondary">
 			<div class="text-accent-dark text-2xl font-bold ">{days[selectedDay]}</div>
-			<div class="grid grid-cols-2 sm:grid-cols-4 gap-8 w-auto sm:w-max">
+			<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8 w-auto sm:w-max">
 			{#each available as [studio, times]}
 				{#if times.length}
 					<div>
