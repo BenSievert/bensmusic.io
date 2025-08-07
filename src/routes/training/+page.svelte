@@ -139,12 +139,12 @@
 	</Section>
 	<Section theme="secondary">
 		<div class="text-secondary-dark mb-2 text-2xl font-bold">Find the Note</div>
-		<div class="mb-3">
+		<div class="mb-2">
 			<span class="text-primary-dark mr-2 text-lg font-bold">Tuning</span>
 			{#each Array.from({ length: 6 }) as _, i}
 				<select
 					bind:value={stringsState[i]}
-					class="pl-1 cursor-pointer bg-white {noteDisplay == `both`
+					class="mb-1 pl-1 cursor-pointer bg-white {noteDisplay == `both`
 						? `w-18`
 						: `w-12`} border-accent-dark mr-1 rounded-md border py-0.5 text-xs"
 				>
