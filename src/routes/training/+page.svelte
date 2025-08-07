@@ -22,15 +22,6 @@
 	];
 	const p5 = 7;
 
-	const getIsPossible = (string, note) => {
-		const toBeFound = notes[note];
-		const stringIndex = notes.indexOf(strings[string]);
-		for (const n of Array.from({ length: maxFret - minFret + 1 }, (_, i) => i)) {
-			if (getNextNote(stringIndex, n + minFret) == toBeFound) return true;
-		}
-		return false;
-	};
-
 	const getPossible = (string: string) =>
 		Array.from({ length: maxFret - minFret + 1 }, (_, i) => i)
 			.map((i) => getNextNote2(notes.indexOf(string), i + minFret))
@@ -112,7 +103,7 @@
 <SitePage title="Training" subtitle="Games and Exercises">
 	<Section>
 		<div class="text-primary-dark mb-2 text-2xl font-bold">Interval Memorization</div>
-		<div>
+		<div class="grid grid-cols-3 sm:grid-cols-6 gap-1 w-max">
 			{#each intervals as interval, intervalIndex}
 				<Checkbox
 					label={interval}
@@ -139,12 +130,12 @@
 	</Section>
 	<Section theme="secondary">
 		<div class="text-secondary-dark mb-2 text-2xl font-bold">Find the Note</div>
-		<div class="mb-2">
-			<span class="text-primary-dark mr-2 text-lg font-bold">Tuning</span>
+		<div class="mb-2 flex-col">
+			<div class="text-primary-dark mr-2 text-lg sm:inline-block">Tuning</div>
 			{#each Array.from({ length: 6 }) as _, i}
 				<select
 					bind:value={stringsState[i]}
-					class="mb-1 pl-1 cursor-pointer bg-white {noteDisplay == `both`
+					class="block sm:inline-block mb-1 pl-1 cursor-pointer bg-white {noteDisplay == `both`
 						? `w-18`
 						: `w-12`} border-accent-dark mr-1 rounded-md border py-0.5 text-xs"
 				>
@@ -184,6 +175,7 @@
 		</div>
 		<div class="text-primary-dark mb-2 text-lg font-bold">
 			Notes
+			<div class="grid grid-cols-4 sm:grid-cols-6 gap-1 w-max">
 			{#each notes as note, noteIndex}
 				<Checkbox
 					label={parseNote(note)}
@@ -195,6 +187,7 @@
 					}}
 				/>
 			{/each}
+			</div>
 		</div>
 		<div class={`${challenge ? `mb-2` : `mb-4`} flex`}>
 			<span class="text-primary-dark mr-2 text-lg font-bold">Challenge Mode</span>

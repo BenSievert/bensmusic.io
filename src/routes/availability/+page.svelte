@@ -161,6 +161,7 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
+			<div class="grid grid-cols-3 sm:grid-cols-6 gap-1 w-max">
 			{#each times as time, i}
 				<Checkbox
 					label={time}
@@ -172,6 +173,7 @@
 					}}
 				/>
 			{/each}
+			</div>
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Needs</h2>
 			{#each Object.keys(needs) as need}
