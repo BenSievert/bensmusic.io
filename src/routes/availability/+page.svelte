@@ -189,11 +189,13 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-accent-dark text-2xl font-bold">{days[selectedDay]}</div>
+			<div class="text-accent-dark text-2xl font-bold ">{days[selectedDay]}</div>
+			<div class="grid grid-cols-2 sm:grid-cols-4 gap-8 w-auto sm:w-max">
 			{#each available as [studio, times]}
 				{#if times.length}
-					<div class="text-primary-dark mb-4 max-w-1/2 text-xl">{studio}</div>
-					<div class="mb-2 flex flex-wrap">
+					<div>
+					<div class="text-primary-dark mb-2 text-xl">{studio == `Large Room (Studio 10)` ? `Large Room` : studio}</div>
+					<div class="mb-2">
 						{#each times as { time, cell }}
 							<button
 								onclick={() => {
@@ -219,8 +221,10 @@
 							</button>
 						{/each}
 					</div>
+					</div>
 				{/if}
 			{/each}
+			</div>
 		</Section>
 	{/if}
 	<Modal
