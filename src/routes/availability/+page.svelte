@@ -195,7 +195,7 @@
 				{#if times.length}
 					<div>
 					<div class="text-primary-dark mb-2 text-xl">{studio == `Large Room (Studio 10)` ? `Large Room` : studio}</div>
-					<div class="mb-2">
+					<div class="mb-2.5">
 						{#each times as { time, cell }}
 							<button
 								onclick={() => {
