@@ -2,6 +2,7 @@
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
 	import Checkbox from '../../components/Checkbox.svelte';
+	import { PitchDetector } from "pitchy";
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
 	let stringsState = $state([`E`, `A`, `D`, `G`, `B`, `E`]);
@@ -21,6 +22,69 @@
 		`Major 7th`
 	];
 	const p5 = 7;
+
+	import { onMount } from 'svelte';
+
+	let pitch: number | null = $state(null);
+	let clarity: number | null = null;
+	let error: string | null = null;
+
+	let audioContext: AudioContext;
+	let analyser: AnalyserNode;
+	let dataArray: Float32Array;
+	let detector;
+	let dedup = $state(false)
+	let autoDetect = $state(false)
+	let autoDetectInterval;
+
+	onMount(async () => {
+		try {
+			const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+			audioContext = new AudioContext();
+			const source = audioContext.createMediaStreamSource(stream);
+
+			analyser = audioContext.createAnalyser();
+			analyser.fftSize = 2048;
+			const bufferLength = analyser.fftSize;
+			dataArray = new Float32Array(bufferLength);
+			detector = PitchDetector.forFloat32Array(bufferLength)
+			detector.minVolumeAbsolute = .02;
+			source.connect(analyser);
+
+		} catch (e) {
+			error = 'Microphone access denied.';
+			console.error(e);
+		}
+	});
+
+	if (autoDetect)
+		autoDetectInterval = setInterval(() => {
+			detect();
+		}, 250);
+
+	function detect() {
+		analyser.getFloatTimeDomainData(dataArray);
+
+		const [detectedPitch, detectedClarity] = detector.findPitch(dataArray, audioContext.sampleRate);
+		if (dedup)
+			return;
+		if (detectedClarity > 0.92) {
+			pitch = detectedPitch;
+			clarity = detectedClarity;
+		} else {
+			pitch = null;
+			clarity = null;
+		}
+
+		if (!detectedPitch || detectedPitch <= 0) return;
+
+		const midi = Math.round(72 + 12 * Math.log2(detectedPitch / 440));
+		const noteIndex = midi % 12;
+		if (noteIndex == ex2Note)
+			win();
+
+	}
+
 
 	const getPossible = (string: string) =>
 		Array.from({ length: maxFret - minFret + 1 }, (_, i) => i)
@@ -44,6 +108,7 @@
 	let seconds = $state(5);
 	let showError = $state(false);
 	let noteDisplay = $state(`sharps`);
+	let correct = $state(false);
 	let allPossible = $derived(
 		strings
 			.map((string) => {
@@ -63,10 +128,30 @@
 		}
 	};
 
+	const win =() => {
+		correct = true;
+		dedup = true;
+		clearInterval(time);
+		setTimeout(() => {
+			dedup = false;
+			correct = false;
+			if (challenge) {
+				time = setInterval(() => {
+					if (challenge) generateEx2Answer();
+				}, seconds * 1000);
+			}
+
+			generateEx2Answer();
+		}, 1000);
+
+	}
+
 	const generateEx2Answer = () => {
 		let newStringIndex;
 		let newString;
 		let newEx2Note;
+
+
 
 		if (allPossible.map(([_, n]) => n).flat().length < 2) {
 			showError = true;
@@ -189,6 +274,24 @@
 			{/each}
 			</div>
 		</div>
+		<div class="flex">
+			<span class="text-primary-dark mr-2 text-lg font-bold">Auto Detect (Beta)</span>
+			<Checkbox
+					noPadding={true}
+					label=""
+					handleInput={() => {
+					clearInterval(autoDetectInterval);
+					if (!autoDetect) {
+						autoDetectInterval = setInterval(() => {
+							detect();
+						}, 250);
+					}
+					autoDetect = !autoDetect;
+				}}
+			/>
+		</div>
+		<div class="text-xs text-orange-800 mb-4">This mode is in beta and janky. It will attempt to detect the note you play through your microphone. If you try it out let me know how it went.</div>
+
 		<div class={`${challenge ? `mb-2` : `mb-4`} flex`}>
 			<span class="text-primary-dark mr-2 text-lg font-bold">Challenge Mode</span>
 			<Checkbox
@@ -226,8 +329,8 @@
 			</div>
 		{/if}
 		<div class="mb-3 text-3xl">
-			Find the <span class="font-bold">{parseNote(notes[ex2Note])}</span> on the
-			<span class="font-bold">{parseNote(string)}</span> string
+			 On the <span class="font-bold">{parseNote(string)}</span> string
+			 find <span class="font-bold">{parseNote(notes[ex2Note])}</span>
 		</div>
 		{#if showError}
 			<div class="text-sm text-orange-800">
@@ -241,6 +344,11 @@
 			>
 				Next
 			</button>
+		{/if}
+		{#if autoDetect}
+		<div class="inline-block p-2 rounded-md {correct ? `bg-green-600 text-white border-2 border-green-700` : `bg-gray-200 text-gray-300`}">
+			Correct
+		</div>
 		{/if}
 	</Section>
 	<Section theme="tertiary">

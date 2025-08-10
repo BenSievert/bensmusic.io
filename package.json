@@ -40,6 +40,7 @@
 		"@tailwindcss/vite": "^4.1.7",
 		"google-auth-library": "^9.15.1",
 		"google-spreadsheet": "^4.1.4",
+		"pitchy": "^4.1.0",
 		"postcss": "^8.5.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"tailwindcss": "^4.1.5",
