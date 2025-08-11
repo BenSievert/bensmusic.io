@@ -12,7 +12,7 @@
 			<div class="mb-3">
 			<a
 					href="training/{game.link}"
-					class="border border-primary inline-block text-xl p-4 bg-blue-100 shadow-softBlue text-blue-700 hover:bg-highlight-mintGreen hover:text-primary md:rounded-md"
+					class="border border-primary inline-block text-xl p-4 bg-blue-100 shadow-softBlue text-blue-700 hover:bg-highlight-mintGreen hover:text-primary rounded-md"
 			>
 				<div class="flex items-center justify-between">
 					<div class="mr-4">
