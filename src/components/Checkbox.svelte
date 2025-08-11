@@ -14,4 +14,3 @@
 	/>
 	<span class="text-sm text-gray-800">{label}</span>
 </label>
-

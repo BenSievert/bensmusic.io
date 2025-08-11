@@ -161,18 +161,18 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
-			<div class="grid grid-cols-3 sm:grid-cols-6 kd gap-1 w-max">
-			{#each times as time, i}
-				<Checkbox
-					label={time}
-					checked={selectedTimes.includes(time)}
-					handleInput={() => {
-						if (selectedTimes.includes(time))
-							selectedTimes = selectedTimes.filter((selectedTime) => selectedTime !== time);
-						else selectedTimes = [...selectedTimes, time];
-					}}
-				/>
-			{/each}
+			<div class="kd grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
+				{#each times as time, i}
+					<Checkbox
+						label={time}
+						checked={selectedTimes.includes(time)}
+						handleInput={() => {
+							if (selectedTimes.includes(time))
+								selectedTimes = selectedTimes.filter((selectedTime) => selectedTime !== time);
+							else selectedTimes = [...selectedTimes, time];
+						}}
+					/>
+				{/each}
 			</div>
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Needs</h2>
@@ -189,41 +189,45 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-accent-dark text-2xl font-bold ">{days[selectedDay]}</div>
-			<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8 w-auto sm:w-max">
-			{#each available as [studio, times]}
-				{#if times.length}
-					<div>
-					<div class="text-primary-dark mb-2 text-xl">{studio == `Large Room (Studio 10)` ? `Large Room` : studio}</div>
-					<div class="mb-2.5">
-						{#each times as { time, cell }}
-							<button
-								onclick={() => {
-									selectedCell = { time, cell, studio };
-									selectedDate = possibleDates[0]?.value;
-									showModal = true;
-								}}
-								class="mr-3 mb-2 flex cursor-pointer items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
-								>{time}<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="1.5"
-									stroke="currentColor"
-									class="mb-[2px] ml-2 size-4"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-									/>
-								</svg>
-							</button>
-						{/each}
-					</div>
-					</div>
-				{/if}
-			{/each}
+			<div class="text-accent-dark text-2xl font-bold">{days[selectedDay]}</div>
+			<div
+				class="grid w-auto grid-cols-2 gap-8 sm:w-max sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+			>
+				{#each available as [studio, times]}
+					{#if times.length}
+						<div>
+							<div class="text-primary-dark mb-2 text-xl">
+								{studio == `Large Room (Studio 10)` ? `Large Room` : studio}
+							</div>
+							<div class="mb-2.5">
+								{#each times as { time, cell }}
+									<button
+										onclick={() => {
+											selectedCell = { time, cell, studio };
+											selectedDate = possibleDates[0]?.value;
+											showModal = true;
+										}}
+										class="mr-3 mb-2 flex cursor-pointer items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+										>{time}<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="mb-[2px] ml-2 size-4"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+											/>
+										</svg>
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/if}
+				{/each}
 			</div>
 		</Section>
 	{/if}

@@ -2,11 +2,11 @@
 	import SitePage from '../../../components/SitePage.svelte';
 	import Section from '../../../components/Section.svelte';
 	import Checkbox from '../../../components/Checkbox.svelte';
-	import { PitchDetector } from "pitchy";
+	import { PitchDetector } from 'pitchy';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
 	let stringsState = $state([`E`, `A`, `D`, `G`, `B`, `E`]);
-	let score = $state(0)
+	let score = $state(0);
 	let strings = $derived([...new Set(stringsState.filter((string) => string != ``))]);
 
 	import { onMount } from 'svelte';
@@ -19,8 +19,8 @@
 	let analyser: AnalyserNode;
 	let dataArray: Float32Array;
 	let detector;
-	let dedup = $state(false)
-	let autoDetect = $state(false)
+	let dedup = $state(false);
+	let autoDetect = $state(false);
 	let autoDetectInterval;
 
 	onMount(async () => {
@@ -33,10 +33,9 @@
 			analyser.fftSize = 2048;
 			const bufferLength = analyser.fftSize;
 			dataArray = new Float32Array(bufferLength);
-			detector = PitchDetector.forFloat32Array(bufferLength)
-			detector.minVolumeAbsolute = .02;
+			detector = PitchDetector.forFloat32Array(bufferLength);
+			detector.minVolumeAbsolute = 0.02;
 			source.connect(analyser);
-
 		} catch (e) {
 			error = 'Microphone access denied.';
 			console.error(e);
@@ -52,8 +51,7 @@
 		analyser.getFloatTimeDomainData(dataArray);
 
 		const [detectedPitch, detectedClarity] = detector.findPitch(dataArray, audioContext.sampleRate);
-		if (dedup)
-			return;
+		if (dedup) return;
 		if (detectedClarity > 0.92) {
 			pitch = detectedPitch;
 			clarity = detectedClarity;
@@ -66,11 +64,8 @@
 
 		const midi = Math.round(72 + 12 * Math.log2(detectedPitch / 440));
 		const noteIndex = midi % 12;
-		if (noteIndex == ex2Note)
-			win();
-
+		if (noteIndex == ex2Note) win();
 	}
-
 
 	const getPossible = (string: string) =>
 		Array.from({ length: maxFret - minFret + 1 }, (_, i) => i)
@@ -111,7 +106,7 @@
 		}
 	};
 
-	const win =() => {
+	const win = () => {
 		correct = true;
 		dedup = true;
 		clearInterval(time);
@@ -127,15 +122,12 @@
 
 			generateEx2Answer();
 		}, 1000);
-
-	}
+	};
 
 	const generateEx2Answer = () => {
 		let newStringIndex;
 		let newString;
 		let newEx2Note;
-
-
 
 		if (allPossible.map(([_, n]) => n).flat().length < 2) {
 			showError = true;
@@ -154,17 +146,16 @@
 		ex2Note = newEx2Note;
 	};
 	generateEx2Answer();
-
 </script>
 
 <SitePage title="Find the Note" subtitle="Games and Exercises">
 	<Section theme="secondary">
 		<div class="mb-2 flex-col">
-			<div class="font-bold text-primary-dark mr-2 text-lg sm:inline-block">Tuning</div>
+			<div class="text-primary-dark mr-2 text-lg font-bold sm:inline-block">Tuning</div>
 			{#each Array.from({ length: 6 }) as _, i}
 				<select
 					bind:value={stringsState[i]}
-					class="block sm:inline-block mb-1 pl-1 cursor-pointer bg-white {noteDisplay == `both`
+					class="mb-1 block cursor-pointer bg-white pl-1 sm:inline-block {noteDisplay == `both`
 						? `w-18`
 						: `w-12`} border-accent-dark mr-1 rounded-md border py-0.5 text-xs"
 				>
@@ -204,26 +195,26 @@
 		</div>
 		<div class="text-primary-dark mb-2 text-lg font-bold">
 			Notes
-			<div class="grid grid-cols-4 sm:grid-cols-6 gap-1 w-max">
-			{#each notes as note, noteIndex}
-				<Checkbox
-					label={parseNote(note)}
-					checked={selectedNotes.includes(noteIndex)}
-					handleInput={() => {
-						if (selectedNotes.includes(noteIndex))
-							selectedNotes = selectedNotes.filter((i) => i !== noteIndex);
-						else selectedNotes = [...selectedNotes, noteIndex];
-					}}
-				/>
-			{/each}
+			<div class="grid w-max grid-cols-4 gap-1 sm:grid-cols-6">
+				{#each notes as note, noteIndex}
+					<Checkbox
+						label={parseNote(note)}
+						checked={selectedNotes.includes(noteIndex)}
+						handleInput={() => {
+							if (selectedNotes.includes(noteIndex))
+								selectedNotes = selectedNotes.filter((i) => i !== noteIndex);
+							else selectedNotes = [...selectedNotes, noteIndex];
+						}}
+					/>
+				{/each}
 			</div>
 		</div>
 		<div class="flex">
 			<span class="text-primary-dark mr-2 text-lg font-bold">Auto Detect (Beta)</span>
 			<Checkbox
-					noPadding={true}
-					label=""
-					handleInput={() => {
+				noPadding={true}
+				label=""
+				handleInput={() => {
 					clearInterval(autoDetectInterval);
 					if (!autoDetect) {
 						autoDetectInterval = setInterval(() => {
@@ -234,7 +225,10 @@
 				}}
 			/>
 		</div>
-		<div class="text-xs text-orange-800 mb-4">This mode is in beta and janky. It will attempt to detect the note you play through your microphone. If you try it out let me know how it went.</div>
+		<div class="mb-4 text-xs text-orange-800">
+			This mode is in beta and janky. It will attempt to detect the note you play through your
+			microphone. If you try it out let me know how it went.
+		</div>
 
 		<div class={`${challenge ? `mb-2` : `mb-4`} flex`}>
 			<span class="text-primary-dark mr-2 text-lg font-bold">Challenge Mode</span>
@@ -273,8 +267,8 @@
 			</div>
 		{/if}
 		<div class="mb-3 text-3xl">
-			 On the <span class="font-bold">{parseNote(string)}</span> string
-			 find <span class="font-bold">{parseNote(notes[ex2Note])}</span>
+			On the <span class="font-bold">{parseNote(string)}</span> string find
+			<span class="font-bold">{parseNote(notes[ex2Note])}</span>
 		</div>
 		{#if showError}
 			<div class="text-sm text-orange-800">
@@ -290,9 +284,13 @@
 			</button>
 		{/if}
 		{#if autoDetect}
-		<div class="mb-2 inline-block p-2 rounded-md {correct ? `bg-green-600 text-white outline-2 outline-green-700` : `bg-gray-200 text-gray-300`}">
-			Correct
-		</div>
+			<div
+				class="mb-2 inline-block rounded-md p-2 {correct
+					? `bg-green-600 text-white outline-2 outline-green-700`
+					: `bg-gray-200 text-gray-300`}"
+			>
+				Correct
+			</div>
 			<div class="text-lg">Score: <span class="font-bold">{score}</span></div>
 		{/if}
 	</Section>

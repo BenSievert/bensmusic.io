@@ -20,9 +20,6 @@
 	];
 	const p5 = 7;
 
-
-
-
 	const getNextNote = (note: number, interval = 1) => notes[(((note + interval) % 12) + 12) % 12];
 
 	const getRandomNote = (override?: number) => Math.floor(Math.random() * (override ?? 11));
@@ -32,14 +29,12 @@
 
 	let interval = $state(p5);
 
-
 	const parseNote = (note: string) => {
 		if (note.length == 1 || note == `` || noteDisplay == `both`) return note;
 		else {
 			return note.split(`/`)[noteDisplay == `sharps` ? 0 : 1];
 		}
 	};
-
 
 	let noteDisplay = $state(`sharps`);
 
@@ -59,7 +54,7 @@
 
 <SitePage title="Interval Memorization" subtitle="Games and Exercises">
 	<Section>
-		<div class="grid grid-cols-3 sm:grid-cols-6 gap-1 w-max">
+		<div class="grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
 			{#each intervals as interval, intervalIndex}
 				<Checkbox
 					label={interval}
@@ -90,28 +85,28 @@
 			<div class="mt-4 mb-3 flex">
 				<label class="mr-2 flex cursor-pointer items-center">
 					<input
-							value="sharps"
-							bind:group={noteDisplay}
-							type="radio"
-							class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+						value="sharps"
+						bind:group={noteDisplay}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
 					/>
 					<span class="text-sm text-rose-700">Sharps</span>
 				</label>
 				<label class="mr-2 flex cursor-pointer items-center">
 					<input
-							value="flats"
-							bind:group={noteDisplay}
-							type="radio"
-							class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+						value="flats"
+						bind:group={noteDisplay}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
 					/>
 					<span class="text-sm text-rose-700">Flats</span>
 				</label>
 				<label class="flex cursor-pointer items-center">
 					<input
-							value="both"
-							bind:group={noteDisplay}
-							type="radio"
-							class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
+						value="both"
+						bind:group={noteDisplay}
+						type="radio"
+						class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
 					/>
 					<span class="text-sm text-rose-700">Both</span>
 				</label>
