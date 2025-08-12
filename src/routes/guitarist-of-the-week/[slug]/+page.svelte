@@ -5,4 +5,4 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<GuitaristOfTheWeek {...data} fromArchive={true}></GuitaristOfTheWeek>
+<GuitaristOfTheWeek {...data}></GuitaristOfTheWeek>

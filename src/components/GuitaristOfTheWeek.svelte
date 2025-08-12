@@ -2,14 +2,11 @@
 	import SitePage from './SitePage.svelte';
 	import Section from './Section.svelte';
 	import Youtube from 'svelte-youtube-embed';
+	import {formatDate} from "../functions.js";
 
-	const { name, img, about, date, videos, whatToListenFor, fromArchive = false } = $props();
-	let src = `/assets/${img}`;
-	let parsedDate = new Date(date).toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+	const { name, img, about, date, videos, whatToListenFor } = $props();
+	const src = `/assets/${img}`;
+	const parsedDate = formatDate(date);
 </script>
 
 <SitePage
