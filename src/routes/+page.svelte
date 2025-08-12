@@ -42,14 +42,21 @@
 			is no smoking gun I'm going to give you that will make you a master in a matter of weeks. The
 			only way to get good is to put in the work.
 		</p>
-
 	</Section>
 	<Section theme="tertiary">
 		<h3 class="text-primary-dark text-xl">What does a teacher provide then?</h3>
 		<ul>
-			<li>Answers questions. There's a lot of info online but figuring out what the important information is is hard on your own. I can clarify points before moving on to new topics.</li>
-			<li>Corrects mistakes. Teachers correct your mistakes and stop you from developing bad habits.</li>
-			<li>Helps you learn efficiently. There are good and bad ways to practice and knowing how to practice effectively helps you advance faster</li>
+			<li>
+				Answers questions. There's a lot of info online but figuring out what the important
+				information is is hard on your own. I can clarify points before moving on to new topics.
+			</li>
+			<li>
+				Corrects mistakes. Teachers correct your mistakes and stop you from developing bad habits.
+			</li>
+			<li>
+				Helps you learn efficiently. There are good and bad ways to practice and knowing how to
+				practice effectively helps you advance faster.
+			</li>
 			<li>Broadens your horizons. I do my best to expose my students to different genres.</li>
 		</ul>
 	</Section>

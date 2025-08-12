@@ -13,7 +13,6 @@
 
 	let pitch: number | null = $state(null);
 	let clarity: number | null = null;
-	let error: string | null = null;
 
 	let audioContext: AudioContext;
 	let analyser: AnalyserNode;
@@ -36,10 +35,7 @@
 			detector = PitchDetector.forFloat32Array(bufferLength);
 			detector.minVolumeAbsolute = 0.02;
 			source.connect(analyser);
-		} catch (e) {
-			error = 'Microphone access denied.';
-			console.error(e);
-		}
+		} catch (e) {}
 	});
 
 	if (autoDetect)
@@ -78,7 +74,6 @@
 	const getRandomNote = (override?: number) => Math.floor(Math.random() * (override ?? 11));
 	let string = $state(`A`);
 	let ex2Note = $state(0);
-	let wrongGuesses = $state<string[]>([]);
 	let selectedNotes = $state([0, 2, 3, 5, 7, 8, 10]);
 	let maxFret = $state(3);
 	let minFret = $state(1);
@@ -174,7 +169,7 @@
 				min="0"
 				max="24"
 				class="border-primary focus:border-accent focus:ring-accent rounded-sm border pl-4 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
-				on:change={() => {
+				onchange={() => {
 					if (minFret > maxFret) maxFret = minFret;
 				}}
 				bind:value={minFret}
@@ -187,7 +182,7 @@
 				min="0"
 				max="24"
 				class="border-primary focus:border-accent focus:ring-accent rounded-sm border pl-4 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
-				on:change={() => {
+				onchange={() => {
 					if (maxFret < minFret) minFret = maxFret;
 				}}
 				bind:value={maxFret}
@@ -254,7 +249,7 @@
 					min="1"
 					class="border-primary focus:border-accent focus:ring-accent w-16 rounded-sm border pl-4 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 					bind:value={seconds}
-					on:input={(e) => {
+					oninput={(e) => {
 						clearInterval(time);
 						time = setInterval(
 							() => {
@@ -277,7 +272,7 @@
 		{/if}
 		{#if !challenge}
 			<button
-				on:click={generateEx2Answer}
+				onclick={generateEx2Answer}
 				class="bg-primary hover:bg-primary-dark border-primary-dark mt-2 rounded-lg border-2 px-3 py-2 hover:text-white"
 			>
 				Next

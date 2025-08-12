@@ -73,7 +73,7 @@
 		</div>
 		{#each notes as note}
 			<button
-				on:click={() => guess(note)}
+				onclick={() => guess(note)}
 				class={`${wrongGuesses.includes(note) ? `bg-gray-300` : `bg-primary`} hover:bg-primary-light mr-4 mb-1 w-16 rounded-md p-2`}
 				>{parseNote(note)}</button
 			>
