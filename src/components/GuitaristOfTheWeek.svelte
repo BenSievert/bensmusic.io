@@ -4,7 +4,7 @@
 	import Youtube from 'svelte-youtube-embed';
 
 	const { name, img, about, date, videos, whatToListenFor, fromArchive = false } = $props();
-	let src = `/static/assets/${img}`;
+	let src = `/assets/${img}`;
 	let parsedDate = new Date(date).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'long',
