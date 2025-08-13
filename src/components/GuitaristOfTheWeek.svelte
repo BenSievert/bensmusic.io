@@ -18,7 +18,7 @@
 		</a>`}
 >
 	<Section theme="tertiary">
-		<div class="flex justify-center">
+		<div class="flex justify-center py-6">
 			<img {src} alt="some alt text" class="mb-4 rounded sm:max-w-3/4" />
 		</div>
 		<h2 class="text-secondary-dark text-2xl">About</h2>
