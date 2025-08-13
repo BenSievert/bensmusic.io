@@ -186,10 +186,10 @@
 				<div>{times[highestIndex]}</div>
 			</div>
 			</div>
-			<div class="kd grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
+			<div class="kd grid w-max grid-cols-3 gap-3 sm:grid-cols-6">
 				{#each shownTimes as time, i}
 					<Checkbox
-							className="mr-2 sm:mr-4"
+						className="mr-2"
 						label={time}
 						checked={selectedTimes.includes(time)}
 						handleInput={() => {
@@ -204,6 +204,7 @@
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Needs</h2>
 			{#each Object.keys(needs) as need}
 				<Checkbox
+					className="mr-2"
 					label={need}
 					checked={selectedNeeds.includes(need)}
 					handleInput={() => {

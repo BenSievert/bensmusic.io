@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let label = '';
 	export let checked = false;
-	export let className = false;
+	export let className = ``;
 	export let handleInput = () => {};
 </script>
 
