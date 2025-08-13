@@ -4,10 +4,14 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Spinner from '../../components/Spinner.svelte';
+	import DoubleRangeSlider from "../../components/DoubleRangeSlider.svelte";
 	import type { PageProps } from './$types';
 	import { onMount } from 'svelte';
 
 	let { data }: PageProps = $props();
+	let start = $state(.66);
+	let end = $state(.85);
+
 
 	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 
@@ -68,16 +72,30 @@
 		`9:30 PM`,
 		`10:00 PM`
 	] as const;
+	const timesLength = times.length
+	const percentager = (value:number) => {
+		const index = Math.floor(value * timesLength) - 1
+		return index >= 0 ? index : 0
+	}
 
-	let openSchedule = $state({});
+	let lowestIndex = $derived(percentager(start))
+	let highestIndex = $derived(percentager(end))
+
+	let shownTimes = $derived(times.filter((time, i) => i >= lowestIndex && i <= highestIndex))
+	console.log(shownTimes)
+
+
+
+		let openSchedule = $state({});
 	let errorMessage = $state(``);
 	let permanent = $state(true);
 
 	onMount(async () => {
 		openSchedule = await (await fetch(`/availability?auth=${data.auth}`)).json();
 	});
-	let selectedTimes = $state<string[]>([]);
-	let selectedNeeds = $state<string[]>([]);
+	let selectedTimes = $state<string[]>(times);
+
+	let selectedNeeds = $state<string[]>([`Piano`]);
 	let showModal = $state(false);
 	let selectedCell = $state();
 	let initials = $state();
@@ -112,6 +130,7 @@
 			openTimes.filter(
 				({ time, cell }) =>
 					selectedTimes.includes(time) &&
+					shownTimes.includes(time) &&
 					selectedNeeds.every((need) => needs[need].includes(studio)) &&
 					!savedCells.includes(cell)
 			)
@@ -161,9 +180,16 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
+			<div class="sm:max-w-1/2"><DoubleRangeSlider bind:start bind:end/>
+			<div class="flex justify-between text-xs mb-3">
+				<div>{times[lowestIndex]}</div>
+				<div>{times[highestIndex]}</div>
+			</div>
+			</div>
 			<div class="kd grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
-				{#each times as time, i}
+				{#each shownTimes as time, i}
 					<Checkbox
+							className="mr-2 sm:mr-4"
 						label={time}
 						checked={selectedTimes.includes(time)}
 						handleInput={() => {

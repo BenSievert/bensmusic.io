@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let label = '';
 	export let checked = false;
-	export let noPadding = false;
+	export let className = false;
 	export let handleInput = () => {};
 </script>
 
-<label class={`inline-flex cursor-pointer items-center space-x-1 ${noPadding ? `` : `p-2`} mr-1`}>
+<label class={`inline-flex cursor-pointer items-center space-x-1 p-1 ${className ? className : ``}`}>
 	<input
 		on:input={handleInput}
 		{checked}
