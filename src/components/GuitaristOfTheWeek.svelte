@@ -25,11 +25,11 @@
 		<p class="mb-4">{about}</p>
 		<h2 class="text-secondary-dark text-2xl">What to listen for</h2>
 		<p class="mb-4">{whatToListenFor}</p>
-		<h2 class="text-secondary-dark text-2xl mb-1">Examples</h2>
+		<h2 class="text-secondary-dark text-2xl mb-2">Examples</h2>
 		{#each videos as {id, description}}
-			<div class="mb-8 md:max-w-3/4">
-				<p class="mb-2">{description}</p>
-				<Youtube id={id} width="5px"></Youtube>
+			<div class="mb-12 md:max-w-3/4 p-2 sm:p-6 bg-blue-100 rounded shadow">
+				<p class="mb-3">{description}</p>
+				<Youtube id={id}></Youtube>
 			</div>
 		{/each}
 	</Section>
