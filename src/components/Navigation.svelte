@@ -1,5 +1,8 @@
 <script>
-	let isOpen = false;
+	import { page } from '$app/state';
+	let isOpen = $state(false);
+
+	let path = $derived(page.url.pathname)
 
 	function toggleMenu() {
 		isOpen = !isOpen;
@@ -38,7 +41,7 @@
 		{#each links as link}
 			<a
 				href={link.href}
-				class="text-accent-dark hover:bg-highlight-mintGreen p-2 hover:text-rose-700 md:rounded-md"
+				class="{path == link.href ? `text-rose-700 bg-pink-100` : `text-accent-dark`} hover:bg-pink-100 p-2 hover:text-rose-700 md:rounded-md"
 			>
 				{link.name}
 			</a>
@@ -53,11 +56,11 @@
 			<a
 				on:click={toggleMenu}
 				href={link.href}
-				class="hover:bg-highlight-mintGreen p-2 text-rose-700"
+				class="p-2 text-rose-700 {path == link.href ? `bg-blue-200` : ``}"
 			>
 				{link.name}
 			</a>
-			<hr class="text-blue-200" />
+			<hr class="text-blue-300" />
 		{/each}
 	</div>
 </nav>

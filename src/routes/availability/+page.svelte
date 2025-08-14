@@ -82,11 +82,7 @@
 	let highestIndex = $derived(percentager(end))
 
 	let shownTimes = $derived(times.filter((time, i) => i >= lowestIndex && i <= highestIndex))
-	console.log(shownTimes)
-
-
-
-		let openSchedule = $state({});
+	let openSchedule = $state({});
 	let errorMessage = $state(``);
 	let permanent = $state(true);
 

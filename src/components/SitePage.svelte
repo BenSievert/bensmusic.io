@@ -1,6 +1,5 @@
 <script>
 	const { title, subtitle = ``, pageTitle = ``, extra, children = () => {} } = $props();
-	console.log(extra);
 </script>
 
 <svelte:head>
