@@ -60,7 +60,7 @@
 			>
 				{link.name}
 			</a>
-			<hr class="text-blue-300" />
+			<hr class="text-blue-200" />
 		{/each}
 	</div>
 </nav>
