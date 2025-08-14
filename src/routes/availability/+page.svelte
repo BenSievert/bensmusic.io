@@ -216,17 +216,17 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-accent-dark text-2xl font-bold">{days[selectedDay]}</div>
+			<div class="text-accent-dark text-2xl font-bold mb-3">{days[selectedDay]}</div>
 			<div
-				class="grid w-auto grid-cols-2 gap-8 sm:w-max sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+				class="grid content-center w-auto grid-cols-2 gap-8 md:w-max md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10"
 			>
 				{#each available as [studio, times]}
 					{#if times.length}
-						<div>
+						<div class="text-center">
 							<div class="text-primary-dark mb-2 text-xl">
 								{studio == `Large Room (Studio 10)` ? `Large Room` : studio}
 							</div>
-							<div class="mb-2.5">
+							<div class="mb-4 flex flex-col items-center">
 								{#each times as { time, cell }}
 									<button
 										onclick={() => {
@@ -234,14 +234,14 @@
 											selectedDate = possibleDates[0]?.value;
 											showModal = true;
 										}}
-										class="mr-3 mb-2 flex cursor-pointer items-center rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+										class="w-[92px] mb-4 flex cursor-pointer items-center justify-between rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
 										>{time}<svg
 											xmlns="http://www.w3.org/2000/svg"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke-width="1.5"
 											stroke="currentColor"
-											class="mb-[2px] ml-2 size-4"
+											class="mb-[2px] size-4"
 										>
 											<path
 												stroke-linecap="round"

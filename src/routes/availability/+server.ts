@@ -130,7 +130,8 @@ export const POST: RequestHandler = async ({ request, url }) => {
 			{ status: 403 }
 		);
 
-	studioCell.value = `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
+	const content =  `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`
+	studioCell.value = content;
 	try {
 		await scheduleSheet.saveCells([studioCell]);
 		return json({ message: `Success` }, { status: 200 });
