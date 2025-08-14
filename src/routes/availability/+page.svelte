@@ -218,7 +218,7 @@
 		<Section theme="secondary">
 			<div class="text-accent-dark text-2xl font-bold mb-3">{days[selectedDay]}</div>
 			<div
-				class="grid content-center w-auto grid-cols-2 gap-8 md:w-max md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10"
+				class="grid content-center w-auto grid-cols-2 gap-8 md:w-max md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12"
 			>
 				{#each available as [studio, times]}
 					{#if times.length}
