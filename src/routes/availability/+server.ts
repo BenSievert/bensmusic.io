@@ -1,5 +1,6 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
+import sql from '../../postgres.server';
 import { json } from '@sveltejs/kit';
 import {
 	GOOGLE_PRIVATE_KEY,
@@ -133,7 +134,15 @@ export const POST: RequestHandler = async ({ request, url }) => {
 	const content =  `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`
 	studioCell.value = content;
 	try {
+		await sql`INSERT INTO schedule_logs (cell, content, initials)
+		VALUES (${cell},${content},${initials})`
+	}
+	catch (e) {
+		console.log(`Something went wrong`, e)
+	}
+	try {
 		await scheduleSheet.saveCells([studioCell]);
+
 		return json({ message: `Success` }, { status: 200 });
 	} catch (e) {
 		return json({ message: e }, { status: 500 });
