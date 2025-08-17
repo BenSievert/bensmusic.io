@@ -19,7 +19,7 @@
 
 <nav class="flex items-center justify-end px-4 pt-4">
 	<button
-		class="bg-primary cursor-pointer rounded-lg px-[3px] py-[2px] text-2xl text-gray-700 md:hidden"
+		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 md:hidden"
 		on:click={toggleMenu}
 	>
 		<svg
