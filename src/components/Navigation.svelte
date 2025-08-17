@@ -12,8 +12,8 @@
 		{ name: 'Home', href: '/', color: `bg-highlight-softYellow` },
 		{ name: 'Policy and Payment', href: '/policy', color: `bg-highlight-peach` },
 		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` },
-		{ name: `Training`, href: `/training`, color: `bg-highlight-peach` }
-		//	{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`, color: `bg-highlight-peach` }
+		{ name: `Training`, href: `/training`, color: `bg-highlight-peach` },
+		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`, color: `bg-highlight-peach` }
 	];
 </script>
 
