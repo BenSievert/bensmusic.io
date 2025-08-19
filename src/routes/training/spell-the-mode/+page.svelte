@@ -8,15 +8,25 @@
 	let focusedIndex = $state(0);
 	const accidentals = [`b`, ``, `#`];
 	const accidentalOrder = [`F`, `C`, `G`, `D`, `A`, `E`, `B`];
+	const presets = [
+		{label: `No Accidentals`, keys: [`C`]},
+		{ label: `All Sharps`, keys: [`C`, `G`, `D`, `A`, `E`, `B`, `F#`]},
+		{ label: `All Flats`, keys: [`C`, `F`, `Bb`, `Eb`, `Ab`, `Db`, `Gb`]},
+		{ label: `One Accidental`, keys: [`C`, `F`, `G`]},
+		{ label: `Two Accidentals`, keys: [`C`, `F`, `G`, `Bb`, `D`]},
+		{ label: `Three Accidentals`, keys: [`C`, `F`, `G`, `Bb`, `D`, `Eb`, `A`]},
+		{ label: `Four Accidentals`, keys: [`C`, `F`, `G`, `Bb`, `D`, `Eb`, `A`, `Ab`, `E`]},
+		{ label: `Five Accidentals`, keys: [`C`, `F`, `G`, `Bb`, `D`, `Eb`, `A`, `Ab`, `E`, `Db`, `B`]},
+		{ label: `Six Accidentals`, keys: [`C`, `F`, `G`, `Bb`, `D`, `Eb`, `A`, `Ab`, `E`, `Db`, `B`, `Gb`, `F#`]},
+
+	]
 
 	const keys = {
 		Ab: { flats: 4 },
 		A: { sharps: 3 },
 		Bb: { flats: 2 },
 		B: { sharps: 5 },
-		Cb: { flats: 7 },
 		C: {},
-		'C#': { sharps: 7 },
 		Db: { flats: 5 },
 		D: { sharps: 2 },
 		Eb: { flats: 3 },
@@ -108,7 +118,7 @@
 				}}
 			/>
 		{/each}
-		<div>
+		<div class="mb-2">
 			<span class="text-primary-dark mr-2 text-xl font-bold">Included Keys</span>
 			{#each Object.keys(keys) as key}
 				<Checkbox
@@ -123,6 +133,15 @@
 				/>
 			{/each}
 		</div>
+		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
+		<select
+				class="focus:outline-accent outline-primary cursor-pointer rounded border border-r-8 border-transparent bg-pink-50 outline"
+				oninput={e => selectedKeys = presets[e.target.value].keys}
+		>
+			{#each presets as { label }, i}
+				<option value={i}>{label}</option>
+			{/each}
+		</select>
 		<div class="text-secondary-dark my-3 text-2xl">
 			Spell {keysWithNotes[key][mode]}
 			{modes[mode]}
