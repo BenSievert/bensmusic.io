@@ -11,6 +11,11 @@
 			title: `Find the Note`,
 			link: `find-the-note`,
 			desc: `Find the correct note on your guitar or bass on a given string.`
+		},
+		{
+			title: `Spell the Mode`,
+			link: `spell-the-mode`,
+			desc: `List all the notes for a given mode.`
 		}
 	];
 </script>

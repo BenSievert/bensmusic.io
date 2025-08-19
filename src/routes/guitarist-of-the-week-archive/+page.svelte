@@ -2,11 +2,10 @@
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
 	import type { PageData } from './$types';
-	import {formatDate} from "../../functions";
+	import { formatDate } from '../../functions';
 
 	let { data }: { data: PageData } = $props();
 	let { guitarists } = data;
-
 </script>
 
 <SitePage title="Guitarist of the Week Archive">

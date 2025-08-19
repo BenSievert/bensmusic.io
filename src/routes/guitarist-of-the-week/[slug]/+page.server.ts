@@ -5,7 +5,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const guitarist = (
 		await sql`SELECT *
 			  FROM guitarists
-			  WHERE date = ${params.slug} AND active`
+			  WHERE date = ${params.slug}`
 	)[0];
 
 	return guitarist;

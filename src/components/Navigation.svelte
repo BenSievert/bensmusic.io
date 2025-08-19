@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	let isOpen = $state(false);
 
-	let path = $derived(page.url.pathname)
+	let path = $derived(page.url.pathname);
 
 	function toggleMenu() {
 		isOpen = !isOpen;
@@ -41,7 +41,9 @@
 		{#each links as link}
 			<a
 				href={link.href}
-				class="{path == link.href ? `text-rose-700 bg-pink-100` : `text-accent-dark`} hover:bg-pink-100 p-2 hover:text-rose-700 md:rounded-md"
+				class="{path == link.href
+					? `bg-pink-100 text-rose-700`
+					: `text-accent-dark`} p-2 hover:bg-pink-100 hover:text-rose-700 md:rounded-md"
 			>
 				{link.name}
 			</a>

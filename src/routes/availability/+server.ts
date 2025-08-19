@@ -131,14 +131,13 @@ export const POST: RequestHandler = async ({ request, url }) => {
 			{ status: 403 }
 		);
 
-	const content =  `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`
+	const content = `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
 	studioCell.value = content;
 	try {
 		await sql`INSERT INTO schedule_logs (cell, content, initials)
-		VALUES (${cell},${content},${initials})`
-	}
-	catch (e) {
-		console.log(`Something went wrong`, e)
+		VALUES (${cell},${content},${initials})`;
+	} catch (e) {
+		console.log(`Something went wrong`, e);
 	}
 	try {
 		await scheduleSheet.saveCells([studioCell]);

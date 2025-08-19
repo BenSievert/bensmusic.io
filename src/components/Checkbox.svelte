@@ -5,7 +5,9 @@
 	export let handleInput = () => {};
 </script>
 
-<label class={`inline-flex cursor-pointer items-center space-x-1 p-1 ${className ? className : ``}`}>
+<label
+	class={`inline-flex cursor-pointer items-center space-x-1 p-1 ${className ? className : ``}`}
+>
 	<input
 		on:input={handleInput}
 		{checked}

@@ -4,14 +4,13 @@
 	import Checkbox from '../../components/Checkbox.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Spinner from '../../components/Spinner.svelte';
-	import DoubleRangeSlider from "../../components/DoubleRangeSlider.svelte";
+	import DoubleRangeSlider from '../../components/DoubleRangeSlider.svelte';
 	import type { PageProps } from './$types';
 	import { onMount } from 'svelte';
 
 	let { data }: PageProps = $props();
-	let start = $state(.66);
-	let end = $state(.85);
-
+	let start = $state(0.66);
+	let end = $state(0.85);
 
 	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 
@@ -72,16 +71,16 @@
 		`9:30 PM`,
 		`10:00 PM`
 	] as const;
-	const timesLength = times.length
-	const percentager = (value:number) => {
-		const index = Math.floor(value * timesLength) - 1
-		return index >= 0 ? index : 0
-	}
+	const timesLength = times.length;
+	const percentager = (value: number) => {
+		const index = Math.floor(value * timesLength) - 1;
+		return index >= 0 ? index : 0;
+	};
 
-	let lowestIndex = $derived(percentager(start))
-	let highestIndex = $derived(percentager(end))
+	let lowestIndex = $derived(percentager(start));
+	let highestIndex = $derived(percentager(end));
 
-	let shownTimes = $derived(times.filter((time, i) => i >= lowestIndex && i <= highestIndex))
+	let shownTimes = $derived(times.filter((time, i) => i >= lowestIndex && i <= highestIndex));
 	let openSchedule = $state({});
 	let errorMessage = $state(``);
 	let permanent = $state(true);
@@ -176,11 +175,12 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
-			<div class="sm:max-w-1/2"><DoubleRangeSlider bind:start bind:end/>
-			<div class="flex justify-between text-xs mb-3">
-				<div>{times[lowestIndex]}</div>
-				<div>{times[highestIndex]}</div>
-			</div>
+			<div class="sm:max-w-1/2">
+				<DoubleRangeSlider bind:start bind:end />
+				<div class="mb-3 flex justify-between text-xs">
+					<div>{times[lowestIndex]}</div>
+					<div>{times[highestIndex]}</div>
+				</div>
 			</div>
 			<div class="kd grid w-max grid-cols-3 gap-3 sm:grid-cols-6">
 				{#each shownTimes as time, i}
@@ -212,9 +212,9 @@
 			{/each}
 		</Section>
 		<Section theme="secondary">
-			<div class="text-accent-dark text-2xl font-bold mb-3">{days[selectedDay]}</div>
+			<div class="text-accent-dark mb-3 text-2xl font-bold">{days[selectedDay]}</div>
 			<div
-				class="grid content-center w-auto grid-cols-2 gap-8 md:w-max md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9"
+				class="grid w-auto grid-cols-2 content-center gap-8 md:w-max md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9"
 			>
 				{#each available as [studio, times]}
 					{#if times.length}
@@ -230,7 +230,7 @@
 											selectedDate = possibleDates[0]?.value;
 											showModal = true;
 										}}
-										class="w-[92px] mb-4 flex cursor-pointer items-center justify-between rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
+										class="mb-4 flex w-[92px] cursor-pointer items-center justify-between rounded-md bg-blue-200 p-2 text-xs text-blue-900 shadow hover:bg-blue-100"
 										>{time}<svg
 											xmlns="http://www.w3.org/2000/svg"
 											fill="none"
