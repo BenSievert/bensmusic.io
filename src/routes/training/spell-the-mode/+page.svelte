@@ -150,7 +150,7 @@
 			{#each guesses as guess, i}
 				<input
 					disabled={correct}
-					class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-16 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
+					class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-10 rounded border bg-pink-50 px-2 py-0.5 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 					bind:value={guesses[i]}
 					onfocus={() => (focusedIndex = i)}
 					onchange={attemptWin}
