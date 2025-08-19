@@ -3,7 +3,6 @@
 	let isOpen = $state(false);
 
 	let path = $derived(page.url.pathname);
-	console.log({path})
 
 	function toggleMenu() {
 		isOpen = !isOpen;
