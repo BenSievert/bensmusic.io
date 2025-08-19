@@ -130,6 +130,7 @@
 		<div class="mb-2">
 			{#each guesses as guess, i}
 				<input
+					disabled={correct}
 					class="placeholder-primary-dark border-primary focus:border-accent focus:ring-accent mr-1 mb-3 w-16 rounded-2xl border bg-pink-50 px-4 py-2 text-gray-600 shadow-sm focus:ring-1 focus:outline-none"
 					bind:value={guesses[i]}
 					onfocus={() => (focusedIndex = i)}
@@ -141,6 +142,7 @@
 			{#each accidentals as accidental}
 				<button
 					class={`bg-primary hover:bg-primary-light mr-4 mb-1 w-16 rounded-md p-2`}
+					disabled={correct}
 					onclick={() => {
 						guesses[focusedIndex] = `${sanitizeNote(currentScaleDegree)}${accidental}`;
 						if (focusedIndex < 6) focusedIndex += 1;
