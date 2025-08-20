@@ -1,5 +1,5 @@
 
-import sql from '../../postgres.server';
+import sql from '../../../postgres.server';
 import {
   CRON_SECRET
 } from '$env/static/private';
