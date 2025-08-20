@@ -1,4 +1,4 @@
-
+import type { RequestHandler } from './$types';
 import sql from '../../../postgres.server';
 import {
   CRON_SECRET
@@ -6,9 +6,9 @@ import {
 
 
 
-export const GET = async ({req, res}) => {
-  if (req.headers.get('Authorization') !== `Bearer ${CRON_SECRET}`) {
-    return res.status(401).end('Unauthorized');
+export const GET = async ({request}) => {
+  if (request.headers.get('Authorization') !== `Bearer ${CRON_SECRET}`) {
+    return new Response('Unauthorized', {status: 401});
   }
   const [guitarist] = await sql`SELECT * FROM guitarists WHERE active = FALSE ORDER BY id LIMIT 1`
   console.log(guitarist)
