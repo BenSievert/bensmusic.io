@@ -2,17 +2,15 @@
 	import SitePage from './SitePage.svelte';
 	import Section from './Section.svelte';
 	import Youtube from 'svelte-youtube-embed';
-	import { formatDate } from '../functions.js';
 
 	const { name, img, about, date, videos, whatToListenFor } = $props();
 	const src = `/assets/${img}`;
-	const parsedDate = formatDate(date);
 </script>
 
 <SitePage
 	title={name}
-	subtitle={parsedDate}
-	pageTitle="Guitarist of the Week - {parsedDate}"
+	subtitle={date}
+	pageTitle="Guitarist of the Week - {date}"
 	extra={`<a href="/guitarist-of-the-week-archive" class=" text-center py-1 px-2 text-xs sm:text-sm rounded bg-secondary-dark hover:bg-secondary text-white">
 			View Previous Entries
 		</a>`}
