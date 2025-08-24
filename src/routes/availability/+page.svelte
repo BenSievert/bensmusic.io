@@ -175,7 +175,7 @@
 			{/each}
 			<div class="mb-4"></div>
 			<h2 class="text-secondary-dark mb-2 text-xl font-bold">Times</h2>
-			<div class="sm:max-w-1/2">
+			<div class="lg:max-w-3/4 xl:max-w-1/2">
 				<DoubleRangeSlider bind:start bind:end />
 				<div class="mb-3 flex justify-between text-xs">
 					<div>{times[lowestIndex]}</div>
