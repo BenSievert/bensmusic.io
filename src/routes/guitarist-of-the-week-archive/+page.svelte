@@ -12,7 +12,7 @@
 	<Section>
 		<ul>
 			{#each guitarists as { name, date, id }}
-				<li>
+				<li class="mb-1">
 					<a class="text-primary-dark hover:underline" href="guitarist-of-the-week/{id}"
 						>{date} - {name}</a
 					>
