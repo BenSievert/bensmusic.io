@@ -239,7 +239,7 @@
 			microphone. If you try it out let me know how it went.
 		</div>
 
-		<div class={`${challenge ? `mb-2` : `mb-4`} flex`}>
+		<div class={`mb-2 flex`}>
 			<span class="text-primary-dark mr-2 text-lg font-bold">Challenge Mode</span>
 			<Checkbox
 				noPadding={true}
@@ -257,7 +257,7 @@
 		</div>
 		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
 		<select
-				class="focus:outline-accent outline-primary cursor-pointer rounded border border-r-8 border-transparent bg-pink-50 outline mb-2"
+				class="focus:outline-accent outline-primary cursor-pointer rounded border border-r-8 border-transparent outline mb-4"
 				oninput={e => {
 					const {frets, tuning} = presets[e.target.value]
 					minFret = frets[0]
