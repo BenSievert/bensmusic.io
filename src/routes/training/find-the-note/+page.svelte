@@ -5,8 +5,8 @@
 	import { PitchDetector } from 'pitchy';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
-	const allStrings = [`E`, `A`, `D`, `G`, `B`, `E`]
-	const highStrings = [``,``,``,`G`,`B`,`E`]
+	const allStrings = [`E`, `A`, `D`, `G`, `B`, `E`];
+	const highStrings = [``, ``, ``, `G`, `B`, `E`];
 	let stringsState = $state(highStrings);
 	let score = $state(0);
 	let strings = $derived([...new Set(stringsState.filter((string) => string != ``))]);
@@ -24,17 +24,17 @@
 	let autoDetect = $state(false);
 	let autoDetectInterval;
 	const presets = [
-		{label: `1st Position - High Strings`, frets: [0, 4], tuning: highStrings},
-		{label: `1st Position - All Strings`, frets: [0, 4], tuning: allStrings},
-		{label: `3rd Position - High Strings`, frets: [3, 6], tuning: highStrings},
-		{label: `3rd Position - All Strings`, frets: [3, 6], tuning: allStrings},
-		{label: `5th Position - High Strings`, frets: [5, 8], tuning: highStrings},
-		{label: `5th Position - All Strings`, frets: [5, 8], tuning: allStrings},
-		{label: `7th Position - High Strings`, frets: [7, 10], tuning: highStrings},
-		{label: `7th Position - All Strings`, frets: [7, 10], tuning: allStrings},
-		{label: `9th Position - High Strings`, frets: [9, 12], tuning: highStrings},
-		{label: `9th Position - All Strings`, frets: [9, 12], tuning: allStrings},
-	]
+		{ label: `1st Position - High Strings`, frets: [0, 4], tuning: highStrings },
+		{ label: `1st Position - All Strings`, frets: [0, 4], tuning: allStrings },
+		{ label: `3rd Position - High Strings`, frets: [3, 6], tuning: highStrings },
+		{ label: `3rd Position - All Strings`, frets: [3, 6], tuning: allStrings },
+		{ label: `5th Position - High Strings`, frets: [5, 8], tuning: highStrings },
+		{ label: `5th Position - All Strings`, frets: [5, 8], tuning: allStrings },
+		{ label: `7th Position - High Strings`, frets: [7, 10], tuning: highStrings },
+		{ label: `7th Position - All Strings`, frets: [7, 10], tuning: allStrings },
+		{ label: `9th Position - High Strings`, frets: [9, 12], tuning: highStrings },
+		{ label: `9th Position - All Strings`, frets: [9, 12], tuning: allStrings }
+	];
 
 	onMount(async () => {
 		try {
@@ -257,13 +257,13 @@
 		</div>
 		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
 		<select
-				class="focus:outline-accent outline-primary cursor-pointer rounded border border-r-8 border-transparent outline mb-4"
-				oninput={e => {
-					const {frets, tuning} = presets[e.target.value]
-					minFret = frets[0]
-					maxFret = frets[1]
-					stringsState = tuning;
-				}}
+			class="focus:outline-accent outline-primary mb-4 cursor-pointer rounded border border-r-8 border-transparent outline"
+			oninput={(e) => {
+				const { frets, tuning } = presets[e.target.value];
+				minFret = frets[0];
+				maxFret = frets[1];
+				stringsState = tuning;
+			}}
 		>
 			{#each presets as { label }, i}
 				<option value={i}>{label}</option>

@@ -99,7 +99,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	});
 };
 
-export const POST: RequestHandler = async ({ request, url }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const { cell, initials, date, permanent, auth } = await request.json();
 	console.log({ cell, initials, date, permanent });
 	let status = 401;
@@ -140,6 +140,7 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		console.log(`Something went wrong`, e);
 	}
 	try {
+
 		await scheduleSheet.saveCells([studioCell]);
 
 		return json({ message: `Success` }, { status: 200 });

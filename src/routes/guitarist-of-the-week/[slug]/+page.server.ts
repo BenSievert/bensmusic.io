@@ -8,12 +8,14 @@ export const load: PageServerLoad = async ({ params }) => {
 			  WHERE id = ${params.slug}`
 	)[0];
 
-	const {start, ...rest} = guitarist
+	const { start, ...rest } = guitarist;
 
-	return {...rest, start: start.toLocaleDateString(undefined,{
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-			}
-		)};
+	return {
+		...rest,
+		start: start.toLocaleDateString(undefined, {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		})
+	};
 };

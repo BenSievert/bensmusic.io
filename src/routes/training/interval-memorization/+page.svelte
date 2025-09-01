@@ -57,6 +57,7 @@
 		<div class="grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
 			{#each intervals as interval, intervalIndex}
 				<Checkbox
+						className="text-xs sm:text-sm md:text-base"
 					label={interval}
 					checked={selectedIntervals.includes(intervalIndex)}
 					handleInput={() => {

@@ -9,6 +9,5 @@ export const load: PageServerLoad = async ({ params }) => {
 			  ORDER BY start DESC LIMIT 1`
 	)[0];
 
-
-	return guitarist
+	return guitarist;
 };
