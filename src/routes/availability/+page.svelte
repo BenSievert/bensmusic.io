@@ -9,7 +9,6 @@
 	import { onMount } from 'svelte';
 
 	let { data }: PageProps = $props();
-	console.log(data)
 	let start = $state(0.66);
 	let end = $state(0.85);
 
