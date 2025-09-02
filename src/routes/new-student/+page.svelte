@@ -112,7 +112,7 @@
 					<span class="text-sm">{levelOption}</span>
 				</label>
 			{/each}
-			<div class="text-primary-dark mt-4 text-left text-lg">*Lesson Pace and Structure Expectations</div>
+			<div class="text-primary-dark mt-4 text-left text-lg">*Lesson pace preference</div>
 
 			{#each teacherExpectationsOptions as teacherExpectationsOption}
 				<label class="mr-2 mb-1 flex cursor-pointer items-center">
