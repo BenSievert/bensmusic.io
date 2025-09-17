@@ -154,18 +154,18 @@ Hear the major scale
 				subSteps: [
 					`A note is a <span class="font-bold">sound</span> with a <span class="font-bold">pitch</span>.`,
 					`If you've played music before, you'll know that notes have names. Maybe you've seen notes named 'A' or 'G#' or 'Cb'.`,
-					`We're not concerned with naming our notes yet. We're going to start off with a single note. Its name is unimportant to us right now.`,
+					`Naming our notes right now will only confuse us. For now, the names of our notes are unimportant.`,
 					note,
-					`Music would be pretty boring if all we had was one note. We're going to need some more notes.`
+					`Music would be pretty boring if all we had was one note. We're going to need more.`
 				]},
 				{title: `Scales`, subSteps: [
-						`A scale is a collection of notes of different pitches.`,
-						`We'll start by learning the major scale. It's best to just hear it for right now and not think about how we chose the pitches in it.`,
+						`One of the ways we can get more notes is to take them from a scale. A scale is a collection of notes of different pitches.`,
+						`The scale we'll learn first is called the major scale. It's best to hear it for right now and not think about how we got all the notes in it.`,
 						scale,
-						`We don't have names for our notes yet, so we'll number them. These are called <span class="font-bold">scale degrees</span>`,
+						`Since we don't have names for our notes yet, we'll number them. These are called <span class="font-bold">scale degrees</span>`,
 						scaleDegrees,
 						`Try clicking on the buttons in this order - 1 1 5 5 6 6 5 4 4 3 3 2 2 1`,
-						`This is the melody to Twinkle Twinkle Little Star. If you stop playing the song when you play 2 you'll notice that it sounds unfinished.`,
+						`This is the melody to Twinkle Twinkle Little Star. If you stop playing the song before the final note you'll notice that it sounds unfinished.`,
 						`The different notes of our scale each have a different feeling. The first note is also called the tonic. It's the one that most feels like it doesn't want to go anywhere else.`,
 						`Knowing how a note functions in the scale is more important than knowing its letter name. This is why I have not revealed any of the names of the notes.`
 				]},
@@ -179,26 +179,35 @@ Hear the major scale
 				]},
 				{title: `Octaves`,
 				subSteps: [
-						`You may notice that we cannot play every interval with the buttons I've provided. How can we play a 5th above degree 6 if our scale ends at 7?`,
+						`You may notice that we cannot play every interval with the buttons I've provided. How can we play a 5th above degree 6 if our scale ends at degree 7?`,
 						`Scales go up and down forever - The major scale repeats its pattern every 7 notes.`,
 						`Here is a larger number of notes to play with.`,
 						scaleDegreesExpanded,
 						`Now we have three '1's. Some sound lower than others, but they all function the same. You can play Twinkle Twinkle starting on any '1'.`,
-						`We now see that degree the 5th above degree 6 is the degree 3 above it. The degree 3 below that 6 is a 4th.`
+						`We now see that degree the 5th above degree 6 is the degree 3 above it.`
 				]
 				},
 				{title: `Chords`, subSteps: [
-						`Chords are built from scales in 3rds. If we take 3 notes in our scale a 3rd apart and play them all at once we get a chord`,
-						`Degrees 1, 3, 5 and form the first chord. 2, 4, and 6 the second chord and so on until we have 7 different chords`,
+						`Chords are built from scales in 3rds. If we take 3 notes in our scale each a 3rd from the next and play them all at once we get a chord`,
+						`Degrees 1, 3, and 5 form the first chord. 2, 4, and 6 the second chord and so on until we have 7 different chords`,
 						`We've already used numbers for our scale degrees, so we're going to use roman numerals for our chords`,
 						chords,
-						`Some of these I've labeled as uppercase or lowercase, and the last one even has a degree symbol.`,
-						`That's because our major scale forms what are called major, minor, and diminished chords. We'll figure out why we get different types of chords and their differences in the next lesson.`,
+						`These are labeled as uppercase or lowercase, and the last one even has a degree symbol.`,
+						`That's because our major scale forms different types of chords. We'll explore these differences in the next lesson.`,
 						`Like our scale degrees, our chords also feel a particular way. Play the chords I, IV, V, I.`,
-						`Playing chords in sequence like this forms what we call a <span class="">chord progression</span>`,
-						`Some chords go into other chords more easily than others, you can experiment with making your own chord progressions before moving on but try to start and end on the I chord for now.`
+						`Playing chords in sequence like this forms what we call a <span class="font-bold">chord progression</span>`,
+						`You can experiment with making your own chord progressions before moving on but try to start and end on the I chord for now.`
+				] },
+				{title: `Review`, subSteps: [
+						`Here are the main takeaways you should get from this lesson.`,
+						`A note is a <span class="font-bold">sound</span> with a <span class="font-bold">pitch</span>.`,
+						`Notes of different pitches can be formed into scales.`,
+						`The letter names of notes are not as important to us as how the note is functioning within the scale.`,
+						`The distance between two scale degrees is called a generic interval.`,
+						`We can form chords from our scale by building them in 3rds.`,
+						`Playing chords in a sequence forms a <span class="font-bold">chord progression</span>`
 				] }
-				,
+
 
 			]}
 		/>
