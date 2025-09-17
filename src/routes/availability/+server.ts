@@ -140,7 +140,6 @@ export const POST: RequestHandler = async ({ request }) => {
 		console.log(`Something went wrong`, e);
 	}
 	try {
-
 		await scheduleSheet.saveCells([studioCell]);
 
 		return json({ message: `Success` }, { status: 200 });

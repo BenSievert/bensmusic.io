@@ -50,6 +50,7 @@
 		"svelte-youtube-embed": "^0.4.4",
 		"tailwindcss": "^4.1.5",
 		"timers": "^0.1.1",
+		"tone": "^15.1.22",
 		"yootils": "^0.3.1"
 	}
 }

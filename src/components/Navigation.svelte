@@ -9,17 +9,18 @@
 	}
 
 	const links = [
-		{ name: 'Home', href: '/', color: `bg-highlight-softYellow` },
-		{ name: 'Policy and Payment', href: '/policy', color: `bg-highlight-peach` },
-		{ name: 'Contact', href: '/contact', color: `bg-highlight-peach` },
-		{ name: `Training`, href: `/training`, color: `bg-highlight-peach` },
-		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`, color: `bg-highlight-peach` }
+		{ name: 'Home', href: '/' },
+		{ name: 'Policy and Payment', href: `/policy`},
+		{ name: 'Contact', href: '/contact'},
+		{ name: `Training`, href: `/training`},
+		{ name: `Learning`, href: `/learning`},
+		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`}
 	];
 </script>
 
 <nav class="flex items-center justify-end px-4 pt-4">
 	<button
-		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 md:hidden"
+		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden"
 		on:click={toggleMenu}
 	>
 		<svg
@@ -37,20 +38,20 @@
 			/>
 		</svg>
 	</button>
-	<div class="hidden space-x-4 md:flex">
+	<div class="hidden space-x-4 lg:flex">
 		{#each links as link}
 			<a
 				href={link.href}
 				class="{path == link.href
 					? `bg-pink-100 text-rose-700`
-					: `text-accent-dark`} p-2 hover:bg-pink-100 hover:text-rose-700 md:rounded-md"
+					: `text-accent-dark`} p-2 hover:bg-pink-100 hover:text-rose-700 rounded"
 			>
 				{link.name}
 			</a>
 		{/each}
 	</div>
 	<div
-		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md md:hidden {isOpen
+		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md lg:hidden {isOpen
 			? 'flex'
 			: 'hidden'}"
 	>
