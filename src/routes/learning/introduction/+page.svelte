@@ -162,7 +162,7 @@ Hear the major scale
 						`One of the ways we can get more notes is to take them from a scale. A scale is a collection of notes of different pitches.`,
 						`The scale we'll learn first is called the major scale. It's best to hear it for right now and not think about how we got all the notes in it.`,
 						scale,
-						`Since we don't have names for our notes yet, we'll number them. These are called <span class="font-bold">scale degrees</span>`,
+						`Since we don't have names for our notes yet, we'll number them. These are called <span class="font-bold">scale degrees</span>.`,
 						scaleDegrees,
 						`Try clicking on the buttons in this order - 1 1 5 5 6 6 5 4 4 3 3 2 2 1`,
 						`This is the melody to Twinkle Twinkle Little Star. If you stop playing the song before the final note you'll notice that it sounds unfinished.`,
@@ -173,8 +173,8 @@ Hear the major scale
 						`You'll also notice that some of the jumps we made in Twinkle Twinkle were larger than others.`,
 						`Going from 1 to 5 is larger than going from 5 to 6.`,
 						`The distance between any two degrees of our scale is called a generic interval.`,
-						`Moving between consecutive notes is what we call a 2nd. 1 to 2 is a 2nd, 2 to 3 is a 2nd, and so on`,
-						`If we move by two notes instead we call it a 3rd. 1 to 3 is a 3rd, 4 to 2 is a 3rd, 3 to 5 is a 3rd and so on`,
+						`Moving between consecutive notes is what we call a 2nd. 1 to 2 is a 2nd, 2 to 3 is a 2nd, and so on.`,
+						`If we move by two notes instead we call it a 3rd. 1 to 3 is a 3rd, 4 to 2 is a 3rd, 3 to 5 is a 3rd and so on.`,
 						`This pattern follows for all notes in our scale. A distance of 3 notes is a 4th, 4 notes is a 5th, and so on.`,
 				]},
 				{title: `Octaves`,
@@ -188,14 +188,14 @@ Hear the major scale
 				]
 				},
 				{title: `Chords`, subSteps: [
-						`Chords are built from scales in 3rds. If we take 3 notes in our scale each a 3rd from the next and play them all at once we get a chord`,
-						`Degrees 1, 3, and 5 form the first chord. 2, 4, and 6 the second chord and so on until we have 7 different chords`,
-						`We've already used numbers for our scale degrees, so we're going to use roman numerals for our chords`,
+						`Chords are built from scales in 3rds. If we take 3 notes in our scale each a 3rd from the next and play them all at once we get a chord.`,
+						`Degrees 1, 3, and 5 form the first chord. 2, 4, and 6 the second chord and so on until we have 7 different chords.`,
+						`We've already used numbers for our scale degrees, so we're going to use roman numerals for our chords.`,
 						chords,
 						`These are labeled as uppercase or lowercase, and the last one even has a degree symbol.`,
 						`That's because our major scale forms different types of chords. We'll explore these differences in the next lesson.`,
 						`Like our scale degrees, our chords also feel a particular way. Play the chords I, IV, V, I.`,
-						`Playing chords in sequence like this forms what we call a <span class="font-bold">chord progression</span>`,
+						`Playing chords in sequence like this forms what we call a <span class="font-bold">chord progression</span>.`,
 						`You can experiment with making your own chord progressions before moving on but try to start and end on the I chord for now.`
 				] },
 				{title: `Review`, subSteps: [
@@ -205,7 +205,7 @@ Hear the major scale
 						`The letter names of notes are not as important to us as how the note is functioning within the scale.`,
 						`The distance between two scale degrees is called a generic interval.`,
 						`We can form chords from our scale by building them in 3rds.`,
-						`Playing chords in a sequence forms a <span class="font-bold">chord progression</span>`
+						`Playing chords in a sequence forms a <span class="font-bold">chord progression</span>.`
 				] }
 
 
