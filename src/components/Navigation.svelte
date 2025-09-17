@@ -10,17 +10,17 @@
 
 	const links = [
 		{ name: 'Home', href: '/' },
-		{ name: 'Policy and Payment', href: `/policy`},
-		{ name: 'Contact', href: '/contact'},
-		{ name: `Training`, href: `/training`},
-		{ name: `Learning`, href: `/learning`},
-		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`}
+		{ name: 'Policy and Payment', href: `/policy` },
+		{ name: 'Contact', href: '/contact' },
+		{ name: `Training`, href: `/training` },
+		{ name: `Learning`, href: `/learning` },
+		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week` }
 	];
 </script>
 
-<nav class="flex items-center justify-end px-4 pt-4">
+<nav class="flex items-center justify-end px-4 pt-4 z-10">
 	<button
-		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden"
+		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden z-30"
 		on:click={toggleMenu}
 	>
 		<svg
@@ -44,14 +44,14 @@
 				href={link.href}
 				class="{path == link.href
 					? `bg-pink-100 text-rose-700`
-					: `text-accent-dark`} p-2 hover:bg-pink-100 hover:text-rose-700 rounded"
+					: `text-accent-dark`} rounded p-2 hover:bg-pink-100 hover:text-rose-700"
 			>
 				{link.name}
 			</a>
 		{/each}
 	</div>
 	<div
-		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md lg:hidden {isOpen
+		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md lg:hidden z-30 {isOpen
 			? 'flex'
 			: 'hidden'}"
 	>

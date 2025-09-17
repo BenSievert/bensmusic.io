@@ -21,11 +21,11 @@
 		'Not sure yet'
 	];
 	const levelOptions = [
-		`absolute beginner`,
-		`some experience but still fairly new`,
-		`new to guitar but not new to music`,
-		`intermediate`,
-		`advanced`
+		`Absolute beginner`,
+		`Some experience but still fairly new`,
+		`New to guitar but not new to music`,
+		`Intermediate`,
+		`Advanced`
 	];
 	const areasOfInterest = [
 		`Music theory`,
