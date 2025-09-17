@@ -26,11 +26,12 @@
 					}, 300)
 				}
 			}}
-				class="text-primary-dark disabled:text-primary hover:text-primary mr-6 text-lg">Previous</button
+				class="text-primary-dark disabled:text-primary hover:text-primary mr-6 text-lg cursor-pointer disabled:cursor-default">Previous</button
 		>
 		<button
-				onclick={async () => {
+				disabled={selectedStep == stepsLength -1 && selectedSubStep == subStepsLength - 1}
 
+				onclick={async () => {
 				if (selectedSubStep < subStepsLength -1) selectedSubStep += 1;
 				else {
 					selectedSubStep = 0;
@@ -41,7 +42,7 @@
 
 
 			}}}
-				class="text-primary-dark disabled:text-primary hover:text-primary text-lg">Next</button
+				class="text-primary-dark disabled:text-primary hover:text-primary text-lg cursor-pointer disabled:cursor-default">Next</button
 		>
 	</div>
 
@@ -60,7 +61,7 @@
 </div>
 	{:else}
 		<button
-				class="text-primary-dark hover:text-primary"
+				class="text-primary-dark hover:text-primary cursor-pointer"
 				onclick={async () => {
 			await Tone.start();
 			synth = new Tone.PolySynth().toDestination();

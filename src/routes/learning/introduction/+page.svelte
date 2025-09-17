@@ -2,7 +2,7 @@
 	import Stepper from '../../../components/Stepper.svelte';
 	import SitePage from '../../../components/SitePage.svelte';
 	import Section from '../../../components/Section.svelte';
-	const buttonClass = `bg-primary-dark hover:bg-primary rounded-md px-3 py-1 text-white m-1`
+	const buttonClass = `bg-primary-dark hover:bg-primary rounded-md px-3 py-1 text-white m-1 cursor-pointer`
 </script>
 
 
