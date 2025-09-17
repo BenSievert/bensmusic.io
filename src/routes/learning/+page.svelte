@@ -3,9 +3,9 @@
   import Section from '../../components/Section.svelte';
   const lessons = [
     {
-      title: `Introduction to music`,
+      title: `Introduction to Music Theory`,
       link: `introduction`,
-      desc: `Learn about busic.`
+      desc: `Introduction to music theory starting from what a note is.`
     }
   ];
 </script>
