@@ -13,7 +13,7 @@
 </script>
 {#if audioEnabled}
 <div>
-	<div class="mb-2">
+	<div class="mb-3 border-b border-gray-200 pb-1">
 		<button
 				disabled={selectedStep == 0 && selectedSubStep == 0}
 				onclick={async () => {
