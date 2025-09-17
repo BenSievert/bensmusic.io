@@ -146,8 +146,8 @@ Hear the major scale
 {/each}
 {/snippet}
 
-<SitePage title="Learning" subtitle="Introduction to Music Theory">
-	<Section theme="secondary">
+<SitePage title="Learning" subtitle="Introduction to Music Theory" hide>
+	<Section theme="secondary" shiftable>
 		<Stepper
 			steps={[
 				{title: `Notes`,

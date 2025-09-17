@@ -49,7 +49,7 @@
 	<div class="text-primary-dark text-lg font-bold">{currentStep.title}</div>
 	<div>
 		{#each steps[selectedStep].subSteps as subStep, i}
-			<div class="{i <= selectedSubStep ? `opacity-100` : `opacity-0`} transition-opacity ease-in duration-300 mb-2">
+			<div class="{i <= selectedSubStep ? `opacity-100` : `opacity-0`} transition-opacity ease-in duration-300 mb-2 text-sm md:text-base">
 				{#if typeof subStep == `function`}
 				{@render subStep(synth, Tone)}
 				{:else}
