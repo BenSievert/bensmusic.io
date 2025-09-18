@@ -140,7 +140,7 @@
 				{
 					title: `Chords`,
 					subSteps: [
-						`The simplest chords are called triads and contain 3 notes.``Chords are built from scales in 3rds. If we take 3 notes in our scale each a 3rd from the next and play them all at once we get a chord.`,
+						`Chords are built from scales in 3rds. If we take 3 notes in our scale each a 3rd from the next and play them all at once we get a chord.`,
 						`Chords also have generic intervals in them. The first note of a chord is called the root. The second is called the 3rd, and the third is called the 5th.`,
 						`Degrees 1, 3, and 5 form the first chord. 2, 4, and 6 the second chord and so on until we have 7 different chords.`,
 						`We've already used numbers for our scale degrees, so we're going to use roman numerals for our chords.`,
