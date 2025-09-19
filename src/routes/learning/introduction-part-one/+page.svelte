@@ -110,7 +110,7 @@
 						`Since we don't have names for our notes yet, we'll number them. These are called <span class="font-bold">scale degrees</span>.`,
 						scaleDegrees,
 						`Try clicking on the buttons in this order - 1 1 5 5 6 6 5 4 4 3 3 2 2 1`,
-						`This is the melody to Twinkle Twinkle Little Star. If you stop playing the song before the final note you'll notice that it sounds unfinished.`,
+						`This is the melody to Twinkle Twinkle Little Star. If you stop playing the song on the second to last note you'll notice that it sounds unfinished.`,
 						`The different notes of our scale each have a different feeling. The first note is also called the tonic. It's the one that most feels like it doesn't want to go anywhere else.`,
 						`Knowing how a note functions in the scale is more important than knowing its letter name. This is why I have not revealed any of the names of the notes.`
 					]
@@ -121,8 +121,8 @@
 						`You'll also notice that some of the jumps we made in Twinkle Twinkle were larger than others.`,
 						`Going from 1 to 5 is larger than going from 5 to 6.`,
 						`The distance between any two degrees of our scale is called a generic interval.`,
-						`Moving between consecutive notes is what we call a 2nd. 1 to 2 is a 2nd, 2 to 3 is a 2nd, and so on.`,
-						`If we move by two notes instead we call it a 3rd. 1 to 3 is a 3rd, 4 to 2 is a 3rd, 3 to 5 is a 3rd and so on.`,
+						`Moving between consecutive notes is what we call a 2nd. degree 1 to 2 is a 2nd, degree 2 to 3 is a 2nd, and so on.`,
+						`If we move by two notes instead we call it a 3rd. degree 1 to 3 is a 3rd, degree 4 to 2 is a 3rd, degree 3 to 5 is a 3rd and so on.`,
 						`This pattern follows for all notes in our scale. A distance of 3 notes is a 4th, 4 notes is a 5th, and so on.`
 					]
 				},

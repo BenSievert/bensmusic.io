@@ -7,13 +7,11 @@
 			link: `introduction-part-one`,
 			desc: `Introduction to music theory starting from what a note is.`
 		},
-		/*{
+		{
 			title: `Introduction to Music Theory Part 2`,
 			link: `introduction-part-two`,
 			desc: `Continuing learning the basics of music theory.`
 		}
-
-		 */
 	];
 </script>
 

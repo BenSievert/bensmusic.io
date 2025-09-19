@@ -12,7 +12,7 @@
 		{ name: 'Home', href: '/' },
 		{ name: 'Policy and Payment', href: `/policy` },
 		{ name: 'Contact', href: '/contact' },
-		{ name: `Training`, href: `/training` },
+		{ name: `Exercises`, href: `/exercises` },
 		{ name: `Learning`, href: `/learning` },
 		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week` }
 	];

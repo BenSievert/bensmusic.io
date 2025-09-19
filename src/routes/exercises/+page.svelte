@@ -20,13 +20,13 @@
 	];
 </script>
 
-<SitePage title="Training" subtitle="Games and Exercises">
+<SitePage title="Exercises" subtitle="Games and Exercises">
 	<Section>
 		<div class="py-4">
 			{#each games as game}
 				<div class="mb-3 w-72">
 					<a
-						href="training/{game.link}"
+						href="exercises/{game.link}"
 						class="border-primary shadow-softBlue hover:bg-highlight-mintGreen hover:text-primary inline-block w-full rounded-md border bg-blue-100 p-4 text-xl text-blue-700"
 					>
 						<div class="flex items-center justify-between">
