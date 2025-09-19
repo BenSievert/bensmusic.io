@@ -94,8 +94,8 @@
 </div>
 {/snippet}
 
-<SitePage title="Learning" subtitle="Introduction to Music Theory Part 2" hide>
-	<Section theme="secondary" shiftable>
+<SitePage title="Learning" subtitle="Introduction to Music Theory Part 2">
+	<Section theme="secondary">
 		<Stepper
 			steps={[
 				{

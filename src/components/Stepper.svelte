@@ -68,9 +68,15 @@
 	<button
 		class="text-primary-dark hover:text-primary cursor-pointer"
 		onclick={async () => {
-			await Tone.start();
+			await Tone.getContext().resume();
+			Tone.start().then(() => {
+            console.log('AudioContext started');
 			synth = new Tone.PolySynth().toDestination();
 			audioEnabled = true;
+        }).catch(err => {
+            console.error('Failed to start AudioContext:', err);
+        });
+
 		}}>Click to enable audio</button
 	>
 {/if}
