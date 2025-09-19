@@ -161,7 +161,7 @@
 				{ title: `Named Notes in Scales Continued`,
 				subSteps: [
 						`We have a chart to figure out the notes in any scale, it's called the Circle of 5ths.`,
-						 `<img src="/assets/circleoffifths.png" class="max-w-1/2" />`,
+						 `<img src="/assets/circleoffifths.png" class="max-w-1/6" />`,
 						 `I recommend printing this out and keeping it for reference. If you're one of my students, I've probably printed this out and given it to you.`,
 						 `This chart is a lot to take in, but we'll learn it piece by piece.`
 				],
