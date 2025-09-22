@@ -2,7 +2,6 @@
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
 	import type { PageData } from './$types';
-	import { formatDate } from '../../functions';
 
 	let { data }: { data: PageData } = $props();
 	let { groupedGuitarists } = data;
