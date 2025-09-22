@@ -18,9 +18,9 @@
 	];
 </script>
 
-<nav class="flex items-center justify-end px-4 pt-4 z-10">
+<nav class="z-10 flex items-center justify-end px-4 pt-4">
 	<button
-		class="bg-primary cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden z-30"
+		class="bg-primary z-30 cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden"
 		on:click={toggleMenu}
 	>
 		<svg
@@ -51,7 +51,7 @@
 		{/each}
 	</div>
 	<div
-		class="menu bg-primary-light absolute top-14 right-0 w-48 flex-col rounded-md lg:hidden z-30 {isOpen
+		class="menu bg-primary-light absolute top-14 right-0 z-30 w-48 flex-col rounded-md lg:hidden {isOpen
 			? 'flex'
 			: 'hidden'}"
 	>
