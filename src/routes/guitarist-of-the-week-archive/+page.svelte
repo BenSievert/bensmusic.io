@@ -14,10 +14,10 @@
 				{#each Object.entries(months) as [month, guitarists]}
 					<div class="text-lg text-secondary-dark mb-1.5">{month}
 						<ul>
-					{#each guitarists as {id, date, name}}
+					{#each guitarists as {id, name}}
 						<li class="mb-1 text-base">
 							<a class="text-primary-dark hover:underline" href="guitarist-of-the-week/{id}"
-							>{date} - {name}</a>
+							>{name}</a>
 						</li>
 					{/each}
 						</ul>
