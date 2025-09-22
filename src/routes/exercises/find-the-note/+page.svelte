@@ -255,20 +255,6 @@
 				}}
 			/>
 		</div>
-		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
-		<select
-			class="focus:outline-accent outline-primary mb-4 cursor-pointer rounded border border-r-8 border-transparent outline"
-			oninput={(e) => {
-				const { frets, tuning } = presets[e.target.value];
-				minFret = frets[0];
-				maxFret = frets[1];
-				stringsState = tuning;
-			}}
-		>
-			{#each presets as { label }, i}
-				<option value={i}>{label}</option>
-			{/each}
-		</select>
 		{#if challenge}
 			<div class="mb-4">
 				<span class="text-primary-dark mr-2 text-lg font-bold">Seconds</span>
@@ -289,6 +275,20 @@
 				/>
 			</div>
 		{/if}
+		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
+		<select
+				class="focus:outline-accent outline-primary mb-4 cursor-pointer rounded border border-r-8 border-transparent outline"
+				oninput={(e) => {
+				const { frets, tuning } = presets[e.target.value];
+				minFret = frets[0];
+				maxFret = frets[1];
+				stringsState = tuning;
+			}}
+		>
+			{#each presets as { label }, i}
+				<option value={i}>{label}</option>
+			{/each}
+		</select>
 		<div class="mb-3 text-3xl">
 			On the <span class="font-bold">{parseNote(string)}</span> string find
 			<span class="font-bold">{parseNote(notes[ex2Note])}</span>
