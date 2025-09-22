@@ -5,19 +5,25 @@
 	import { formatDate } from '../../functions';
 
 	let { data }: { data: PageData } = $props();
-	let { guitarists } = data;
+	let { groupedGuitarists } = data;
 </script>
 
 <SitePage title="Guitarist of the Week Archive">
 	<Section>
-		<ul>
-			{#each guitarists as { name, date, id }}
-				<li class="mb-1">
-					<a class="text-primary-dark hover:underline" href="guitarist-of-the-week/{id}"
-						>{date} - {name}</a
-					>
-				</li>
+			{#each groupedGuitarists as [year, months]}
+				<div class="font-bold text-2xl text-primary-dark mb-1">{year}</div>
+				{#each Object.entries(months) as [month, guitarists]}
+					<div class="text-lg text-secondary-dark mb-1.5">{month}
+						<ul>
+					{#each guitarists as {id, date, name}}
+						<li class="mb-1 text-base">
+							<a class="text-primary-dark hover:underline" href="guitarist-of-the-week/{id}"
+							>{date} - {name}</a>
+						</li>
+					{/each}
+						</ul>
+					</div>
+				{/each}
 			{/each}
-		</ul>
 	</Section>
 </SitePage>

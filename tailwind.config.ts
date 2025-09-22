@@ -14,7 +14,7 @@ export default {
 				secondary: {
 					light: '#ffb4e1', // Lightened Soft Pink
 					DEFAULT: '#F1A7DB', // Lighter Lavender Pink
-					dark: '#d9698f' // Lighter Dusty Lavender
+					dark: '#d74671' // Lighter Dusty Lavender
 				},
 				accent: {
 					light: '#FF99E6', // Lightened Light Lilac
