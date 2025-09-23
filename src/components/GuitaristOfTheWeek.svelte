@@ -1,9 +1,23 @@
-<script>
+<script lang="ts">
 	import SitePage from './SitePage.svelte';
 	import Section from './Section.svelte';
 	import Youtube from 'svelte-youtube-embed';
 
-	const { name, img, about, date, videos, whatToListenFor } = $props();
+	const {
+		name,
+		img,
+		about,
+		date,
+		videos,
+		whatToListenFor
+	}: {
+		name: string;
+		img: string;
+		about: string;
+		date: string;
+		videos: { id: string; description: string }[];
+		whatToListenFor: string;
+	} = $props();
 	const src = `/assets/${img}`;
 </script>
 

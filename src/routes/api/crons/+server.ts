@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
 import sql from '../../../postgres.server';
 import { CRON_SECRET } from '$env/static/private';
-
+/*
 export const GET = async ({ request }) => {
 	if (request.headers.get('Authorization') !== `Bearer ${CRON_SECRET}`) {
 		return new Response('Unauthorized', { status: 401 });
@@ -11,3 +11,6 @@ export const GET = async ({ request }) => {
 
 	return new Response(`New Guitarist ${guitarist.name}`);
 };
+
+
+ */

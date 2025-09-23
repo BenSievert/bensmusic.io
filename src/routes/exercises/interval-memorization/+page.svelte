@@ -2,7 +2,7 @@
 	import SitePage from '../../../components/SitePage.svelte';
 	import Section from '../../../components/Section.svelte';
 	import Checkbox from '../../../components/Checkbox.svelte';
-
+	import CheckboxGroup from '../../../components/CheckboxGroup.svelte';
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
 	const intervals = [
 		`Unison`,
@@ -55,18 +55,7 @@
 <SitePage title="Interval Memorization" subtitle="Games and Exercises">
 	<Section>
 		<div class="grid w-max grid-cols-3 gap-1 sm:grid-cols-6">
-			{#each intervals as interval, intervalIndex}
-				<Checkbox
-					className="text-xs sm:text-sm md:text-base"
-					label={interval}
-					checked={selectedIntervals.includes(intervalIndex)}
-					handleInput={() => {
-						if (selectedIntervals.includes(intervalIndex))
-							selectedIntervals = selectedIntervals.filter((i) => i !== intervalIndex);
-						else selectedIntervals = [...selectedIntervals, intervalIndex];
-					}}
-				/>
-			{/each}
+			<CheckboxGroup boxes={intervals} bind:value={selectedIntervals} />
 		</div>
 		<div class="mb-2 text-lg">
 			What is the <span class="font-bold">{intervals[interval]}</span> of

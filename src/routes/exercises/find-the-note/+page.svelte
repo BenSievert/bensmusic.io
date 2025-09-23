@@ -2,6 +2,7 @@
 	import SitePage from '../../../components/SitePage.svelte';
 	import Section from '../../../components/Section.svelte';
 	import Checkbox from '../../../components/Checkbox.svelte';
+	import CheckboxGroup from '../../../components/CheckboxGroup.svelte';
 	import { PitchDetector } from 'pitchy';
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
@@ -205,17 +206,7 @@
 		<div class="text-primary-dark mb-2 text-lg font-bold">
 			Notes
 			<div class="grid w-max grid-cols-4 gap-1 sm:grid-cols-6">
-				{#each notes as note, noteIndex}
-					<Checkbox
-						label={parseNote(note)}
-						checked={selectedNotes.includes(noteIndex)}
-						handleInput={() => {
-							if (selectedNotes.includes(noteIndex))
-								selectedNotes = selectedNotes.filter((i) => i !== noteIndex);
-							else selectedNotes = [...selectedNotes, noteIndex];
-						}}
-					/>
-				{/each}
+				<CheckboxGroup boxes={notes} bind:value={selectedNotes} />
 			</div>
 		</div>
 		<div class="flex">

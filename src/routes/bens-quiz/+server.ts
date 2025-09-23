@@ -3,7 +3,10 @@ import { json } from '@sveltejs/kit';
 import { sendEmail } from '../../backend_functions';
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { numberCorrect, questionsAndAnswers } = await request.json();
+	const { numberCorrect, questionsAndAnswers } = (await request.json()) as {
+		numberCorrect: number;
+		questionsAndAnswers: [string, string][];
+	};
 
 	try {
 		await sendEmail(

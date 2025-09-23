@@ -2,6 +2,7 @@
 	import SitePage from '../../../components/SitePage.svelte';
 	import Section from '../../../components/Section.svelte';
 	import Checkbox from '../../../components/Checkbox.svelte';
+	import CheckboxGroup from '../../../components/CheckboxGroup.svelte';
 	const letters = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
 	const modes = [`Ionian`, `Dorian`, `Phrygian`, `Lydian`, `Mixolydian`, `Aeolian`, `Locrian`];
 	let selectedModes = $state([0, 5]);
@@ -112,31 +113,10 @@
 <SitePage title="Spell the Mode" subtitle="Games and Exercises">
 	<Section>
 		<span class="text-primary-dark mr-2 text-xl font-bold">Included Modes</span>
-		{#each modes as mode, i}
-			<Checkbox
-				checked={selectedModes.includes(i)}
-				label={mode}
-				className="mr-2"
-				handleInput={() => {
-					if (selectedModes.includes(i)) selectedModes = selectedModes.filter((mode) => mode !== i);
-					else selectedModes = [...selectedModes, i];
-				}}
-			/>
-		{/each}
+		<CheckboxGroup boxes={modes} bind:value={selectedModes} checkClass="mr-2" />
 		<div class="mb-2">
 			<span class="text-primary-dark mr-2 text-xl font-bold">Included Keys</span>
-			{#each Object.keys(keys) as key}
-				<Checkbox
-					checked={selectedKeys.includes(key)}
-					label={key}
-					className="mr-2"
-					handleInput={() => {
-						if (selectedKeys.includes(key))
-							selectedKeys = selectedKeys.filter((selectedKey) => selectedKey !== key);
-						else selectedKeys = [...selectedKeys, key];
-					}}
-				/>
-			{/each}
+			<CheckboxGroup boxes={Object.keys(keys)} bind:value={selectedKeys} checkClass="mr-2" />
 		</div>
 		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
 		<select

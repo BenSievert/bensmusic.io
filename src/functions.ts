@@ -14,5 +14,5 @@ const months = [
 ];
 export const formatDate = (date: string) => {
 	const [year, month, day] = date.split(`-`);
-	return `${months[month - 1]} ${day}, ${year}`;
+	return `${months[+month - 1]} ${day}, ${year}`;
 };

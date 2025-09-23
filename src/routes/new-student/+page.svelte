@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
-	import Checkbox from '../../components/Checkbox.svelte';
+	import CheckboxGroup from '../../components/CheckboxGroup.svelte';
 	import Spinner from '../../components/Spinner.svelte';
 	import RadioGroup from '../../components/RadioGroup.svelte';
 	let name = $state(``);
@@ -76,7 +76,7 @@
 				practiceIntent,
 				misc,
 				favorites,
-				selectedAreasOfInterest: selectedAreasOfInterest.join(`, `)
+				selectedAreasOfInterest: selectedAreasOfInterest.map((i) => areasOfInterest[i]).join(`, `)
 			}),
 			headers: {
 				'Content-Type': 'application/json'
@@ -137,19 +137,7 @@
 					<div class="text-primary-dark mt-4 text-left text-lg">
 						Areas of interest <span class="text-sm">(Select all that apply)</span>
 						<div class="grid w-max grid-cols-2 gap-1 text-xs md:grid-cols-3 md:text-base">
-							{#each areasOfInterest as areaOfInterest}
-								<Checkbox
-									label={areaOfInterest}
-									checked={selectedAreasOfInterest.includes(areaOfInterest)}
-									handleInput={() => {
-										if (selectedAreasOfInterest.includes(areaOfInterest))
-											selectedAreasOfInterest = selectedAreasOfInterest.filter(
-												(interest) => interest !== areaOfInterest
-											);
-										else selectedAreasOfInterest = [...selectedAreasOfInterest, areaOfInterest];
-									}}
-								/>
-							{/each}
+							<CheckboxGroup boxes={areasOfInterest} bind:value={selectedAreasOfInterest} />
 						</div>
 					</div>
 					<div class="text-primary-dark mt-4 text-left text-lg">
@@ -182,9 +170,4 @@
 			{/if}
 		</Section>
 	{/if}
-	<button
-		onclick={() => {
-			console.log({ name, experience, myGoals, practiceIntent });
-		}}>Click me</button
-	>
 </SitePage>
