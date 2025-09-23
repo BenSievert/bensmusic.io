@@ -3,12 +3,13 @@
 	import Section from '../../components/Section.svelte';
 	import Checkbox from '../../components/Checkbox.svelte';
 	import Spinner from '../../components/Spinner.svelte';
+	import RadioGroup from '../../components/RadioGroup.svelte';
 	let name = $state(``);
 	let favorites = $state(``);
 	let teacherExpectations = $state(``);
 	let misc = $state(``);
 	let practiceIntent = $state(``);
-	let level = $state(``);
+	let experience = $state(``);
 	let selectedAreasOfInterest = $state([]);
 	let myGoals = $state(``);
 	let formSubmitting = $state(false);
@@ -20,7 +21,7 @@
 		'Structured lessons with consistent practice goals and weekly accountability',
 		'Not sure yet'
 	];
-	const levelOptions = [
+	const experienceOptions = [
 		`Absolute beginner`,
 		`Some experience but still fairly new`,
 		`New to guitar but not new to music`,
@@ -70,7 +71,7 @@
 			body: JSON.stringify({
 				name,
 				teacherExpectations,
-				level,
+				experience,
 				myGoals,
 				practiceIntent,
 				misc,
@@ -109,56 +110,30 @@
 							bind:value={name}
 						/>
 					</label>
-					<div class="text-primary-dark mt-4 text-left text-lg">*Experience</div>
-
-					{#each levelOptions as levelOption}
-						<label class="mr-2 mb-1 flex cursor-pointer items-center">
-							<input
-								value={levelOption}
-								bind:group={level}
-								type="radio"
-								class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
-							/>
-							<span class="text-sm">{levelOption}</span>
-						</label>
-					{/each}
-					<div class="text-primary-dark mt-4 text-left text-lg">*Lesson pace preference</div>
-
-					{#each teacherExpectationsOptions as teacherExpectationsOption}
-						<label class="mr-2 mb-1 flex cursor-pointer items-center">
-							<input
-								value={teacherExpectationsOption}
-								bind:group={teacherExpectations}
-								type="radio"
-								class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
-							/>
-							<span class="text-sm">{teacherExpectationsOption}</span>
-						</label>
-					{/each}
-					<div class="text-primary-dark mt-4 text-left text-lg">*Direction and goals</div>
-					{#each goalsOptions as goalsOption}
-						<label class="mr-2 mb-1 flex cursor-pointer items-center">
-							<input
-								value={goalsOption}
-								bind:group={myGoals}
-								type="radio"
-								class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
-							/>
-							<span class="text-sm">{goalsOption}</span>
-						</label>
-					{/each}
-					<div class="text-primary-dark mt-4 text-left text-lg">*Practice time</div>
-					{#each practiceIntentOptions as practiceIntentOption}
-						<label class="mr-2 mb-1 flex cursor-pointer items-center">
-							<input
-								value={practiceIntentOption}
-								bind:group={practiceIntent}
-								type="radio"
-								class="accent-accent-dark mr-1 mb-[2px] cursor-pointer focus:ring-0 focus:ring-offset-0"
-							/>
-							<span class="text-sm">{practiceIntentOption}</span>
-						</label>
-					{/each}
+					<RadioGroup
+						required
+						title="Experience"
+						choices={experienceOptions}
+						bind:value={experience}
+					/>
+					<RadioGroup
+						required
+						title="Lesson Pace Preference"
+						choices={teacherExpectationsOptions}
+						bind:value={teacherExpectations}
+					/>
+					<RadioGroup
+						required
+						title="Direction and Goals"
+						choices={goalsOptions}
+						bind:value={myGoals}
+					/>
+					<RadioGroup
+						required
+						title="Practice Time"
+						choices={practiceIntentOptions}
+						bind:value={practiceIntent}
+					/>
 					<div class="text-primary-dark mt-4 text-left text-lg">
 						Areas of interest <span class="text-sm">(Select all that apply)</span>
 						<div class="grid w-max grid-cols-2 gap-1 text-xs md:grid-cols-3 md:text-base">
@@ -195,7 +170,7 @@
 					<button
 						disabled={!name ||
 							!teacherExpectations ||
-							!level ||
+							!experience ||
 							!myGoals ||
 							!practiceIntent ||
 							formSubmitting}
@@ -207,4 +182,9 @@
 			{/if}
 		</Section>
 	{/if}
+	<button
+		onclick={() => {
+			console.log({ name, experience, myGoals, practiceIntent });
+		}}>Click me</button
+	>
 </SitePage>

@@ -277,8 +277,8 @@
 		{/if}
 		<span class="text-primary-dark mr-2 text-xl font-bold">Presets</span>
 		<select
-				class="focus:outline-accent outline-primary mb-4 cursor-pointer rounded border border-r-8 border-transparent outline"
-				oninput={(e) => {
+			class="focus:outline-accent outline-primary mb-4 cursor-pointer rounded border border-r-8 border-transparent outline"
+			oninput={(e) => {
 				const { frets, tuning } = presets[e.target.value];
 				minFret = frets[0];
 				maxFret = frets[1];
