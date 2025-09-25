@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
-	let { steps } = $props();
+	let { steps, noEnable = false } = $props();
 	let selectedStep = $state(0);
 	let selectedSubStep = $state(0);
 	let stepsLength = $derived(steps.length);
@@ -9,7 +9,7 @@
 	import * as Tone from 'tone';
 	let synth;
 	let now;
-	let audioEnabled = $state(false);
+	let audioEnabled = $state(noEnable);
 </script>
 
 {#if audioEnabled}

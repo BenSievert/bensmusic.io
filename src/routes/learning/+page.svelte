@@ -11,7 +11,8 @@
 			title: `Introduction to Music Theory Part 2`,
 			link: `introduction-part-two`,
 			desc: `Continuing learning the basics of music theory.`
-		}
+		},
+		{title: `Effective Practice`, link: `effective-practice`, desc: `Learn how to practice effectively and make the most of your time.`}
 	];
 </script>
 
