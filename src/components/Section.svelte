@@ -3,7 +3,7 @@
 	const colors = {
 		primary: `bg-background-light text-gray-900`,
 		secondary: `text-gray-950`,
-		tertiary: `bg-sky-50`
+		tertiary: `bg-[#f2f7fc]`
 	};
 </script>
 
