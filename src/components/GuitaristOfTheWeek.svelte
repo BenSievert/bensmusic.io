@@ -33,11 +33,11 @@
 		<div class="flex justify-center py-6">
 			<img {src} alt="some alt text" class="mb-4 rounded sm:max-w-1/2" />
 		</div>
-		<h2 class="text-secondary-dark text-2xl">About</h2>
+		<h2 class="text-primary-dark text-2xl">About</h2>
 		<p class="mb-4">{about}</p>
-		<h2 class="text-secondary-dark text-2xl">What to listen for</h2>
+		<h2 class="text-primary-dark text-2xl">What to listen for</h2>
 		<p class="mb-4">{whatToListenFor}</p>
-		<h2 class="text-secondary-dark mb-2 text-2xl">Examples</h2>
+		<h2 class="text-primary-dark mb-2 text-2xl">Examples</h2>
 		{#each videos as { id, description }}
 			<div class="mb-12 rounded bg-blue-100 p-2 shadow sm:p-6 md:max-w-3/4">
 				<p class="mb-3">{description}</p>
