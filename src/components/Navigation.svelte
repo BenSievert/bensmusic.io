@@ -56,7 +56,7 @@
 			? 'flex'
 			: 'hidden'}"
 	>
-		{#each links as link}
+		{#each links as link, i}
 			<a
 				on:click={toggleMenu}
 				href={link.href}
@@ -64,7 +64,9 @@
 			>
 				{link.name}
 			</a>
-			<hr class="text-blue-200" />
+			{#if i !== links.length - 1}
+				<hr class="text-blue-200" />
+			{/if}
 		{/each}
 	</div>
 </nav>

@@ -9,7 +9,7 @@ const connectionString: string = process.env.DATABASE_URL as string;
 const sql = neon(connectionString);
 
 const [fileName, update] = process.argv.slice(2);
-const name = fileName.replaceAll(`_`, ` `)
+const name = fileName.replaceAll(`_`, ` `);
 readFile(`./${fileName}.md`, 'utf8').then(async (content) => {
 	const resp = await (update
 		? sql`UPDATE articles SET content = ${content} WHERE name = ${name}`
