@@ -56,7 +56,7 @@
 						`Spacing your practice out throughout the day helps you practice retrieving information.`,
 						`30 minutes in the morning and 30 minutes in the evening is better than one hour in the morning`,
 						`The more often you switch the thing you're working on during practice, the better you'll learn.`,
-						`Working on Song A for 15 minutes and then Song B for 15 minutes is not as switching between them more often`,
+						`Working on Song A for 20 minutes and then Song B for 20 minutes is not good as switching between them more often`,
 						`Try to change the variables often as you play. Play it loud, then soft. Play it slow then fast. This will make you flexible.`
 					]},
 					{
