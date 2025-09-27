@@ -7,14 +7,18 @@
 	import { tick } from 'svelte';
 	let totalTime = $state(20);
 	let taskTime = $state(10)
-	let currentStep = $state(0)
 	let timeLeft = $state(20 * 60)
 	let tilNext = $state(10 * 60);
-	let showTimer = $state(false)
+	const blueTheme = {bg: `bg-blue-100`, text: `text-primary-dark`}
+	const greenTheme = { bg: `bg-green-100`, text: `text-green-800`}
+	const nextContent = {title: `Change Tasks`, desc: `Time to start working on something else.`, ...blueTheme}
 	let totalInterval;
 	let nextInterval
-	let paused = $state(false)
-	let done = $state(false)
+	let paused = $state(true)
+	let changeState = $state(false)
+
+	let changeContent = $state(nextContent)
+	const changeStates = []
 
 	const resetNext = (next: number) => {
 		clearInterval(nextInterval)
@@ -22,9 +26,13 @@
 		tick().then(() => {
 			nextInterval = setInterval(() => {
 				if (tilNext == 0) {
-					if (steps.length != 4)
-						steps[3] = {title: `Change Tasks`, desc: `Time to start working on something else.`, bg: `bg-primary-dark`, text: `text-white`, button: `hover:text-gray-300 hover:border-gray-300`}
+					changeState= true;
+					changeContent = nextContent
 					clearInterval(nextInterval)
+					setTimeout(() => {
+						changeState = false;
+						resetNext(taskTime * 60)
+					}, 3500)
 					return;
 				}
 				tilNext -= 1
@@ -41,8 +49,9 @@
 
 				if (timeLeft == 0) {
 					clearInterval(totalInterval)
-					done = true;
-					steps[3] = {title: `Done`, desc: `You've completed the amount of practice you set.`,  bg: `bg-green-700`, text: `text-white`};
+					clearInterval(nextInterval)
+					changeState = true;
+					changeContent = {title: `Done`, desc: `You've completed the amount of practice you set.`, ...greenTheme};
 					return;
 				}
 				timeLeft -= 1
@@ -75,13 +84,11 @@
 
 	 */
 
-	const steps = $state([
-		{title: `Plan`, desc: `Think about what you're about to do.`,  bg: `bg-orange-100`, text: `text-orange-800`, button: `hover:text-orange-600 hover:border-orange-600`},
-		{title: `Play`, desc: `Execute on what you want to do.`, bg: `bg-green-100`, text: `text-green-800`, button: `hover:text-green-600 hover:border-green-600`},
-		{title: `Reflect`, desc: `Did it go well or poorly? Why did it go that way?`,  bg: `bg-blue-100`, text: `text-primary-dark`, button: `hover:text-primary hover:border-primary`},
+	const steps = ([
+		{title: `Plan`, desc: `Think about what you're about to do.`,  bg: `bg-orange-100`, text: `text-orange-800`},
+		{title: `Play`, desc: `Execute on what you want to do.`, ...greenTheme},
+		{title: `Reflect`, desc: `Did it go well or poorly? Why did it go that way?`, ...blueTheme},
 	]);
-
-	let step = $derived(steps[currentStep])
 
 
 	const secondsToMinutes = (time: number, none = false) => {
@@ -97,21 +104,6 @@
 
 <SitePage title="Practicifier" subtitle="Games and Exercises">
 	<Section theme="secondary">
-		<label class="flex mb-2">
-			<span class="text-primary-dark mr-2 text-lg font-bold">Show Timer</span>
-			<Checkbox
-					checked={showTimer}
-					handleInput={() => {
-						if (showTimer) {
-							clearInterval(totalInterval);
-						}
-						else if (!paused)
-							resetTimer(timeLeft, tilNext)
-						showTimer = !showTimer;
-					}}
-			></Checkbox>
-		</label>
-		{#if showTimer}
 		<div class="mb-2 inline-block">
 
 		<Input label="Total (min)" className="mb-2" bind:value={totalTime} onchange={(event) => {
@@ -125,9 +117,9 @@
 
 		}}/>
 		</div>
-		<div class="text-center text-xl text-primary-dark grid-cols-2 mt-4 flex justify-center">
-			<div class="flex items-center">
-				<button class="rounded-lg border-2 shadow {paused ? `border-green-800 bg-green-50 text-green-800` : `text-secondary-dark border-secondary-dark bg-rose-50`} mr-4 p-1" onclick={() => {
+		<div>
+			<div class="flex items-center text-primary-dark">
+				<button class="rounded-lg border-2 shadow {paused ? `border-green-700 text-green-700` : `text-secondary-dark border-secondary-dark`} mr-4 p-0.5" onclick={() => {
 				if (paused)
 					resetTimer(timeLeft, tilNext)
 				else {
@@ -149,42 +141,32 @@
 
 				</button>
 			<div>
-			<div class="flex justify-between"><div class="mr-1">Total:</div>{secondsToMinutes(timeLeft)}</div>
+			<div class="flex justify-between text-primary-dark"><div class="mr-1">Total:</div>{secondsToMinutes(timeLeft)}</div>
 				{#if timeLeft > tilNext}<div class="flex justify-between"><div class="mr-1">Next:</div> {secondsToMinutes(tilNext)}</div>{/if}
 			</div>
 			</div>
 		</div>
-		{/if}
 	</Section>
-	<Section disableTheme className="{step.bg} {step.text} py-12" >
-		<div class="text-center {step.bg}">
-		<div>
-			<div class="text-2xl">{step.title}</div>
-			{@html step.desc}
+	<Section theme="secondary" className="inline-block">
+	<div class="relative">
+	<div class="{changeContent.bg} {changeContent.text} absolute md:w-1/2 shadow top-22 bottom-22 left-0 right-0 flex justify-center items-center rounded-lg z-30 {changeState ? `opacity-100` : `opacity-0`} transition-opacity duration-300 ease-in">
+		<div class="text-center">
+			<div class="text-2xl md:text-3xl">{changeContent.title}</div>
+		<div class="text-lg px-3">{changeContent.desc}</div>
 		</div>
-			{#if steps[currentStep].title != `Done`}
-			<button class="mt-8 border py-1 px-2 rounded  hover:shadow {steps[currentStep].button}"
-					onclick={() => {
-			if (steps[currentStep].title == `Done`)
-				return;
-			if (currentStep == steps.length -1)
-				currentStep = 0
-			else currentStep += 1
+	</div>
+	{#each steps as {bg, text, title, desc}, i}
+	<div class="shadow {bg} {text} px-2 py-5 rounded-lg md:w-1/2 mb-3 {changeState ? `opacity-0` : `opacity-100`} transition-opacity duration-400 ease-in" >
+		<div class="text-center">
+		<div class="grid grid-cols-2 items-center justify-between-between">
+			<span class="mr-6 text-2xl md:text-3xl whitespace-nowrap">{i + 1}) {title}</span>
+			<span class="md:text-lg text-left">{@html desc}</span>
+		</div>
 
-			if (currentStep == 0 && steps.length == 4) {
-				steps.pop();
-				let newTime = taskTime * 60
-				resetTimer(timeLeft, newTime > timeLeft ? timeLeft : newTime)
-				currentStep += 1;
-			}
-		}}>Next</button>
-				{/if}
 		</div>
+	</div>
+	{/each}
+	</div>
 	</Section>
-	<section theme="secondary">
-		<div class="text-center mt-2">
 
-
-		</div>
-	</section>
 </SitePage>
