@@ -17,6 +17,11 @@
 			title: `Spell the Mode`,
 			link: `spell-the-mode`,
 			desc: `List all the notes for a given mode.`
+		},
+		{
+			title: `Practicifier`,
+			link: `practicifier`,
+			desc: `Engage in better practicing.`
 		}
 	];
 </script>

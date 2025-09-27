@@ -66,7 +66,16 @@
 						`In preparation for a performance you're giving, you should run through the entire piece as early as possible.`,
 						`Even if you do not feel all the individual parts are ready, this helps acclimate you to pressure and getting it right the first time.`,
 						`It's good to practice one day, then record a run through the beginning of the next day.`
-					]}
+					]},
+					{title: `Putting Practice into Practice`,
+					subSteps: [
+							`I've created a tool to help you engage in better practice habits.`,
+							`You can go to the link <a class="text-primary-dark hover:underline hover:text-primary" target="_blank" href="/exercises/practicifier">here</a>`,
+							`It's been designed to get you to engage in deliberate and retrieval practice.`,
+							`It has an optional timer to help you stay focused and know when to change exercises.`
+					]
+					}
+
 
 			]}
 		/>
