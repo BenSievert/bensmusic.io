@@ -97,7 +97,7 @@
 
 <SitePage title="Practicifier" subtitle="Games and Exercises">
 	<Section theme="secondary">
-		<label class="flex">
+		<label class="flex mb-2">
 			<span class="text-primary-dark mr-2 text-lg font-bold">Show Timer</span>
 			<Checkbox
 					checked={showTimer}
@@ -112,23 +112,20 @@
 			></Checkbox>
 		</label>
 		{#if showTimer}
-		<div>
-		<Input label="Practice for" bind:value={totalTime} onchange={(event) => {
+		<div class="mb-2 inline-block">
+
+		<Input label="Total (min)" className="mb-2" bind:value={totalTime} onchange={(event) => {
 			let value = event.target.value
 			resetTimer(value * 60, taskTime * 60);
 
 		}}/>
-	minutes
-		</div>
-		<div>
-			<Input label="Change activity every"  bind:value={taskTime} onchange={(event) => {
+			<Input label="Per Activity (min)"  bind:value={taskTime} onchange={(event) => {
 			let value = event.target.value
 			resetTimer(timeLeft, value * 60);
 
 		}}/>
-			minutes
 		</div>
-		<div class="text-center text-xl text-primary-dark grid-cols-2 mt-2 flex justify-center">
+		<div class="text-center text-xl text-primary-dark grid-cols-2 mt-4 flex justify-center">
 			<div class="flex items-center">
 				<button class="rounded-lg border-2 shadow {paused ? `border-green-800 bg-green-50 text-green-800` : `text-secondary-dark border-secondary-dark bg-rose-50`} mr-4 p-1" onclick={() => {
 				if (paused)

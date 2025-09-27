@@ -1,10 +1,10 @@
 <script lang="ts">
-    let {value = $bindable(), label, onchange = (e: any) => {} } = $props();
+    let {value = $bindable(), label, onchange = (e: any) => {}, className } = $props();
 
 </script>
 
-<label>
-    <span class="text-primary-dark text-lg font-bold">{label}</span>
+<label class="flex justify-between {className}">
+    <span class="text-primary-dark text-lg font-bold mr-2">{label}</span>
 
     <input
         type="number"
