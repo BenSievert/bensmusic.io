@@ -7,6 +7,10 @@
 	};
 </script>
 
-<div class="px-8 py-4 {disableTheme ? `` : colors[theme]} {className} {shiftable ? `absolute top-4 md:static` : ``}">
+<div
+	class="px-8 py-4 {disableTheme ? `` : colors[theme]} {className} {shiftable
+		? `absolute top-4 md:static`
+		: ``}"
+>
 	{@render children()}
 </div>

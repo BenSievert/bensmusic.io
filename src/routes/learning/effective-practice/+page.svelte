@@ -5,7 +5,6 @@
 	const buttonClass = `bg-primary-dark hover:bg-primary rounded-md px-3 py-1 text-white m-1 cursor-pointer`;
 </script>
 
-
 <SitePage title="Effective Practice" subtitle="Making the most of your time" hide>
 	<Section theme="secondary" shiftable>
 		<Stepper
@@ -20,7 +19,7 @@
 						`Many advanced musicians don't know the most effective practice methods themselves, they just repeat what their teacher told them who in turn repeat what their teachers told them.`,
 						`But there are better and worse ways to practice.`,
 						`The following information is taken from Noa Kageyama's course BulletProof Musician.`,
-						`Noa is a highly respected performance psychologist and the beginning of the course focuses on how to practice effectively.`,
+						`Noa is a highly respected performance psychologist and the beginning of the course focuses on how to practice effectively.`
 					]
 				},
 				{
@@ -49,8 +48,9 @@
 						`The next day you may find you've lost the progress you made the day before.`,
 						`Most musicians practice to maximize <span class="italic">performance</span> and not <span class="italic">learning</span>.`,
 						`So how can we maximize learning?`
-					]},
-					{
+					]
+				},
+				{
 					title: `Retrieval Practice Continued`,
 					subSteps: [
 						`Spacing your practice out throughout the day helps you practice retrieving information.`,
@@ -58,25 +58,26 @@
 						`The more often you switch the thing you're working on during practice, the better you'll learn.`,
 						`Working on Song A for 20 minutes and then Song B for 20 minutes is not good as switching between them more often`,
 						`Try to change the variables often as you play. Play it loud, then soft. Play it slow then fast. This will make you flexible.`
-					]},
-					{
+					]
+				},
+				{
 					title: `Performance Practice`,
 					subSteps: [
 						`This section is for those who wish to perform live. If you'd like to record pieces in fewer takes this is also helpful.`,
 						`In preparation for a performance you're giving, you should run through the entire piece as early as possible.`,
 						`Even if you do not feel all the individual parts are ready, this helps acclimate you to pressure and getting it right the first time.`,
 						`It's good to practice one day, then record a run through the beginning of the next day.`
-					]},
-					{title: `Putting Practice into Practice`,
-					subSteps: [
-							`I've created a tool to help you engage in better practice habits.`,
-							`You can go to the link <a class="text-primary-dark hover:underline hover:text-primary" target="_blank" href="/exercises/practicifier">here</a>`,
-							`It's been designed to get you to engage in deliberate and retrieval practice.`,
-							`It has an optional timer to help you stay focused and know when to change exercises.`
 					]
-					}
-
-
+				},
+				{
+					title: `Putting Practice into Practice`,
+					subSteps: [
+						`I've created a tool to help you engage in better practice habits.`,
+						`You can go to the link <a class="text-primary-dark hover:underline hover:text-primary" target="_blank" href="/exercises/practicifier">here</a>`,
+						`It's been designed to get you to engage in deliberate and retrieval practice.`,
+						`It has an optional timer to help you stay focused and know when to change exercises.`
+					]
+				}
 			]}
 		/>
 	</Section>
