@@ -131,11 +131,15 @@
 				}}
 			/>
 		</div>
-		<div>
-			<label class="text-primary-dark mr-2 text-lg font-bold mb-2 flex items-center"><span class="mr-1">Enable Audio</span><Checkbox
+		<div class="mb-2">
+			<label class="text-primary-dark mr-2 text-lg font-bold inline-block">
+				<div class="flex items-center">
+				<span class="mr-1">Enable Audio</span><Checkbox
 					checked={audioEnabled}
 					handleInput={() => audioEnabled = !audioEnabled}
-			/></label>
+			/>
+				</div>
+			</label>
 		</div>
 		<div>
 			<div class="text-primary-dark flex items-center">
