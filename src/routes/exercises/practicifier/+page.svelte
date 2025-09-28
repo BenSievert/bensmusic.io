@@ -14,6 +14,7 @@
 	const nextContent = {
 		title: `Change Tasks`,
 		desc: `Time to start working on something else.`,
+		button: true,
 		...blueTheme
 	};
 	let totalInterval;
@@ -21,9 +22,14 @@
 	let paused = $state(true);
 	let changeState = $state(false);
 	let suggestion = $state(``)
+	let audioEnabled = $state(false);
 
 	let changeContent = $state(nextContent);
 	const changeStates = [];
+
+	const playAlarm = () => {
+		if (audioEnabled) document.getElementById('alarmSound').play();
+	}
 
 	const resetNext = (next: number) => {
 		clearInterval(nextInterval);
@@ -33,11 +39,8 @@
 				if (tilNext == 0) {
 					changeState = true;
 					changeContent = nextContent;
+					playAlarm();
 					clearInterval(nextInterval);
-					setTimeout(() => {
-						changeState = false;
-						resetNext(taskTime * 60);
-					}, 3500);
 					return;
 				}
 				tilNext -= 1;
@@ -51,11 +54,13 @@
 		clearInterval(nextInterval);
 		timeLeft = left;
 		tilNext = next;
+
 		tick().then(() => {
 			totalInterval = setInterval(() => {
 				if (timeLeft == 0) {
 					clearInterval(totalInterval);
 					clearInterval(nextInterval);
+					playAlarm();
 					changeState = true;
 					changeContent = {
 						title: `Done`,
@@ -103,6 +108,8 @@
 </script>
 
 <SitePage title="Practicifier" subtitle="Games and Exercises">
+	<audio id="alarmSound" src="/audio/alarm.wav" preload="auto"></audio>
+
 	<Section theme="secondary">
 		<div class="mb-2 inline-block">
 			<Input
@@ -111,6 +118,7 @@
 				bind:value={totalTime}
 				onchange={(event) => {
 					let value = event.target.value;
+					if (!paused)
 					resetTimer(value * 60, taskTime * 60);
 				}}
 			/>
@@ -122,6 +130,12 @@
 					resetTimer(timeLeft, value * 60);
 				}}
 			/>
+		</div>
+		<div>
+			<label class="text-primary-dark mr-2 text-lg font-bold mb-2 flex items-center"><span class="mr-1">Enable Audio</span><Checkbox
+					checked={audioEnabled}
+					handleInput={() => audioEnabled = !audioEnabled}
+			/></label>
 		</div>
 		<div>
 			<div class="text-primary-dark flex items-center">
@@ -193,6 +207,9 @@
 				<div class="text-center">
 					<div class="text-2xl md:text-3xl">{changeContent.title}</div>
 					<div class="px-3 text-lg">{changeContent.desc}</div>
+					{#if changeContent.button}
+						<Button className="mt-2" onclick={() => { resetNext(taskTime * 60); changeState = false}} text="Continue"></Button>
+						{/if}
 				</div>
 			</div>
 			<div class="text-center shadow bg-purple-100 text-purple-800 mb-3 rounded-lg px-2 py-2 md:w-1/2 {changeState
@@ -208,7 +225,6 @@
 												let newSuggestion
 												do {
 												const randomInt = Math.floor(Math.random() * (challenges.length))
-												console.log(randomInt)
 												newSuggestion = challenges[randomInt]
 												} while (newSuggestion == suggestion)
 												suggestion = newSuggestion
