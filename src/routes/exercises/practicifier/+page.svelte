@@ -117,8 +117,8 @@
 				className="mb-2"
 				bind:value={totalTime}
 				onchange={(event) => {
+					console.log(`talk to the moon`)
 					let value = event.target.value;
-					if (!paused)
 					resetTimer(value * 60, taskTime * 60);
 				}}
 			/>
