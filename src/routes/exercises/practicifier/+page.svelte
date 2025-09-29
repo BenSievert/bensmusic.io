@@ -31,10 +31,11 @@
 		if (audioEnabled) document.getElementById('alarmSound').play();
 	}
 
-	const resetNext = (next: number) => {
+	const resetNext = (next: number, sentPause = paused) => {
 		clearInterval(nextInterval);
 		tilNext = next;
-		tick().then(() => {
+		if (!sentPause)
+			tick().then(() => {
 			nextInterval = setInterval(() => {
 				if (tilNext == 0) {
 					changeState = true;
@@ -49,12 +50,13 @@
 	};
 
 
-	let resetTimer = (left: number, next: number) => {
+	let resetTimer = (left: number, next: number, sentPause = paused) => {
 		clearInterval(totalInterval);
 		clearInterval(nextInterval);
 		timeLeft = left;
 		tilNext = next;
 
+		if (!sentPause)
 		tick().then(() => {
 			totalInterval = setInterval(() => {
 				if (timeLeft == 0) {
@@ -72,7 +74,7 @@
 				timeLeft -= 1;
 			}, 1000);
 
-			resetNext(next);
+			resetNext(next, sentPause);
 		});
 	};
 
@@ -148,7 +150,7 @@
 						? `border-green-700 text-green-700`
 						: `text-secondary-dark border-secondary-dark`} mr-4 p-0.5"
 					onclick={() => {
-						if (paused) resetTimer(timeLeft, tilNext);
+						if (paused) resetTimer(timeLeft, tilNext, !paused);
 						else {
 							clearInterval(totalInterval);
 							clearInterval(nextInterval);
