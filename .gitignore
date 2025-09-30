@@ -23,5 +23,5 @@ vite.config.ts.timestamp-*
 /.idea
 .env*.local
 
-src/article-uploader/*.md
+*.md
 src/article-uploader/*.js
