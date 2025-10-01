@@ -5,12 +5,16 @@
 		pageTitle = ``,
 		extra,
 		children = () => {},
-		hide = false
+		hide = false,
+		meta = false
 	} = $props();
 </script>
 
 <svelte:head>
 	<title>{pageTitle || title}</title>
+	{#if meta}
+		<meta name="description" content="Private guitar lessons in Bloomington, IL  for all ages and skill levels. All styles of music — tailored to your goals. Located at Hip Cat music school." />
+	{/if}
 </svelte:head>
 <div class="flex items-center justify-between px-4 py-1">
 	<div class="mr-4 {hide ? `invisible absolute md:visible md:static` : ``}">

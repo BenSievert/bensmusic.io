@@ -32,8 +32,9 @@ fs.readdir('./articles', async (_: NodeJS.ErrnoException | null, files: string[]
 	const chosenName = chosenFile.slice(0, -3)
 
 	readFile(`./articles/${chosenFile}`, 'utf8').then(async (content: string) => {
-
-		const exists = (((await sql`SELECT COUNT(*) FROM articles WHERE name = ${chosenName}` as { count: number}[])[0])).count;
+ console.log({chosenName})
+		const exists = +(((await sql`SELECT COUNT(*) FROM articles WHERE name = ${chosenName}` as { count: number}[])[0])).count;
+ console.log({exists})
 		if (exists) {
 			console.log(`Updating Article`)
 			await sql`UPDATE articles SET content = ${content} WHERE name = ${chosenName}`
