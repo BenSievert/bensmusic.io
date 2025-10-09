@@ -9,7 +9,7 @@
 
 <SitePage title={name} subtitle={date}>
 	<Section theme="tertiary">
-		<div class="prose prose-headings:text-primary-dark prose-headings:font-normal">
+		<div class="prose prose-headings:text-primary-dark prose-headings:font-normal prose-a:text-secondary-dark prose-a:hover:text-secondary">
 			{@html html}
 		</div>
 	</Section>

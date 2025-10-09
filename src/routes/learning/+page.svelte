@@ -12,6 +12,10 @@
 			link: `introduction-part-two`,
 			desc: `Continuing learning the basics of music theory.`
 		},
+		{ title: `The Minor Scale`,
+		  link: `the-minor-scale`,
+		  desc: `Learn what the minor scale is`
+		},
 		{
 			title: `Effective Practice`,
 			link: `effective-practice`,
