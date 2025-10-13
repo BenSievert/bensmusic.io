@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/state';
+	import {SignIn} from "@auth/sveltekit/components";
 	let isOpen = $state(false);
+
 
 	let path = $derived(page.url.pathname);
 
@@ -20,10 +22,20 @@
 	];
 </script>
 
-<nav class="z-10 flex items-center justify-end px-4 pt-4">
+<div class="px-4 pt-4">
+<div class="mb-2">
+	<SignIn provider="cognito" signInPage="signin" className="text-primary-dark hover:text-primary text-right text-sm">
+		<div slot="submitButton">
+            <span>
+              Log In or Create Account
+            </span>
+		</div>
+	</SignIn>
+</div>
+<nav class="z-10 flex items-center justify-end">
 	<button
 		class="bg-primary z-30 cursor-pointer rounded-lg px-[6px] py-[5px] text-2xl text-gray-700 lg:hidden"
-		on:click={toggleMenu}
+		onclick={toggleMenu}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +71,7 @@
 	>
 		{#each links as link, i}
 			<a
-				on:click={toggleMenu}
+				onclick={toggleMenu}
 				href={link.href}
 				class="p-2 text-rose-700 {path == link.href ? `bg-blue-200` : ``}"
 			>
@@ -71,6 +83,7 @@
 		{/each}
 	</div>
 </nav>
+</div>
 
 <style>
 	.menu.open {

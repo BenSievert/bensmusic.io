@@ -1,7 +1,10 @@
 import sql from '../../postgres.server';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
+	const session = await locals.auth()
+	console.log({session})
+
 	const guitarists = (await sql`SELECT name, id,
 				TO_CHAR(start,'Month') start_month,
 				TO_CHAR(start,'YYYY') start_year
