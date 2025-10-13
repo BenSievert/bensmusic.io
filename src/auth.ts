@@ -11,6 +11,7 @@ import {
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
   trustHost: true,
+  debug:true,
   providers: [Cognito({
     AUTH_COGNITO_ID,
     AUTH_COGNITO_SECRET,
