@@ -38,6 +38,7 @@
 		"vitest": "^2.1.9"
 	},
 	"dependencies": {
+		"@auth/sveltekit": "^1.11.0",
 		"@aws-sdk/client-pinpoint": "^3.894.0",
 		"@aws-sdk/client-ses": "^3.894.0",
 		"@aws-sdk/credential-providers": "^3.894.0",

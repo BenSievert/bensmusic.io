@@ -14,6 +14,7 @@
 		{ name: 'Contact', href: '/contact' },
 		{ name: `Exercises`, href: `/exercises` },
 		{ name: `Learning`, href: `/learning` },
+		{ name: `Song Bird`, href: `/song-bird`},
 		{ name: `Blog`, href: `/blog` },
 		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week` }
 	];

@@ -21,7 +21,7 @@
 	let nextInterval;
 	let paused = $state(true);
 	let changeState = $state(false);
-	let suggestion = $state(``)
+	let suggestion = $state(``);
 	let audioEnabled = $state(false);
 
 	let changeContent = $state(nextContent);
@@ -29,26 +29,25 @@
 
 	const playAlarm = () => {
 		if (audioEnabled) document.getElementById('alarmSound').play();
-	}
+	};
 
 	const resetNext = (next: number, sentPause = paused) => {
 		clearInterval(nextInterval);
 		tilNext = next;
 		if (!sentPause)
 			tick().then(() => {
-			nextInterval = setInterval(() => {
-				if (tilNext == 0) {
-					changeState = true;
-					changeContent = nextContent;
-					playAlarm();
-					clearInterval(nextInterval);
-					return;
-				}
-				tilNext -= 1;
-			}, 1000);
-		});
+				nextInterval = setInterval(() => {
+					if (tilNext == 0) {
+						changeState = true;
+						changeContent = nextContent;
+						playAlarm();
+						clearInterval(nextInterval);
+						return;
+					}
+					tilNext -= 1;
+				}, 1000);
+			});
 	};
-
 
 	let resetTimer = (left: number, next: number, sentPause = paused) => {
 		clearInterval(totalInterval);
@@ -57,36 +56,53 @@
 		tilNext = next;
 
 		if (!sentPause)
-		tick().then(() => {
-			totalInterval = setInterval(() => {
-				if (timeLeft == 0) {
-					clearInterval(totalInterval);
-					clearInterval(nextInterval);
-					playAlarm();
-					changeState = true;
-					changeContent = {
-						title: `Done`,
-						desc: `You've completed the amount of practice you set.`,
-						...greenTheme
-					};
-					return;
-				}
-				timeLeft -= 1;
-			}, 1000);
+			tick().then(() => {
+				totalInterval = setInterval(() => {
+					if (timeLeft == 0) {
+						clearInterval(totalInterval);
+						clearInterval(nextInterval);
+						playAlarm();
+						changeState = true;
+						changeContent = {
+							title: `Done`,
+							desc: `You've completed the amount of practice you set.`,
+							...greenTheme
+						};
+						return;
+					}
+					timeLeft -= 1;
+				}, 1000);
 
-			resetNext(next, sentPause);
-		});
+				resetNext(next, sentPause);
+			});
 	};
 
 	const suggestions = [
 		[`Easy`, [`slower`, `faster`, `louder`, `quieter`, `staccato`, `legato`, `with even dynamics`]],
 		[
 			`Medium`,
-			[`emphasizing weak beats`, `in a different position`, `crescendo`, `decrescendo`, `swung`, `without looking at your hands`, `with a metronome`, `fast but quiet`, `quiet but fast`]
+			[
+				`emphasizing weak beats`,
+				`in a different position`,
+				`crescendo`,
+				`decrescendo`,
+				`swung`,
+				`without looking at your hands`,
+				`with a metronome`,
+				`fast but quiet`,
+				`quiet but fast`
+			]
 		],
 		[
 			`Hard`,
-			[`in a different key`, `twice as fast`, `in a different time signature`, `with ornamentation`, `in a different mode`, `with different chord extensions`]
+			[
+				`in a different key`,
+				`twice as fast`,
+				`in a different time signature`,
+				`with ornamentation`,
+				`in a different mode`,
+				`with different chord extensions`
+			]
 		]
 	];
 
@@ -119,7 +135,7 @@
 				className="mb-2"
 				bind:value={totalTime}
 				onchange={(event) => {
-					console.log(`talk to the moon`)
+					console.log(`talk to the moon`);
 					let value = event.target.value;
 					resetTimer(value * 60, taskTime * 60);
 				}}
@@ -134,12 +150,12 @@
 			/>
 		</div>
 		<div class="mb-2">
-			<label class="text-primary-dark mr-2 text-lg font-bold inline-block">
+			<label class="text-primary-dark mr-2 inline-block text-lg font-bold">
 				<div class="flex items-center">
-				<span class="mr-1">Enable Audio</span><Checkbox
-					checked={audioEnabled}
-					handleInput={() => audioEnabled = !audioEnabled}
-			/>
+					<span class="mr-1">Enable Audio</span><Checkbox
+						checked={audioEnabled}
+						handleInput={() => (audioEnabled = !audioEnabled)}
+					/>
 				</div>
 			</label>
 		</div>
@@ -214,36 +230,43 @@
 					<div class="text-2xl md:text-3xl">{changeContent.title}</div>
 					<div class="px-3 text-lg">{changeContent.desc}</div>
 					{#if changeContent.button}
-						<Button className="mt-2" onclick={() => { resetNext(taskTime * 60); changeState = false}} text="Continue"></Button>
-						{/if}
+						<Button
+							className="mt-2"
+							onclick={() => {
+								resetNext(taskTime * 60);
+								changeState = false;
+							}}
+							text="Continue"
+						></Button>
+					{/if}
 				</div>
 			</div>
-			<div class="text-center shadow bg-purple-100 text-purple-800 mb-3 rounded-lg px-2 py-2 md:w-1/2 {changeState
-						? `z-10 opacity-0`
-						: `z-50 opacity-100`} transition-opacity duration-400 ease-in">
+			<div
+				class="mb-3 rounded-lg bg-purple-100 px-2 py-2 text-center text-purple-800 shadow md:w-1/2 {changeState
+					? `z-10 opacity-0`
+					: `z-50 opacity-100`} transition-opacity duration-400 ease-in"
+			>
+				<div>
+					Need Inspiration? Generate a challenge.
 					<div>
-						Need Inspiration? Generate a challenge.
-						<div>
-							{#each suggestions as [difficulty, challenges], i}
-								<button
-										class="relative z-40 mt-1 mr-2 cursor-pointer rounded-md border px-2 shadow hover:border-purple-600 hover:text-purple-600"
-										onclick={() => {
-												let newSuggestion
-												do {
-												const randomInt = Math.floor(Math.random() * (challenges.length))
-												newSuggestion = challenges[randomInt]
-												} while (newSuggestion == suggestion)
-												suggestion = newSuggestion
-
-											}}
-								>{difficulty}</button
-								>
-							{/each}
-						</div>
-						{#if suggestion}
-							<div class="mt-2">Try playing {suggestion}</div>
-						{/if}
+						{#each suggestions as [difficulty, challenges], i}
+							<button
+								class="relative z-40 mt-1 mr-2 cursor-pointer rounded-md border px-2 shadow hover:border-purple-600 hover:text-purple-600"
+								onclick={() => {
+									let newSuggestion;
+									do {
+										const randomInt = Math.floor(Math.random() * challenges.length);
+										newSuggestion = challenges[randomInt];
+									} while (newSuggestion == suggestion);
+									suggestion = newSuggestion;
+								}}>{difficulty}</button
+							>
+						{/each}
 					</div>
+					{#if suggestion}
+						<div class="mt-2">Try playing {suggestion}</div>
+					{/if}
+				</div>
 			</div>
 			{#each steps as { bg, text, title, desc }, i}
 				<div
@@ -256,7 +279,6 @@
 							<span class="mr-6 text-2xl whitespace-nowrap md:text-3xl">{i + 1}) {title}</span>
 							<span class="text-left md:text-lg">{@html desc}</span>
 						</div>
-
 					</div>
 				</div>
 			{/each}
