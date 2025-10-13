@@ -1,7 +1,7 @@
 import { SvelteKitAuth } from "@auth/sveltekit"
 import Cognito from "@auth/sveltekit/providers/cognito"
 import { config } from 'dotenv';
-config({ path: '.env.development.local' });
+config({ path: '.env.local' });
 
 import {
   AUTH_COGNITO_ID,
