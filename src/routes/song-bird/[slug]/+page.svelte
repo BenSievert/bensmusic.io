@@ -45,7 +45,7 @@
 
 <SitePage title="Song Bird" subtitle="Write and Arrange Songs">
 	{#if session}
-		<Section className="sm:grid md:grid-cols-2 lg:grid-cols-3">
+		<Section className="sm:grid md:grid-cols-2 lg:grid-cols-3" theme="secondary">
 			<Input
 				bind:value={songTitle}
 				label="Song Title"
@@ -127,6 +127,7 @@
 					</div>
 				{/each}
 			</div>
+			{#if !showEditor}
 			<button
 				onclick={() => {
 					editing = null;
@@ -137,6 +138,7 @@
 			class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"
 
 			><span class="text-2xl mr-1.5">+</span> Create New Section</button>
+			{/if}
 		</Section>
 		<Section theme="tertiary">
 			<div class="text-primary-dark text-xl font-extrabold">Arrange</div>
