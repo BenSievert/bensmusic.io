@@ -22,7 +22,7 @@
 	let editing = $state(null);
 	let editingIndex = $derived(sections.findIndex(({ title }) => title == editing));
 	let formSubmitting = $state(false);
-	let existing = $state(data?.row?.id);
+	let existing = $state(data?.id);
 	const annotate = (lyrics: string) => {
 		let openPosition = lyrics.indexOf(`{`);
 		let closePosition = lyrics.indexOf(`}`);
@@ -209,6 +209,6 @@
 			</button>
 		</Section>
 	{:else}
-		<Section>You must be logged in to use this page.</Section>
+		<Section class="secondary">You must be logged in to use this page.</Section>
 	{/if}
 </SitePage>

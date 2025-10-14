@@ -13,7 +13,5 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			  WHERE id = ${params.slug} AND email=${session.user.email}`
 	)[0];
 
-	return {
-		row
-	};
+	return row;
 };

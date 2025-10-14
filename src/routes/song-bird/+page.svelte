@@ -11,21 +11,21 @@
 <SitePage title="Song Bird" subtitle="Write and Arrange Songs">
 	<Section theme="secondary">
 		{#if session}
-			<table>
+			<table class="table-auto w-full">
 				<thead class="text-primary-dark text-lg">
 					<tr>
 						{#each headers as header}
-							<th>{header}</th>
+							<th class=" text-left p-1">{header}</th>
 						{/each}
 					</tr>
 				</thead>
 				<tbody>
 					{#each songs as { title, date_created, last_updated, id }}
-						<tr>
-							<td>{title}</td>
-							<td>{date_created}</td>
-							<td>{last_updated}</td>
-							<td
+						<tr class="hover:bg-gray-100 transition-colors">
+							<td class="p-1">{title}</td>
+							<td class="p-1">{date_created}</td>
+							<td class="p-1">{last_updated}</td>
+							<td class="p-1"
 								><a href="/song-bird/{id}" class="text-primary-dark hover:text-primary">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
