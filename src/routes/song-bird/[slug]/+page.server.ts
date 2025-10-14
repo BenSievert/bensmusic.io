@@ -5,7 +5,7 @@ import { getSession } from '../../../backend_functions';
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const session = await getSession(locals);
 
-	if (params.slug == `new`) return {};
+	if (params.slug == `new` || !session) return {};
 
 	const row = (
 		await sql`SELECT id, title, key_signature, time, sections, section_order
