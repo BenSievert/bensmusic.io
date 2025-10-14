@@ -1,7 +1,8 @@
 <script>
 	import { page } from '$app/state';
-	import {SignIn} from "@auth/sveltekit/components";
+	import {SignIn, SignOut} from "@auth/sveltekit/components";
 	let isOpen = $state(false);
+	let {loggedIn} = $props()
 
 
 	let path = $derived(page.url.pathname);
@@ -24,6 +25,11 @@
 
 <div class="px-4 pt-4">
 <div class="mb-2">
+	{#if loggedIn}
+	<SignOut className="text-primary-dark hover:text-primary text-right text-sm">
+		<span slot="submitButton">Log Out</span>
+	</SignOut>
+	{:else}
 	<SignIn provider="cognito" signInPage="signin" className="text-primary-dark hover:text-primary text-right text-sm">
 		<div slot="submitButton">
             <span>
@@ -31,6 +37,7 @@
             </span>
 		</div>
 	</SignIn>
+	{/if}
 </div>
 <nav class="z-10 flex items-center justify-end">
 	<button
