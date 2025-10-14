@@ -24,7 +24,7 @@
 </script>
 
 <div class="px-4 pt-4">
-<div class="mb-2 flex justify-end">
+<div class="mb-1.5 flex justify-end">
 	<button class="text-primary-dark hover:text-primary text-right text-sm" onclick={() => {loggedIn ? signOut() : signIn(`cognito`)} }>{loggedIn ? `Log Out` : `Log In or Create Account`}</button>
 </div>
 <nav class="z-10 flex items-center justify-end">
