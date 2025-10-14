@@ -88,26 +88,25 @@
 				<div>
 					<pre class="leading-[3]">{@html annotate(newLyrics)}</pre>
 				</div>
-				<Button
-					text={editing ? `Update` : `Create`}
-					onClick={() => {
+				<button
+					class="text-primary-dark hover:text-primary cursor-pointer text-lg mr-2 py-1 px-2 border border-primary rounded-md"
+					onclick={() => {
 						showEditor = false;
 
 						if (editing) {
 							sections[editingIndex] = { title: sectionTitle, lyrics: newLyrics };
 						} else sections.push({ title: sectionTitle, lyrics: newLyrics });
 					}}
-				/>
+				>{editing ? `Update` : `Create`}</button>
 				{#if editing}
-					<Button
-						theme="danger"
-						text="Delete"
-						onClick={() => {
+					<button
+						class="text-secondary-dark hover:text-secondary cursor-pointer text-lg py-1 px-2 border border-secondary rounded-md"
+						onclick={() => {
 							showEditor = false;
 							sections.splice(editingIndex, 1);
 							order.filter((title) => title != sectionTitle);
 						}}
-					/>
+					>Delete</button>
 				{/if}
 			</Section>
 		{/if}
@@ -128,15 +127,16 @@
 					</div>
 				{/each}
 			</div>
-			<Button
-				onClick={() => {
+			<button
+				onclick={() => {
 					editing = null;
 					showEditor = true;
 					newLyrics = ``;
 					sectionTitle = ``;
 				}}
-				text="Create New Section"
-			></Button>
+			class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"
+
+			><span class="text-2xl mr-1.5">+</span> Create New Section</button>
 		</Section>
 		<Section theme="tertiary">
 			<div class="text-primary-dark text-xl font-extrabold">Arrange</div>
