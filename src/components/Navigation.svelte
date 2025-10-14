@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/state';
-	import {SignIn, SignOut} from "@auth/sveltekit/components";
+	import { signIn, signOut } from "@auth/sveltekit/client"
 	let isOpen = $state(false);
 	let {loggedIn} = $props()
 
@@ -24,18 +24,8 @@
 </script>
 
 <div class="px-4 pt-4">
-<div class="mb-2">
-	{#if loggedIn}
-	<SignOut  options={{ redirectTo: `/`}} className="text-primary-dark hover:text-primary text-right text-sm">
-		<div slot="submitButton">Log Out</div>
-	</SignOut>
-	{:else}
-	<SignIn provider="cognito" signInPage="signin" className="text-primary-dark hover:text-primary text-right text-sm">
-		<div slot="submitButton">
-              Log In or Create Account
-		</div>
-	</SignIn>
-	{/if}
+<div class="mb-2 flex justify-end">
+	<button class="text-primary-dark hover:text-primary text-right text-sm" onclick={() => {loggedIn ? signOut() : signIn(`cognito`)} }>{loggedIn ? `Log Out` : `Log In or Create Account`}</button>
 </div>
 <nav class="z-10 flex items-center justify-end">
 	<button
