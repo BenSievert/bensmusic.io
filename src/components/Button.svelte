@@ -4,7 +4,7 @@
 	const themes = {
 		base: `bg-primary-dark hover:bg-primary`,
 		danger: `bg-red-500 hover:bg-red-400`
-	}
+	};
 </script>
 
 <button

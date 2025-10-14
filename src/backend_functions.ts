@@ -1,5 +1,5 @@
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
-import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } from '$env/static/private';
+import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, local } from '$env/static/private';
 import { fromEnv } from '@aws-sdk/credential-providers';
 
 process.env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
@@ -31,3 +31,14 @@ export const sendEmail = (subject: string, body: string) => {
 	const command = new SendEmailCommand(params);
 	return client.send(command);
 };
+
+export const getSession = async (locals) =>
+	local
+		? {
+				user: {
+					id: '495d2327-6cab-4a79-81b8-aa84908f5986',
+					name: 'Benjamin Sievert',
+					email: 'sievertbenjamin@gmail.com'
+				}
+			}
+		: locals.auth();
