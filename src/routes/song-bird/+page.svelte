@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
+	import Button from "../../components/Button.svelte";
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -11,7 +12,8 @@
 <SitePage title="Song Bird" subtitle="Write and Arrange Songs">
 	<Section theme="secondary">
 		{#if session}
-			<table class="table-auto w-full">
+			<a href="/song-bird/new" class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"><span class="text-2xl mr-1.5">+</span> Start New Song</a>
+			<table class="table-auto w-full mt-2">
 				<thead class="text-primary-dark text-lg">
 					<tr>
 						{#each headers as header}
