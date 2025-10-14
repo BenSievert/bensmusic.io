@@ -26,7 +26,7 @@
 <div class="px-4 pt-4">
 <div class="mb-2">
 	{#if loggedIn}
-	<SignOut className="text-primary-dark hover:text-primary text-right text-sm">
+	<SignOut  options={{ redirectTo: `/`}} className="text-primary-dark hover:text-primary text-right text-sm">
 		<div slot="submitButton">Log Out</div>
 	</SignOut>
 	{:else}
