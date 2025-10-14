@@ -27,14 +27,12 @@
 <div class="mb-2">
 	{#if loggedIn}
 	<SignOut className="text-primary-dark hover:text-primary text-right text-sm">
-		<span slot="submitButton">Log Out</span>
+		<div slot="submitButton">Log Out</div>
 	</SignOut>
 	{:else}
 	<SignIn provider="cognito" signInPage="signin" className="text-primary-dark hover:text-primary text-right text-sm">
 		<div slot="submitButton">
-            <span>
               Log In or Create Account
-            </span>
 		</div>
 	</SignIn>
 	{/if}
