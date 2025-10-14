@@ -4,6 +4,7 @@ import { getSession } from '../../backend_functions';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const session = await getSession(locals);
+  if (!session) return {songs: []}
 
 	const songs =
 		await sql`SELECT title, id, TO_CHAR(date_created,'Month DD, YYYY') date_created, TO_CHAR(last_updated,'Month DD, YYYY') last_updated

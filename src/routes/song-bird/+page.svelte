@@ -1,14 +1,9 @@
 <script lang="ts">
 	import SitePage from '../../components/SitePage.svelte';
 	import Section from '../../components/Section.svelte';
-	import Button from '../../components/Button.svelte';
-	import Input from '../../components/Input.svelte';
-	import Spinner from '../../components/Spinner.svelte';
-
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	console.log(data);
 	const { session, songs } = data;
 	const headers = [`Title`, `Created`, `Last Updated`, ``];
 </script>
