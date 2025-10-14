@@ -33,7 +33,7 @@ export const sendEmail = (subject: string, body: string) => {
 };
 
 export const getSession = async (locals) =>
-	local
+	local == `true`
 		? {
 				user: {
 					id: '495d2327-6cab-4a79-81b8-aa84908f5986',
