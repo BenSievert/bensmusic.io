@@ -104,7 +104,7 @@
 						onclick={() => {
 							showEditor = false;
 							sections.splice(editingIndex, 1);
-							order.filter((title) => title != sectionTitle);
+							order = order.filter((title) => title != sectionTitle);
 						}}
 					>Delete</button>
 				{/if}
