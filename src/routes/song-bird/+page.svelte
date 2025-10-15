@@ -52,7 +52,7 @@
 			</table>
 			<div class="visible md:invisible absolute grid grid-cols-1 content-center mt-2 w-full text-sm">
 				{#each songs as song}
-					<a class="shadow rounded-md py-3 flex justify-between px-4 items-center gap-8 mb-4 border border-gray-200" href="/song-bird/{song.id}">
+					<a class="shadow rounded-md py-3 flex justify-between px-4 items-center gap-8 mb-4 border border-gray-200 bg-white text-gray-700" href="/song-bird/{song.id}">
 						<div class="w-full">
 						{#each headers.slice(0,-1) as [header, key]}
 							<div class="flex justify-between gap-2 mb-2 items-center">
