@@ -7,7 +7,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const session = await getSession(locals);
 	if (!session) return json({ Message: `Unauthenticated` }, { status: 401 });
 
-	const { title, key, time, sections, order, action, id } = await request.json();
+	const { title, key, time, sections, order, action, id, notes } = await request.json();
 	const email = session.user.email;
 	const sectionsJSON = JSON.stringify(sections);
 	const orderJSON = JSON.stringify(order);
@@ -15,8 +15,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	let row;
 	try {
 		if (action == `create`) {
-			row = await sql`INSERT INTO songs (title,key_signature,time,sections,section_order, email) 
-        VALUES (${title},${key},${time},${sectionsJSON},${orderJSON},${email}) RETURNING id;`;
+			row = await sql`INSERT INTO songs (title,key_signature,time,sections,section_order, email, notes) 
+        VALUES (${title},${key},${time},${sectionsJSON},${orderJSON},${email},${notes}) RETURNING id;`;
 		} else if (action == `update`) {
 			await sql`UPDATE songs
 				SET title = ${title},
@@ -24,6 +24,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 				    time = ${time},
 				    sections = ${sectionsJSON},
 				    section_order = ${orderJSON},
+				    notes = ${notes},
 						last_updated = NOW()
 				WHERE id = ${id} AND email = ${email}`;
 		}

@@ -22,6 +22,7 @@
 	let editing = $state(null);
 	let editingIndex = $derived(sections.findIndex(({ title }) => title == editing));
 	let formSubmitting = $state(false);
+	let notes = $state(data.notes ?? ``)
 	let existing = $state(data?.id);
 	const annotate = (lyrics: string) => {
 		let openPosition = lyrics.indexOf(`{`);
@@ -45,7 +46,8 @@
 
 <SitePage title="Song Bird" subtitle="Write and Arrange Songs">
 	{#if session}
-		<Section className="sm:grid md:grid-cols-2 lg:grid-cols-3" theme="secondary">
+		<Section theme="secondary">
+			<div class="sm:grid md:grid-cols-2 lg:grid-cols-3">
 			<Input
 				bind:value={songTitle}
 				label="Song Title"
@@ -70,6 +72,12 @@
 				inputClassName="w-16"
 				type="text"
 			/>
+			</div>
+			<textarea
+					bind:value={notes}
+					class="my-4 min-h-32 w-full bg-white p-2"
+					placeholder="Write any notes here"
+			></textarea>
 		</Section>
 		{#if showEditor}
 			<Section theme="tertiary">
@@ -83,7 +91,7 @@
 				<textarea
 					bind:value={newLyrics}
 					class="my-4 min-h-32 w-full bg-white p-2"
-					placeholder="Write your lyrics here"
+					placeholder={`Write your lyrics here. \nTip: Insert a chord symbol by writing it between "{}"\nExample: {B9}lyric`}
 				></textarea>
 				<div>
 					<pre class="leading-[3]">{@html annotate(newLyrics)}</pre>
@@ -138,6 +146,7 @@
 			class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"
 
 			><span class="text-2xl mr-1.5">+</span> Create New Section</button>
+
 			{/if}
 		</Section>
 		<Section theme="tertiary">
@@ -193,6 +202,7 @@
 							time,
 							sections,
 							order,
+							notes,
 							action: existing ? `update` : `create`,
 							id: existing
 						}),
