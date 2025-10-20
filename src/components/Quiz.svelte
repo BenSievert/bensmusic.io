@@ -57,19 +57,6 @@
 					else {
 						numberCorrect = questions.filter(({ answer }, i) => answer == answers[i]).length;
 
-						fetch(`/bens-quiz`, {
-							method: 'POST',
-							body: JSON.stringify({
-								numberCorrect,
-								questionsAndAnswers: questions.map((question, i) => [
-									question.question,
-									question.choices[answers[i]]
-								])
-							}),
-							headers: {
-								'Content-Type': 'application/json'
-							}
-						});
 
 						submitted = true;
 						window.scrollTo(0, 0);

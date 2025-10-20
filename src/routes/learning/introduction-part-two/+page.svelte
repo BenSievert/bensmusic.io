@@ -139,24 +139,6 @@
 				choices: [`A Minor`, `B Major`, `C Major`, `E Minor`]
 			},
 			{
-				question: `A major third is a larger interval than a minor third.`,
-				explanation: `A major third is 4 half steps and a minor third is 3.`,
-				answer: 0,
-				choices: [`True`, `False`]
-			},
-			{
-				question: `What note is at the 5th fret of the D string?`,
-				explanation: `G is at the 5th fret of the D string.`,
-				answer: 3,
-				choices: [`A`, `E`, `F`, `G`]
-			},
-			{
-				question: `These notes typically create the least tension when creating a melody.`,
-				choices: [`Chord tones`, `Diatonic non chord tones`, `Chromatic non chord tones`],
-				answer: 0,
-				explanation: `While it's not a hard and fast rule, chord tones tend to produce the least tension.`
-			},
-			{
 				question: `What are the types of three note chords formed by the major scale?`,
 				choices: [
 					`Major`,
