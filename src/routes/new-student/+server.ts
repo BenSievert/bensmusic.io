@@ -6,7 +6,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const {
 		name,
 		teacherExpectations,
-		level,
+		experience,
 		myGoals,
 		practiceIntent,
 		misc,
@@ -16,7 +16,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	console.log(
 		name,
 		teacherExpectations,
-		level,
+		experience,
 		myGoals,
 		practiceIntent,
 		misc,
@@ -30,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			`
           Name: ${name}
           
-          Ability: ${level}
+          Experience: ${experience}
           
           Provide: ${teacherExpectations}
           

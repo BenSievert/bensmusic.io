@@ -25,7 +25,7 @@
 	title={name}
 	subtitle={date}
 	pageTitle="Guitarist of the Week - {date}"
-	extra={`<a href="/guitarist-of-the-week-archive" class=" text-center py-1 px-2 text-xs sm:text-sm rounded bg-primary-dark hover:bg-primary text-white">
+	extra={`<a data-sveltekit-reload href="/guitarist-of-the-week-archive" class=" text-center py-1 px-2 text-xs sm:text-sm rounded bg-primary-dark hover:bg-primary text-white">
 			View Previous Entries
 		</a>`}
 >

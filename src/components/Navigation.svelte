@@ -16,9 +16,9 @@
 		{ name: 'Contact', href: '/contact' },
 		{ name: `Exercises`, href: `/exercises` },
 		{ name: `Learning`, href: `/learning` },
-		{ name: `Song Bird`, href: `/song-bird`},
-		{ name: `Blog`, href: `/blog` },
-		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week` }
+		{ name: `Song Bird`, href: `/song-bird`, reload: true},
+		{ name: `Blog`, href: `/blog`, reload: true },
+		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`, reload: true }
 	];
 </script>
 
@@ -54,6 +54,7 @@
 		<div class="hidden space-x-4 lg:flex">
 			{#each links as link}
 				<a
+					data-sveltekit-reload={link.reload}
 					href={link.href}
 					class="{path == link.href
 						? `bg-pink-100 text-rose-700`
@@ -70,6 +71,7 @@
 		>
 			{#each links as link, i}
 				<a
+					data-sveltekit-reload={link.reload}
 					onclick={toggleMenu}
 					href={link.href}
 					class="p-2 text-rose-700 {path == link.href ? `bg-blue-200` : ``}"
