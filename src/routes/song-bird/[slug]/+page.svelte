@@ -44,7 +44,7 @@
 	};
 </script>
 
-<SitePage title="Song Bird" subtitle="Write and Arrange Songs">
+<SitePage title="Song Bird" subtitle="Write and Arrange">
 	{#if session}
 		<Section theme="secondary">
 			<div class="sm:grid md:grid-cols-2 lg:grid-cols-3">

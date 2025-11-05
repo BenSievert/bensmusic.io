@@ -9,10 +9,10 @@
 	const headers = [[`Title`, `title`], [`Created`, `date_created`], [`Last Updated`, `last_updated`], [``, `id`]];
 </script>
 
-<SitePage title="Song Bird" subtitle="Write and Arrange Songs">
+<SitePage title="Song Bird" subtitle="Write and Arrange">
 	<Section theme="secondary">
 		{#if session}
-			<a href="/song-bird/new" class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"><span class="text-2xl mr-1.5">+</span> Start New Song</a>
+			<a href="/song-bird/new" class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"><span class="text-2xl mr-1.5">+</span> New</a>
 			<div class="relative">
 			<table class="table-auto w-full mt-2 invisible md:visible absolute">
 				<thead class="text-primary-dark text-lg">
