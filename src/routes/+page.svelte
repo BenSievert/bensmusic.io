@@ -38,8 +38,7 @@
 		<p>
 			No, but you'll advance faster with one. There are numerous online resources that can tell you
 			anything you'd like to know about playing the guitar. Many exceptional guitar players have
-			been entirely self-taught. There are no magic secrets that are revealed in my lessons. There
-			is no smoking gun I'm going to give you that will make you a master in a matter of weeks. The
+			been entirely self-taught. There are no magic secrets that are revealed in my lessons. There's no trick you'll learn in my lessons that will transform you into a guitar god over night. The
 			only way to get good is to put in the work.
 		</p>
 	</Section>
@@ -47,17 +46,17 @@
 		<h3 class="text-primary-dark text-xl">What does a teacher provide then?</h3>
 		<ul>
 			<li>
-				Answers questions. There's a lot of info online but figuring out what the important
-				information is is hard on your own. I can clarify points before moving on to new topics.
+				<span class="font-bold">Answers questions and guides you.</span> There's a lot of info online but figuring what's important is difficult. I can clarify points before moving on to new topics.
+				I also make sure you're learning what's important. Even if those things aren't always the most fun.
 			</li>
 			<li>
-				Corrects mistakes. Teachers correct your mistakes and stop you from developing bad habits.
+				<span class="font-bold">Corrects mistakes.</span> Teachers correct your mistakes and stop you from developing bad habits. We also figure out where you need to go next.
 			</li>
 			<li>
-				Helps you learn efficiently. There are good and bad ways to practice and knowing how to
-				practice effectively helps you advance faster.
+				<span class="font-bold">Helps you learn efficiently.</span>There are good and bad ways to practice and knowing how to
+				practice effectively helps you advance faster. Effective practice is even a topic many advanced musicians don't know about.
 			</li>
-			<li>Broadens your horizons. I do my best to expose my students to different genres.</li>
+			<li><span class="font-bold">Broadens your horizons.</span> I do my best to expose my students to different genres, cultures, and ways of thinking.</li>
 		</ul>
 	</Section>
 </SitePage>
