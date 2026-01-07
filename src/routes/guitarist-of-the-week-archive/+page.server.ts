@@ -13,6 +13,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const groupedGuitarists = Object.entries(byYear).map(([year, guitaristsByYear]) => [
 		year,
 		Object.groupBy(guitaristsByYear!, ({ start_month }) => start_month)
-	]);
+	]).reverse();
 	return { groupedGuitarists };
 };
