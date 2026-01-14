@@ -164,6 +164,11 @@
 	{#if !Object.entries(openSchedule).length}
 		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
+		<Section disableTheme className="bg-green-50">
+			<h2 class="text-green-800 text-2xl font-extrabold">Attention</h2>
+			For the like 5 people who use this app. You can now create an account and see all your studio reservations in a cleaner format than google sheets.
+			<a href="/my-reservations" class="text-secondary-dark cursor-pointer hover:underline text-lg" target="_blank">Here</a>
+		</Section>
 		<Section>
 			<h2 class="text-primary-dark mb-2 text-xl font-bold">Day</h2>
 			{#each days as day}

@@ -1,14 +1,13 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
-import sql from '../../postgres.server';
 import { json } from '@sveltejs/kit';
 import {
 	GOOGLE_PRIVATE_KEY,
 	GOOGLE_SERVICE_ACCOUNT_EMAIL,
 	SHEET_ID,
-	AUTH
 } from '$env/static/private';
 import type { RequestHandler } from './$types';
+import {getSession} from "../../backend_functions";
 
 const times = [
 	`8:00 AM`,
@@ -54,8 +53,9 @@ const getSheet = async () => {
 	return doc;
 };
 
-export const GET: RequestHandler = async ({ url }) => {
-	if (url.searchParams.get(`auth`) != AUTH)
+export const GET: RequestHandler = async ({ url, locals }) => {
+	const session = await getSession(locals);
+	if (!session)
 		return json(
 			{},
 			{
@@ -65,8 +65,32 @@ export const GET: RequestHandler = async ({ url }) => {
 				}
 			}
 		);
-	const openSchedule = {};
+
+
+	const mySchedule = {};
 	const doc = await getSheet();
+	const contactSheet = doc.sheetsByTitle[`contact information`];
+	await contactSheet.loadCells(`D3:G52`);
+	const offset = 2;
+	let initials;
+	for (let i = offset; i < contactSheet.cellStats.loaded - offset; i++) {
+		const cell = contactSheet.getCell(i, 6).value;
+		if (cell == session.user.email) {
+			initials = contactSheet.getCell(i, 3).value
+			break;
+		}
+
+	}
+	if (!initials)
+		return json(
+			{},
+			{
+				status: 401,
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			}
+		);
 	const scheduleSheet = doc.sheetsByTitle[`schedule`];
 	await scheduleSheet.loadCells(`B1:CR31`);
 	const colLen = 96;
@@ -74,24 +98,23 @@ export const GET: RequestHandler = async ({ url }) => {
 
 	let currentStudio = ``;
 	for (let column = 1; column < colLen; column++) {
-		const day = scheduleSheet.getCell(1, column).value as keyof typeof openSchedule;
+		const day = scheduleSheet.getCell(1, column).value as keyof typeof mySchedule;
 		if (!day) continue;
 		const studioCell = scheduleSheet.getCell(0, column).value as string;
 		if (studioCell) currentStudio = studioCell;
 
 		for (let row = 2; row < rowLen; row++) {
 			const cell = scheduleSheet.getCell(row, column);
-			const slot = cell.value;
-			if (!slot) {
-				openSchedule[day] = openSchedule[day] ?? {};
-				openSchedule[day][currentStudio] = openSchedule[day][currentStudio] ?? [];
+			const slot = cell.value as string;
+			if (slot && slot.split(` `)[0]?.includes(initials)) {
+				mySchedule[day] = mySchedule[day] ?? [];
 				// @ts-ignore
-				openSchedule[day][currentStudio].push({ time: times[row - 2], cell: cell.a1Address });
+				mySchedule[day].push({ time: times[row - 2], cell: cell.a1Address, content: slot, studio: currentStudio });
 			}
 		}
 	}
 
-	return json(openSchedule, {
+	return json({mySchedule, name: session.user.name}, {
 		status: 200,
 		headers: {
 			'Cache-Control': 'no-cache'
@@ -99,45 +122,57 @@ export const GET: RequestHandler = async ({ url }) => {
 	});
 };
 
-export const POST: RequestHandler = async ({ request }) => {
-	const { cell, initials, date, permanent, auth } = await request.json();
-	let status = 401;
-	let response = { message: `Wrong Auth or Initials` };
-	if (auth != AUTH && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
-		return json(response, { status });
-
+export const POST: RequestHandler = async ({ request, locals }) => {
+	const session = await getSession(locals);
+	if (!session)
+		return json(
+			{},
+			{
+				status: 401,
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			}
+		);
 	const doc = await getSheet();
 	const contactSheet = doc.sheetsByTitle[`contact information`];
-	await contactSheet.loadCells(`D3:D50`);
+	await contactSheet.loadCells(`D3:G52`);
 	const offset = 2;
-	let authorized = false;
+	let initials;
 	for (let i = offset; i < contactSheet.cellStats.loaded - offset; i++) {
-		const cell = contactSheet.getCell(i, 3).value;
-		if (initials.toUpperCase() == cell) {
-			authorized = true;
+		const cell = contactSheet.getCell(i, 6).value;
+		if (cell == session.user.email) {
+			initials = contactSheet.getCell(i, 3).value
 			break;
 		}
-	}
 
-	if (!authorized) return json(response, { status });
+	}
+	if (!initials)
+		return json(
+			{},
+			{
+				status: 401,
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			}
+		);
+
+
+	const { cell } = await request.json();
+
 
 	const scheduleSheet = doc.sheetsByTitle[`schedule`];
 	await scheduleSheet.loadCells(cell);
 	const studioCell = scheduleSheet.getCellByA1(cell);
-	if (studioCell.value)
+	if (studioCell.value.split(` `)[0].toUpperCase() != initials)
+
 		return json(
-			{ message: `Cell was not empty, someone must have gotten it first` },
-			{ status: 403 }
+			{message: `Cell had someone else's initials, could not delete`},
+			{status: 403}
 		);
 
-	const content = `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
-	studioCell.value = content;
-	try {
-		await sql`INSERT INTO schedule_logs (cell, content, initials)
-		VALUES (${cell},${content},${initials})`;
-	} catch (e) {
-		console.log(`Something went wrong`, e);
-	}
+	studioCell.value = ``
 	try {
 		await scheduleSheet.saveCells([studioCell]);
 
