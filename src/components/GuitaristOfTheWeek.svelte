@@ -16,7 +16,7 @@
 		img: string;
 		about: string;
 		date: string;
-		videos: { id: string; description: string }[];
+		videos: { id: string; }[];
 		whatToListenFor: string;
 		gear?: string;
 	} = $props();
@@ -59,9 +59,8 @@
 		</a>
 		{/if}
 		<h2 class="text-primary-dark mb-2 text-2xl">Examples</h2>
-		{#each videos as { id, description }}
+		{#each videos as { id }}
 			<div class="mb-12 rounded bg-blue-100 p-2 shadow sm:p-6 md:max-w-3/4">
-				<p class="mb-3">{description}</p>
 				<Youtube {id}></Youtube>
 			</div>
 		{/each}
