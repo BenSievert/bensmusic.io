@@ -62,7 +62,7 @@
 			return `w-[100px] h-[100px]`
 		const length = [showStudio, showContent].filter(truthy => truthy).length
 		if (length == 0)
-			return `w-[56px] h-[30px]`
+			return `w-[62px] h-[30px]`
 		if (length == 1)
 			return `w-[70px] h-[46px]`
 	})
