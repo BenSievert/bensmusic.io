@@ -43,6 +43,8 @@
 	let mySchedule = $state({});
 	let errorMessage = $state(``);
 	let showGaps = $state()
+	let showStudio = $state(true)
+	let showContent = $state()
 	let name = $state(``)
 
 	onMount(async () => {
@@ -54,6 +56,16 @@
 	let showModal = $state(false);
 	let selectedCell = $state();
 	let formSubmitting = $state(false);
+
+	const size = $derived.by(() => {
+		if (showContent)
+			return `w-[100px] h-[100px]`
+		const length = [showStudio, showContent].filter(truthy => truthy).length
+		if (length == 0)
+			return `w-[56px] h-[30px]`
+		if (length == 1)
+			return `w-[70px] h-[46px]`
+	})
 
 	const getAllTimes = (day: string) => {
 		const formatted = times.map(time => mySchedule[day]?.find(reservation => reservation.time == time) ?? {time})
@@ -90,12 +102,31 @@
 		<Section>
 			<Checkbox
 					className="mr-2"
+					label="Show Studio"
+					checked={showStudio}
+					handleInput={() => {
+						showStudio = !showStudio
+					}}
+			/>
+			<br />
+			<Checkbox
+					className="mr-2"
+					label="Show Content"
+					checked={showContent}
+					handleInput={() => {
+						showContent = !showContent
+					}}
+			/>
+			<br />
+			<Checkbox
+					className="mr-2"
 					label="Show Empty Times"
 					checked={showGaps}
 					handleInput={() => {
 						showGaps = !showGaps
 					}}
 			/>
+
 		</Section>
 		<Section theme="secondary">
 			<div
@@ -113,11 +144,12 @@
 											selectedCell = { time: possible.time, cell: possible.cell, studio: possible.studio, day, content: possible.content};
 											showModal = true;
 										}}
-											class="w-[70px] h-[46px] cursor-pointer items-center justify-between rounded-md {possible.content.split(` `).length > 1 ? `bg-orange-200 text-orange-900 hover:bg-orange-100` : `bg-blue-200 text-blue-900 hover:bg-blue-100`} text-xs  shadow"
-									>{possible.studio} <div class="text-nowrap">{possible.time}</div>
+											class="{size} cursor-pointer items-center justify-between rounded-md {possible.content.split(` `).length > 1 ? `bg-orange-200 text-orange-900 hover:bg-orange-100` : `bg-blue-200 text-blue-900 hover:bg-blue-100`} text-xs  shadow"
+									>{showStudio ? possible.studio : ``} <div class="text-nowrap">{possible.time}</div>
+										<div>{showContent ? possible.content : ``}</div>
 									</button>
 									{:else }
-									<button disabled class="text-gray-700 w-[70px] h-[46px] bg-gray-200 shadow items-center justify-between text-xs rounded-md"><div>{possible.time}</div></button>
+									<button disabled class="text-gray-700 {size} bg-gray-200 shadow items-center justify-between text-xs rounded-md"><div>{possible.time}</div></button>
 								{/if}
 								</div>
 							{/each}
@@ -139,8 +171,10 @@
 		<br /><br />
 		Clicking on one of the cells opens a pop up showing the content of that cell and asking if you'd like to remove it. Choosing "Confirm" will delete the reservation out of the spread sheet.
 		<br /><br />
-		The checkbox at the top allows you to also see times where you do not currently have any reservations.
+		The checkbox at the top labeled "Show Empty Times" allows you to also see times where you do not currently have any reservations.
 		<br /> <br />
+		The other two checkboxes let you adjust what you see about a particular time. This is so if you're looking at a smaller screen it's easier to read.
+		<br/> <br/>
 		<span class="text-lg">If you have any issues, please email <a class="text-secondary-dark" href="mailto:sievertbenjamin@gmail.com">sievertbenjamin@gmail.com</a></span>
 	</Section>
 	<Modal
