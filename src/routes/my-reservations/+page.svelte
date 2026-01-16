@@ -145,7 +145,7 @@
 											showModal = true;
 										}}
 											class="{size} cursor-pointer items-center justify-between rounded-md {possible.content.split(` `).length > 1 ? `bg-orange-200 text-orange-900 hover:bg-orange-100` : `bg-blue-200 text-blue-900 hover:bg-blue-100`} text-xs  shadow"
-									>{showStudio ? possible.studio : ``} <div class="text-nowrap">{possible.time}</div>
+									>{showStudio ? possible.studio == `Large Room (Studio 10)` ? `Studio 10` :  possible.studio : ``} <div class="text-nowrap">{possible.time}</div>
 										<div>{showContent ? possible.content : ``}</div>
 									</button>
 									{:else }
