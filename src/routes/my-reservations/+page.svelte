@@ -134,8 +134,8 @@
 			>
 				{#each days as day}
 					<div class="text-center text-primary-dark">
-						<span class="font-bold">{day.slice(0,3)}</span>
-						<div class="flex flex-col items-center">
+						<span class="font-bold sticky top-2 z-10 bg-white rounded px-2 py-1 shadow">{day.slice(0,3)}</span>
+						<div class="flex flex-col items-center mt-4">
 							{#each getAllTimes(day) as possible}
 								<div class="mb-1.5">
 								{#if possible.cell }
