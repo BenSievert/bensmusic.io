@@ -7,8 +7,8 @@
 
 	const notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', `D`, `D#/Eb`, `E`, 'F', 'F#/Gb', `G`, `G#/Ab`];
 	const allStrings = [`E`, `A`, `D`, `G`, `B`, `E`];
-	const highStrings = [``, ``, ``, `G`, `B`, `E`];
-	let stringsState = $state(highStrings);
+	const lowStrings = [`E`, `A`, `D`];
+	let stringsState = $state(lowStrings);
 	let score = $state(0);
 	let strings = $derived([...new Set(stringsState.filter((string) => string != ``))]);
 
@@ -25,15 +25,15 @@
 	let autoDetect = $state(false);
 	let autoDetectInterval;
 	const presets = [
-		{ label: `1st Position - High Strings`, frets: [0, 4], tuning: highStrings },
+		{ label: `1st Position - Low Strings`, frets: [0, 4], tuning: lowStrings },
 		{ label: `1st Position - All Strings`, frets: [0, 4], tuning: allStrings },
-		{ label: `3rd Position - High Strings`, frets: [3, 6], tuning: highStrings },
+		{ label: `3rd Position - Low Strings`, frets: [3, 6], tuning: lowStrings },
 		{ label: `3rd Position - All Strings`, frets: [3, 6], tuning: allStrings },
-		{ label: `5th Position - High Strings`, frets: [5, 8], tuning: highStrings },
+		{ label: `5th Position - Low Strings`, frets: [5, 8], tuning: lowStrings },
 		{ label: `5th Position - All Strings`, frets: [5, 8], tuning: allStrings },
-		{ label: `7th Position - High Strings`, frets: [7, 10], tuning: highStrings },
+		{ label: `7th Position - Low Strings`, frets: [7, 10], tuning: lowStrings },
 		{ label: `7th Position - All Strings`, frets: [7, 10], tuning: allStrings },
-		{ label: `9th Position - High Strings`, frets: [9, 12], tuning: highStrings },
+		{ label: `9th Position - Low Strings`, frets: [9, 12], tuning: lowStrings },
 		{ label: `9th Position - All Strings`, frets: [9, 12], tuning: allStrings }
 	];
 
@@ -191,7 +191,7 @@
 			/>
 		</div>
 		<div class="text-secondary-dark inline-block text-sm">
-			Highest
+			Lowest
 			<input
 				type="number"
 				min="0"
@@ -225,11 +225,6 @@
 				}}
 			/>
 		</div>
-		<div class="mb-4 text-xs text-orange-800">
-			This mode is in beta and janky. It will attempt to detect the note you play through your
-			microphone. If you try it out let me know how it went.
-		</div>
-
 		<div class={`mb-2 flex`}>
 			<span class="text-primary-dark mr-2 text-lg font-bold">Challenge Mode</span>
 			<Checkbox
