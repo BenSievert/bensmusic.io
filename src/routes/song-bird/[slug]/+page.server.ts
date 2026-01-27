@@ -1,6 +1,6 @@
 import sql from '../../../postgres.server';
 import type { PageServerLoad } from './$types';
-import { getSession } from '../../../backend_functions';
+import { getSession } from '../$lib/server/functions';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const session = await getSession(locals);

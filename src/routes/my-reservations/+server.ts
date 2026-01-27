@@ -7,7 +7,7 @@ import {
 	SHEET_ID,
 } from '$env/static/private';
 import type { RequestHandler } from './$types';
-import {getSession} from "../../backend_functions";
+import {getSession} from "$lib/server/functions";
 
 const times = [
 	`8:00 AM`,

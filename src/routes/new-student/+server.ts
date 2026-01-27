@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import { sendEmail } from '../../backend_functions';
+import { sendEmail } from '$lib/server/functions';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const {

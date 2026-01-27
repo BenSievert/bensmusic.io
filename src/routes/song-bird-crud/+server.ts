@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import sql from '../../postgres.server';
-import { getSession } from '../../backend_functions';
+import { getSession } from '$lib/server/functions';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
 	const session = await getSession(locals);
