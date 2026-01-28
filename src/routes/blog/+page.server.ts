@@ -14,9 +14,11 @@ export const load: PageServerLoad = async ({ params }) => {
 	}[];
 
 	const byYear = Object.groupBy(articles, ({ start_year }) => start_year);
-	const groupedArticles = Object.entries(byYear).map(([year, articlesByYear]) => [
-		year,
-		Object.groupBy(articlesByYear!, ({ start_month }) => start_month)
-	]).reverse();
+	const groupedArticles = Object.entries(byYear)
+		.map(([year, articlesByYear]) => [
+			year,
+			Object.groupBy(articlesByYear!, ({ start_month }) => start_month)
+		])
+		.reverse();
 	return { groupedArticles };
 };

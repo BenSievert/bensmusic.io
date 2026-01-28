@@ -15,7 +15,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	let row;
 	try {
 		if (action == `create`) {
-			row = await sql`INSERT INTO songs (title,key_signature,time,sections,section_order, email, notes) 
+			row =
+				await sql`INSERT INTO songs (title,key_signature,time,sections,section_order, email, notes) 
         VALUES (${title},${key},${time},${sectionsJSON},${orderJSON},${email},${notes}) RETURNING id;`;
 		} else if (action == `update`) {
 			await sql`UPDATE songs

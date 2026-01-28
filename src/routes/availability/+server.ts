@@ -1,61 +1,15 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { JWT } from 'google-auth-library';
 import sql from '../../postgres.server';
 import { json } from '@sveltejs/kit';
-import {
-	GOOGLE_PRIVATE_KEY,
-	GOOGLE_SERVICE_ACCOUNT_EMAIL,
-	SHEET_ID,
-	AUTH
-} from '$env/static/private';
+import { AUTH } from '$env/static/private';
 import type { RequestHandler } from './$types';
+import { getSheet, getTeachers, readSheet } from '$lib/server/sheet-functions';
+import { getSession, isRoot } from '$lib/server/functions';
 
-const times = [
-	`8:00 AM`,
-	`8:30 AM`,
-	`9:00 AM`,
-	`9:30 AM`,
-	`10:00 AM`,
-	`10:30 AM`,
-	`11:00 AM`,
-	`11:30 AM`,
-	`12:00 PM`,
-	`12:30 PM`,
-	`1:00 PM`,
-	`1:30 PM`,
-	`2:00 PM`,
-	`2:30 PM`,
-	`3:00 PM`,
-	`3:30 PM`,
-	`4:00 PM`,
-	`4:30 PM`,
-	`5:00 PM`,
-	`5:30 PM`,
-	`6:00 PM`,
-	`6:30 PM`,
-	`7:00 PM`,
-	`7:30 PM`,
-	`8:00 PM`,
-	`8:30 PM`,
-	`9:00 PM`,
-	`9:30 PM`,
-	`10:00 PM`
-];
+export const GET: RequestHandler = async ({ url, locals }) => {
+	const session = await getSession(locals);
 
-const getSheet = async () => {
-	const serviceAccountAuth = new JWT({
-		email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-		key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-		scopes: ['https://www.googleapis.com/auth/spreadsheets']
-	});
-
-	const doc = new GoogleSpreadsheet(SHEET_ID, serviceAccountAuth);
-	await doc.loadInfo();
-	return doc;
-};
-
-export const GET: RequestHandler = async ({ url }) => {
-	if (url.searchParams.get(`auth`) != AUTH)
+	const isRootUser = isRoot(session);
+	if (url.searchParams.get(`auth`) != AUTH && !isRootUser)
 		return json(
 			{},
 			{
@@ -65,31 +19,8 @@ export const GET: RequestHandler = async ({ url }) => {
 				}
 			}
 		);
-	const openSchedule = {};
-	const doc = await getSheet();
-	const scheduleSheet = doc.sheetsByTitle[`schedule`];
-	await scheduleSheet.loadCells(`B1:CR31`);
-	const colLen = 96;
-	const rowLen = 31;
 
-	let currentStudio = ``;
-	for (let column = 1; column < colLen; column++) {
-		const day = scheduleSheet.getCell(1, column).value as keyof typeof openSchedule;
-		if (!day) continue;
-		const studioCell = scheduleSheet.getCell(0, column).value as string;
-		if (studioCell) currentStudio = studioCell;
-
-		for (let row = 2; row < rowLen; row++) {
-			const cell = scheduleSheet.getCell(row, column);
-			const slot = cell.value;
-			if (!slot) {
-				openSchedule[day] = openSchedule[day] ?? {};
-				openSchedule[day][currentStudio] = openSchedule[day][currentStudio] ?? [];
-				// @ts-ignore
-				openSchedule[day][currentStudio].push({ time: times[row - 2], cell: cell.a1Address });
-			}
-		}
-	}
+	const openSchedule = await readSheet((slot: any) => !slot);
 
 	return json(openSchedule, {
 		status: 200,
@@ -99,27 +30,26 @@ export const GET: RequestHandler = async ({ url }) => {
 	});
 };
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
+	const session = await getSession(locals);
+	const isRootUser = isRoot(session);
+
 	const { cell, initials, date, permanent, auth } = await request.json();
+	const initialsUpper = initials.toUpperCase();
 	let status = 401;
 	let response = { message: `Wrong Auth or Initials` };
-	if (auth != AUTH && (date != `now` || new Date(date).toDateString() == `Invalid Date`))
-		return json(response, { status });
-
-	const doc = await getSheet();
-	const contactSheet = doc.sheetsByTitle[`contact information`];
-	await contactSheet.loadCells(`D3:D50`);
-	const offset = 2;
-	let authorized = false;
-	for (let i = offset; i < contactSheet.cellStats.loaded - offset; i++) {
-		const cell = contactSheet.getCell(i, 3).value;
-		if (initials.toUpperCase() == cell) {
-			authorized = true;
-			break;
-		}
+	if (date != `now` && new Date(date).toDateString() == `Invalid Date`) {
+		return json({message: `Invalid Date`}, {status});
 	}
 
-	if (!authorized) return json(response, { status });
+	if (!isRootUser && auth != AUTH)
+		return json(response, { status });
+
+	const teachers = await getTeachers();
+	const doc = await getSheet();
+
+	if (!teachers.find((teacher) => initialsUpper == teacher.initials))
+		return json(response, { status });
 
 	const scheduleSheet = doc.sheetsByTitle[`schedule`];
 	await scheduleSheet.loadCells(cell);
@@ -130,11 +60,11 @@ export const POST: RequestHandler = async ({ request }) => {
 			{ status: 403 }
 		);
 
-	const content = `${initials.toUpperCase()}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
+	const content = `${initialsUpper}${date == `now` ? `` : `${permanent ? ` start` : ``} ${date}`}`;
 	studioCell.value = content;
 	try {
 		await sql`INSERT INTO schedule_logs (cell, content, initials)
-		VALUES (${cell},${content},${initials})`;
+		VALUES (${cell},${content},${initialsUpper})`;
 	} catch (e) {
 		console.log(`Something went wrong`, e);
 	}

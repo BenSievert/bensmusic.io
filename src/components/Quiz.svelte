@@ -57,7 +57,6 @@
 					else {
 						numberCorrect = questions.filter(({ answer }, i) => answer == answers[i]).length;
 
-
 						submitted = true;
 						window.scrollTo(0, 0);
 					}

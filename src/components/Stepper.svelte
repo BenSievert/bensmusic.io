@@ -14,7 +14,9 @@
 
 {#if audioEnabled}
 	<div>
-		<div class="mb-3 border-b border-gray-200 pb-1">
+		<div
+			class="sticky top-2 z-10 mb-3 inline-block rounded border border-b border-blue-100 bg-gray-50 px-3 py-1"
+		>
 			<button
 				disabled={selectedStep == 0 && selectedSubStep == 0}
 				onclick={async () => {

@@ -10,9 +10,11 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			  ORDER BY start DESC`) as { name: string; id: string; start_month: string; start_year: string }[];
 
 	const byYear = Object.groupBy(guitarists, ({ start_year }) => start_year);
-	const groupedGuitarists = Object.entries(byYear).map(([year, guitaristsByYear]) => [
-		year,
-		Object.groupBy(guitaristsByYear!, ({ start_month }) => start_month)
-	]).reverse();
+	const groupedGuitarists = Object.entries(byYear)
+		.map(([year, guitaristsByYear]) => [
+			year,
+			Object.groupBy(guitaristsByYear!, ({ start_month }) => start_month)
+		])
+		.reverse();
 	return { groupedGuitarists };
 };

@@ -4,10 +4,10 @@
 	import type { PageData } from './$types';
 
 	let { data, children }: { data: PageData; children } = $props();
-	let { session } = data;
+	let { session, isRoot } = data;
 </script>
 
 <div class="min-h-screen bg-gray-50">
-	<Navigation loggedIn={session?.user} />
+	<Navigation loggedIn={session?.user} {isRoot} />
 	{@render children()}
 </div>

@@ -22,7 +22,7 @@
 	let editing = $state(null);
 	let editingIndex = $derived(sections.findIndex(({ title }) => title == editing));
 	let formSubmitting = $state(false);
-	let notes = $state(data.notes ?? ``)
+	let notes = $state(data.notes ?? ``);
 	let existing = $state(data?.id);
 	const annotate = (lyrics: string) => {
 		let openPosition = lyrics.indexOf(`{`);
@@ -48,35 +48,35 @@
 	{#if session}
 		<Section theme="secondary">
 			<div class="sm:grid md:grid-cols-2 lg:grid-cols-3">
-			<Input
-				bind:value={songTitle}
-				label="Song Title"
-				labelClass="block"
-				className="mb-2 block"
-				inputClassName="w-52"
-				type="text"
-			/>
-			<Input
-				bind:value={key}
-				label="Key"
-				labelClass="block"
-				className="mb-2 block"
-				inputClassName="w-24"
-				type="text"
-			/>
-			<Input
-				bind:value={time}
-				label="Time Signature"
-				labelClass="block"
-				className="mb-2 block"
-				inputClassName="w-16"
-				type="text"
-			/>
+				<Input
+					bind:value={songTitle}
+					label="Song Title"
+					labelClass="block"
+					className="mb-2 block"
+					inputClassName="w-52"
+					type="text"
+				/>
+				<Input
+					bind:value={key}
+					label="Key"
+					labelClass="block"
+					className="mb-2 block"
+					inputClassName="w-24"
+					type="text"
+				/>
+				<Input
+					bind:value={time}
+					label="Time Signature"
+					labelClass="block"
+					className="mb-2 block"
+					inputClassName="w-16"
+					type="text"
+				/>
 			</div>
 			<textarea
-					bind:value={notes}
-					class="my-4 min-h-32 w-full bg-white p-2"
-					placeholder="Write any notes here"
+				bind:value={notes}
+				class="my-4 min-h-32 w-full bg-white p-2"
+				placeholder="Write any notes here"
 			></textarea>
 		</Section>
 		{#if showEditor}
@@ -97,24 +97,24 @@
 					<pre class="leading-[3]">{@html annotate(newLyrics)}</pre>
 				</div>
 				<button
-					class="text-primary-dark hover:text-primary cursor-pointer text-lg mr-2 py-1 px-2 border border-primary rounded-md"
+					class="text-primary-dark hover:text-primary border-primary mr-2 cursor-pointer rounded-md border px-2 py-1 text-lg"
 					onclick={() => {
 						showEditor = false;
 
 						if (editing) {
 							sections[editingIndex] = { title: sectionTitle, lyrics: newLyrics };
 						} else sections.push({ title: sectionTitle, lyrics: newLyrics });
-					}}
-				>{editing ? `Update` : `Create`}</button>
+					}}>{editing ? `Update` : `Create`}</button
+				>
 				{#if editing}
 					<button
-						class="text-secondary-dark hover:text-secondary cursor-pointer text-lg py-1 px-2 border border-secondary rounded-md"
+						class="text-secondary-dark hover:text-secondary border-secondary cursor-pointer rounded-md border px-2 py-1 text-lg"
 						onclick={() => {
 							showEditor = false;
 							sections.splice(editingIndex, 1);
 							order = order.filter((title) => title != sectionTitle);
-						}}
-					>Delete</button>
+						}}>Delete</button
+					>
 				{/if}
 			</Section>
 		{/if}
@@ -136,17 +136,16 @@
 				{/each}
 			</div>
 			{#if !showEditor}
-			<button
-				onclick={() => {
-					editing = null;
-					showEditor = true;
-					newLyrics = ``;
-					sectionTitle = ``;
-				}}
-			class="text-primary-dark hover:text-primary cursor-pointer text-lg flex items-center"
-
-			><span class="text-2xl mr-1.5">+</span> Create New Section</button>
-
+				<button
+					onclick={() => {
+						editing = null;
+						showEditor = true;
+						newLyrics = ``;
+						sectionTitle = ``;
+					}}
+					class="text-primary-dark hover:text-primary flex cursor-pointer items-center text-lg"
+					><span class="mr-1.5 text-2xl">+</span> Create New Section</button
+				>
 			{/if}
 		</Section>
 		<Section theme="tertiary">

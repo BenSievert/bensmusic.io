@@ -16,7 +16,7 @@
 		img: string;
 		about: string;
 		date: string;
-		videos: { id: string; }[];
+		videos: { id: string }[];
 		whatToListenFor: string;
 		gear?: string;
 	} = $props();
@@ -40,23 +40,27 @@
 		<h2 class="text-primary-dark text-2xl">What to listen for</h2>
 		<p class="mb-4">{whatToListenFor}</p>
 		{#if gear}
-		<a class="text-primary-dark text-2xl flex items-center gap-1.5 cursor-pointer hover:text-primary mb-4" href={gear} target="_blank">
-			Steal their Tone
-			<svg
+			<a
+				class="text-primary-dark hover:text-primary mb-4 flex cursor-pointer items-center gap-1.5 text-2xl"
+				href={gear}
+				target="_blank"
+			>
+				Steal their Tone
+				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
 					class="size-6"
-			>
-				<path
+				>
+					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-				/>
-			</svg>
-		</a>
+					/>
+				</svg>
+			</a>
 		{/if}
 		<h2 class="text-primary-dark mb-2 text-2xl">Examples</h2>
 		{#each videos as { id }}

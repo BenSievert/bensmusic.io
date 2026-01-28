@@ -7,12 +7,11 @@
 	import DoubleRangeSlider from '../../components/DoubleRangeSlider.svelte';
 	import type { PageProps } from './$types';
 	import { onMount } from 'svelte';
+	import { times, days } from '$lib/shared-functions';
 
 	let { data }: PageProps = $props();
 	let start = $state(0.66);
 	let end = $state(0.85);
-
-	const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
 
 	const needs = {
 		Piano: [
@@ -40,37 +39,7 @@
 		],
 		'Drum Kit': [`Studio 5`, `Large Room (Studio 10)`]
 	};
-	const times = [
-		`8:00 AM`,
-		`8:30 AM`,
-		`9:00 AM`,
-		`9:30 AM`,
-		`10:00 AM`,
-		`10:30 AM`,
-		`11:00 AM`,
-		`11:30 AM`,
-		`12:00 PM`,
-		`12:30 PM`,
-		`1:00 PM`,
-		`1:30 PM`,
-		`2:00 PM`,
-		`2:30 PM`,
-		`3:00 PM`,
-		`3:30 PM`,
-		`4:00 PM`,
-		`4:30 PM`,
-		`5:00 PM`,
-		`5:30 PM`,
-		`6:00 PM`,
-		`6:30 PM`,
-		`7:00 PM`,
-		`7:30 PM`,
-		`8:00 PM`,
-		`8:30 PM`,
-		`9:00 PM`,
-		`9:30 PM`,
-		`10:00 PM`
-	] as const;
+
 	const timesLength = times.length;
 	const percentager = (value: number) => {
 		const index = Math.floor(value * timesLength) - 1;
@@ -165,9 +134,14 @@
 		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
 		<Section disableTheme className="bg-green-50">
-			<h2 class="text-green-800 text-2xl font-extrabold">Attention</h2>
-			For the like 5 people who use this app. You can now create an account and see all your studio reservations in a cleaner format than google sheets.
-			<a href="/my-reservations" class="text-secondary-dark cursor-pointer hover:underline text-lg" target="_blank">Here</a>
+			<h2 class="text-2xl font-extrabold text-green-800">Attention</h2>
+			For the like 5 people who use this app. You can now create an account and see all your studio reservations
+			in a cleaner format than google sheets.
+			<a
+				href="/my-reservations"
+				class="text-secondary-dark cursor-pointer text-lg hover:underline"
+				target="_blank">Here</a
+			>
 		</Section>
 		<Section>
 			<h2 class="text-primary-dark mb-2 text-xl font-bold">Day</h2>
