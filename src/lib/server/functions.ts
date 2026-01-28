@@ -13,8 +13,8 @@ process.env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
 process.env.AWS_REGION = AWS_REGION;
 
 // TODO remove before push
-export const isRoot = (session: { user: { id: string; name: string; email: string } }) =>
-	session.user.email == ROOT_EMAIL;
+export const isRoot = (session?: { user: { id: string; name: string; email: string } }) =>
+	session?.user.email == ROOT_EMAIL;
 
 export const sendEmail = (subject: string, body: string) => {
 	const client = new SESClient({
