@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	let isOpen = $state(false);
-	let { loggedIn, isRoot } = $props();
+	let { loggedIn, isRoot, student } = $props();
 
 	let path = $derived(page.url.pathname);
 
@@ -19,10 +19,12 @@
 		{ name: `Song Bird`, href: `/song-bird`, reload: true },
 		{ name: `Blog`, href: `/blog`, reload: true },
 		{ name: `Guitarist of the Week`, href: `/guitarist-of-the-week`, reload: true },
+		...(student ? [{ name: `Lesson Notes`, href: `/lesson-notes`, reload: true }] : []),
 		...(isRoot
 			? [
 					{ name: `Availability`, href: `/availability`, reload: true },
-					{ name: `My Reservations`, href: `/my-reservations`, reload: true }
+					{ name: `My Reservations`, href: `/my-reservations`, reload: true },
+					{ name: `My Students`, href: `/my-students`, reload: true }
 				]
 			: [])
 	];

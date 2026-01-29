@@ -7,6 +7,7 @@ import {
 	local
 } from '$env/static/private';
 import { fromEnv } from '@aws-sdk/credential-providers';
+import sql from '../../postgres.server';
 
 process.env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
 process.env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
@@ -53,3 +54,6 @@ export const getSession = async (locals) =>
 				}
 			}
 		: locals.auth();
+
+export const getStudentByEmail = async (session) =>
+	(await sql`SELECT * FROM students WHERE email = ${session.user.email}`)[0];

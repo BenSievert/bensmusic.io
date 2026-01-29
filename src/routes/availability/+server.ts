@@ -39,11 +39,10 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	let status = 401;
 	let response = { message: `Wrong Auth or Initials` };
 	if (date != `now` && new Date(date).toDateString() == `Invalid Date`) {
-		return json({message: `Invalid Date`}, {status});
+		return json({ message: `Invalid Date` }, { status });
 	}
 
-	if (!isRootUser && auth != AUTH)
-		return json(response, { status });
+	if (!isRootUser && auth != AUTH) return json(response, { status });
 
 	const teachers = await getTeachers();
 	const doc = await getSheet();
