@@ -14,7 +14,7 @@
 <SitePage title="Students">
 	<Section>
 		{#each students as { first_name, last_name, id }}
-			<a class="text-primary-dark hover:text-primary hover:underline" href="/my-students/{id}"
+			<a class="text-primary-dark hover:text-primary hover:underline block mb-3" href="/my-students/{id}"
 				>{first_name} {last_name}</a
 			>
 		{/each}
