@@ -1,11 +1,11 @@
 import sql from '../../postgres.server';
 import type { PageServerLoad } from './$types';
-import { getSession, getStudentByEmail } from '$lib/server/functions';
+import { getSession, getStudentByCognitoID } from '$lib/server/functions';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const session = await getSession(locals);
 	if (!session) return {};
-	const student = await getStudentByEmail(session);
+	const student = await getStudentByCognitoID(session);
 
 	const notes = await sql`SELECT notes,
        	internal,

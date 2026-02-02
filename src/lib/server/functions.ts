@@ -55,5 +55,5 @@ export const getSession = async (locals) =>
 			}
 		: locals.auth();
 
-export const getStudentByEmail = async (session) =>
-	(await sql`SELECT * FROM students WHERE email = ${session.user.email}`)[0];
+export const getStudentByCognitoID = async (session) =>
+	(await sql`SELECT * FROM students WHERE cognito_id = ${session.user.id}`)[0];
