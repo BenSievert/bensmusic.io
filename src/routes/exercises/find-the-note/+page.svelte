@@ -191,7 +191,7 @@
 			/>
 		</div>
 		<div class="text-secondary-dark inline-block text-sm">
-			Lowest
+			Highest
 			<input
 				type="number"
 				min="0"
