@@ -22,6 +22,7 @@
 	const getRandomNote = () => noteNames[getRandom(noteNames.length)];
 
 	let note = $state(getRandomNote());
+	let score = $state(0)
 </script>
 
 <SitePage title="Name the Note on the Staff" subtitle="Games and Exercises">
@@ -48,6 +49,9 @@
 				{/each}
 			</div>
 		</div>
+		<div class="font-bold mb-2">
+			Score: {score}
+		</div>
 		{#each letters as letter}
 			<Button
 				disabled={wrongGuesses.includes(letter)}
@@ -59,6 +63,8 @@
 							newNote = getRandomNote();
 						}
 						note = newNote;
+						if (!wrongGuesses.length)
+							score += 1;
 						wrongGuesses = [];
 					} else {
 						wrongGuesses.push(letter);
@@ -66,5 +72,12 @@
 				}}
 			></Button>
 		{/each}
+	</Section>
+	<Section disableTheme className="bg-green-50">
+		<h2 class="text-2xl font-extrabold text-green-800">Instructions</h2>
+		This exercise is meant to help you quickly read notes on the staff.
+		<br /> You'll be shown a note on the staff an you must select the correct name of the note on the blue buttons.
+		<br /> <br />
+		Your score will only go up if your first guess is correct.
 	</Section>
 </SitePage>
