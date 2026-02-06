@@ -76,7 +76,7 @@
 	<Section disableTheme className="bg-green-50">
 		<h2 class="text-2xl font-extrabold text-green-800">Instructions</h2>
 		This exercise is meant to help you quickly read notes on the staff.
-		<br /> You'll be shown a note on the staff an you must select the correct name of the note on the blue buttons.
+		<br /> You'll be shown a note  and you must select its correct name on the blue buttons.
 		<br /> <br />
 		Your score will only go up if your first guess is correct.
 	</Section>
