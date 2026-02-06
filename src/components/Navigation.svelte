@@ -12,8 +12,6 @@
 
 	const links = [
 		{ name: 'Home', href: '/' },
-		{ name: 'Policy and Payment', href: `/policy` },
-		{ name: 'Contact', href: '/contact' },
 		{ name: `Exercises`, href: `/exercises` },
 		{ name: `Learning`, href: `/learning` },
 		{ name: `Song Bird`, href: `/song-bird`, reload: true },
