@@ -31,3 +31,5 @@ export const times = [
 ];
 
 export const days = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`];
+
+export const getRandom = (limit) => Math.floor(Math.random() * limit);

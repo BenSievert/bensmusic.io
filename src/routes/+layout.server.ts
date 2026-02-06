@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from '../$types';
 import { ROOT_EMAIL } from '$env/static/private';
-import {getSession, getStudentByCognitoID} from '$lib/server/functions';
+import { getSession, getStudentByCognitoID } from '$lib/server/functions';
 
 export const load: LayoutServerLoad = async (event) => {
 	const session = await getSession(event.locals);
@@ -10,6 +10,5 @@ export const load: LayoutServerLoad = async (event) => {
 		session,
 		isRoot,
 		student: session && (await getStudentByCognitoID(session))
-
 	};
 };

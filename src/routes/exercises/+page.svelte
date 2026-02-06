@@ -19,6 +19,11 @@
 			desc: `List all the notes for a given mode.`
 		},
 		{
+			title: `Find the Note on the Staff`,
+			link: `staff-finder`,
+			desc: `Choose the correct note shown on the staff.`
+		},
+		{
 			title: `Practicifier`,
 			link: `practicifier`,
 			desc: `Engage in better practicing.`
