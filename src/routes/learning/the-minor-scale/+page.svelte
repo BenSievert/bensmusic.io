@@ -118,10 +118,10 @@
 					]
 				},
 				{
-					title: `Altered Scales`,
+					title: `Conclusion`,
 					subSteps: [
-						`When we use the word minor, we're usually referring to Natural Minor. There are two other minor scales worth discussing though.`,
-						`Harmonic `
+						`Everything we've learned this lesson applies to the Natural Minor Scale.`,
+						`Other forms of minor also exist and we will learn about them in a future lesson.`,
 					]
 				}
 			]}
