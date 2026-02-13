@@ -135,7 +135,6 @@
 				className="mb-2"
 				bind:value={totalTime}
 				onchange={(event) => {
-					console.log(`talk to the moon`);
 					let value = event.target.value;
 					resetTimer(value * 60, taskTime * 60);
 				}}
@@ -232,7 +231,7 @@
 					{#if changeContent.button}
 						<Button
 							className="mt-2"
-							onclick={() => {
+							onClick={() => {
 								resetNext(taskTime * 60);
 								changeState = false;
 							}}
