@@ -63,8 +63,8 @@
 					data-sveltekit-reload={link.reload}
 					href={link.href}
 					class="{path == link.href
-						? `bg-pink-100 text-rose-700`
-						: `text-accent-dark`} rounded p-2 hover:bg-pink-100 hover:text-rose-700"
+						? `bg-pink-100 text-rose-700 ring ring-secondary-dark`
+						: `text-accent-dark`} rounded-lg p-2 hover:bg-pink-100 hover:text-rose-700"
 				>
 					{link.name}
 				</a>

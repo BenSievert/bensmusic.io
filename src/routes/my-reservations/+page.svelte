@@ -150,7 +150,7 @@
 			</div>
 		</Section>
 	{/if}
-	<Section disableTheme className="bg-green-50">
+	<Section disableTheme className="bg-green-50/80">
 		<h2 class="text-2xl font-extrabold text-green-800">Instructions</h2>
 		This application shows you all of your studio reservations at Hip Cat.
 		<br /><br />

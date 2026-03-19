@@ -3,13 +3,13 @@
 	let { buttons, path } = $props();
 </script>
 
-<Section>
+<Section theme="secondary">
 	<div class="py-4">
 		{#each buttons as button}
 			<div class="mb-3 w-72">
 				<a
 					href="{path}/{button.link}"
-					class="border-primary shadow-softBlue hover:bg-highlight-mintGreen hover:text-primary inline-block w-full rounded-md border bg-blue-100 p-4 text-xl text-blue-700"
+					class="border-primary shadow-softBlue text-primary-dark hover:text-primary inline-block w-full rounded-md border bg-blue-100 p-4 text-xl"
 				>
 					<div class="flex items-center justify-between">
 						<div class="mr-4">

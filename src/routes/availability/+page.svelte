@@ -133,7 +133,7 @@
 	{#if !Object.entries(openSchedule).length}
 		<Spinner divClass="ml-4" svgClass="fill-primary-dark size-24" />
 	{:else}
-		<Section disableTheme className="bg-green-50">
+		<Section disableTheme className="bg-green-50/80">
 			<h2 class="text-2xl font-extrabold text-green-800">Attention</h2>
 			For the like 5 people who use this app. You can now create an account and see all your studio reservations
 			in a cleaner format than google sheets.

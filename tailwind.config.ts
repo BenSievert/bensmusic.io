@@ -8,7 +8,7 @@ export default {
 			colors: {
 				primary: {
 					light: '#d7e6fc', // Light Sky Blue
-					DEFAULT: '#a4c5ff', // Soft Baby Blue
+					DEFAULT: '#84b0ff', // Soft Baby Blue
 					dark: '#002a85' // Slate Blue
 				},
 				secondary: {

@@ -73,7 +73,7 @@
 			></Button>
 		{/each}
 	</Section>
-	<Section disableTheme className="bg-green-50">
+	<Section disableTheme className="bg-green-50/80">
 		<h2 class="text-2xl font-extrabold text-green-800">Instructions</h2>
 		This exercise is meant to help you quickly read notes on the staff.
 		<br /> You'll be shown a note  and you must select its correct name on the blue buttons.
