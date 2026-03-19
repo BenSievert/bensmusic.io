@@ -31,7 +31,7 @@
 			View Previous Entries
 		</a>`}
 >
-	<Section theme="tertiary">
+	<Section>
 		<div class="flex justify-center py-6">
 			<img {src} alt="some alt text" class="mb-4 rounded sm:max-w-1/2" />
 		</div>
@@ -64,7 +64,7 @@
 		{/if}
 		<h2 class="text-primary-dark mb-2 text-2xl">Examples</h2>
 		{#each videos as { id }}
-			<div class="mb-12 rounded bg-blue-100 p-2 shadow sm:p-6 md:max-w-3/4">
+			<div class="mb-12 rounded bg-blue-200 p-2 shadow sm:p-6 md:max-w-3/4">
 				<Youtube {id}></Youtube>
 			</div>
 		{/each}

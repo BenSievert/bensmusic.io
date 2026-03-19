@@ -28,7 +28,7 @@
 	];
 </script>
 
-<div class="px-4 pt-4">
+<div class="px-4 pt-4 bg-rose-100/30">
 	<div class="mb-1.5 flex justify-end">
 		<button
 			class="text-primary-dark hover:text-primary cursor-pointer text-right text-sm"

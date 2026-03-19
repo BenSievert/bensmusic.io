@@ -9,12 +9,12 @@ export default {
 				primary: {
 					light: '#d7e6fc', // Light Sky Blue
 					DEFAULT: '#a4c5ff', // Soft Baby Blue
-					dark: '#416fd7' // Slate Blue
+					dark: '#002a85' // Slate Blue
 				},
 				secondary: {
 					light: '#ffb4e1', // Lightened Soft Pink
 					DEFAULT: '#F1A7DB', // Lighter Lavender Pink
-					dark: '#d74671' // Lighter Dusty Lavender
+					dark: '#b40a3b' // Lighter Dusty Lavender
 				},
 				accent: {
 					light: '#FF99E6', // Lightened Light Lilac

@@ -7,7 +7,8 @@
 <SitePage title="Ben's Music Lessons" subtitle="Guitar Lessons in Bloomington-Normal">
 	<Section>
 		<h3 class="text-primary-dark text-xl">About Me</h3>
-		<p>
+		<div class="md:flex justify-evenly items-center">
+		<p class="max-w-[800px]">
 			My name is Ben Sievert and I teach guitar lessons at <Link
 				href="https://www.hipcatmusicschool.com/home"
 				text="Hip Cat Music School"
@@ -16,7 +17,10 @@
 			styles. I've studied the guitar as well as other instruments with several teachers. I've also performed
 			in multiple bands. I've done everything from playing classical music to playing in a funk-rock
 			band.
-		</p></Section
+		</p>
+		<img src="me/me.png" class="max-w-[300px]"/>
+		</div>
+	</Section
 	>
 	<Section theme="secondary">
 		<h3 class="text-accent-dark text-xl">Teaching Philosophy</h3>

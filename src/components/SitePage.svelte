@@ -19,7 +19,7 @@
 		/>
 	{/if}
 </svelte:head>
-<div class="flex items-center justify-between px-4 py-1">
+<div class="flex items-center justify-between px-4 py-1 bg-rose-100/30">
 	<div class="mr-4 {hide ? `invisible absolute md:visible md:static` : ``}">
 		<h1 class="font-display text-primary-dark text-3xl md:text-5xl">{title}</h1>
 		<h2 class="text-secondary-dark mb-4 max-w-lg text-lg md:text-xl">{subtitle}</h2>
