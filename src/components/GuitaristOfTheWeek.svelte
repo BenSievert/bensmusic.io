@@ -37,8 +37,6 @@
 		</div>
 		<h2 class="text-primary-dark text-2xl">About</h2>
 		<p class="mb-4">{about}</p>
-		<h2 class="text-primary-dark text-2xl">What to listen for</h2>
-		<p class="mb-4">{whatToListenFor}</p>
 		{#if gear}
 			<a
 				class="text-primary-dark hover:text-primary mb-4 flex cursor-pointer items-center gap-1.5 text-2xl"
